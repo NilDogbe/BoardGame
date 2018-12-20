@@ -1,0 +1,3 @@
+D:/Work/Git/BoardGame/cmake-build-debug/CMakeFiles/BoardGame.dir
+D:/Work/Git/BoardGame/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Work/Git/BoardGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir

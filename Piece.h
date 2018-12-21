@@ -16,7 +16,7 @@ class Piece {
 
     public:
     Piece(string name);
-    string getNom();
+    std::string getNom();
 
 
 

@@ -1,12 +1,15 @@
 
 #include <iostream>
 #include "Piece.h"
+#include "Board.h"
+
 using namespace std;
 
 
 int main() {
-    Piece("piece");
-
+    Piece b("piece");
+    Board a;
+    a.initBoard(1);
     int age(0);
     string nom;
     cout << "Hello " << nom << " coucou quel age a tu ?" << endl;

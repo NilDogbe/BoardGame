@@ -11,16 +11,17 @@ class Case {
 
 private:
     int m_color;
-    Piece m_piece;
+    Piece* m_piece;
     int m_x, m_y;
 
 public:
     Case(int x, int y, int color);
+    Case();
 
     int getX();
     int getY();
     int getColor();
-    Piece getPiece();
+    Piece* getPiece();
     void setX(int x);
     void setY(int y);
     bool isEmpty();

@@ -4,10 +4,11 @@
 
 #include "Case.h"
 
-Case::Case(int x, int y, int color){
+Case::Case(int x, int y, int color, Piece* piece){
     m_x=x;
     m_y=y;
     m_color = color;
+    m_piece = piece;
 }
 
 Case::Case(){

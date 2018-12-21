@@ -10,13 +10,15 @@ using namespace std;
 
 class Piece {
 
-    private:
-    string m_name;
+protected:
+    int m_color;
+    bool canMove();
+
 
 
     public:
-    Piece(string name);
-    std::string getNom();
+    Piece(int color);
+    int getColor();
 
 
 

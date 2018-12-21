@@ -8,10 +8,10 @@
 using namespace std;
 
 
-Piece::Piece(string name) {
-    m_name = name;
+Piece::Piece(int couleur) {
+    m_color = couleur;
 }
 
-string Piece::getNom() {
-    return m_name;
+int Piece::getColor(){
+    return m_color;
 }

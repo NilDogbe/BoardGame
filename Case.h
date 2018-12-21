@@ -15,7 +15,7 @@ private:
     int m_x, m_y;
 
 public:
-    Case(int x, int y, int color);
+    Case(int x, int y, int color, Piece* piece);
     Case();
 
     int getX();

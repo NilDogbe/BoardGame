@@ -3,4 +3,4 @@ project(BoardGame)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(BoardGame main.cpp Menu.cpp Menu.h Piece.cpp Piece.h Board.cpp Board.h Case.cpp Case.h)
+add_executable(BoardGame main.cpp Menu.cpp Menu.h Piece.cpp Piece.h Board.cpp Board.h Case.cpp Case.h King.cpp King.h)

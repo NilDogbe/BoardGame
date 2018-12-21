@@ -3,11 +3,15 @@
 //
 
 #include "Piece.h"
+#include <string>
+
+using namespace std;
+
 
 Piece::Piece(string name) {
     m_name = name;
 }
 
 string Piece::getNom() {
-    return nom;
+    return m_name;
 }

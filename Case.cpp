@@ -4,11 +4,7 @@
 
 #include "Case.h"
 
-Case::Case(int x, int y, int color){
-    m_x = x;
-    m_y = y;
-    m_color = color;
-}
+
 int Case::getY(){
     return m_y;
 }
@@ -25,5 +21,5 @@ void Case::setY(int y){
     m_y = y;
 }
 bool Case::isEmpty(){
-    return (m_piece == NULL);
+    return true;//(m_piece = NULL);
 }

@@ -80,6 +80,30 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/Work/Git/BoardGame/Board.cpp">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Board.h">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Case.cpp">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Case.h">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Menu.cpp">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Menu.h">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Piece.cpp">
+			<Option target="BoardGame"/>
+		</Unit>
+		<Unit filename="D:/Work/Git/BoardGame/Piece.h">
+			<Option target="BoardGame"/>
+		</Unit>
 		<Unit filename="D:/Work/Git/BoardGame/main.cpp">
 			<Option target="BoardGame"/>
 		</Unit>

@@ -1,10 +1,11 @@
 
 #include <iostream>
-
+#include "Piece.h"
 using namespace std;
 
 
 int main() {
+    Piece("piece");
 
     int age(0);
     string nom;

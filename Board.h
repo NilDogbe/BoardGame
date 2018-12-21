@@ -9,7 +9,7 @@
 
 class Board {
 private:
-    Case[8][8];
+    Case m_board[8][8];
 };
 
 

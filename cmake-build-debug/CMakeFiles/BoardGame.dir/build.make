@@ -69,19 +69,79 @@ CMakeFiles/BoardGame.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BoardGame.dir/main.cpp.s"
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Work\Git\BoardGame\main.cpp -o CMakeFiles\BoardGame.dir\main.cpp.s
 
+CMakeFiles/BoardGame.dir/Menu.cpp.obj: CMakeFiles/BoardGame.dir/flags.make
+CMakeFiles/BoardGame.dir/Menu.cpp.obj: ../Menu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BoardGame.dir/Menu.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BoardGame.dir\Menu.cpp.obj -c D:\Work\Git\BoardGame\Menu.cpp
+
+CMakeFiles/BoardGame.dir/Menu.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BoardGame.dir/Menu.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Work\Git\BoardGame\Menu.cpp > CMakeFiles\BoardGame.dir\Menu.cpp.i
+
+CMakeFiles/BoardGame.dir/Menu.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BoardGame.dir/Menu.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Work\Git\BoardGame\Menu.cpp -o CMakeFiles\BoardGame.dir\Menu.cpp.s
+
+CMakeFiles/BoardGame.dir/Piece.cpp.obj: CMakeFiles/BoardGame.dir/flags.make
+CMakeFiles/BoardGame.dir/Piece.cpp.obj: ../Piece.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BoardGame.dir/Piece.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BoardGame.dir\Piece.cpp.obj -c D:\Work\Git\BoardGame\Piece.cpp
+
+CMakeFiles/BoardGame.dir/Piece.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BoardGame.dir/Piece.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Work\Git\BoardGame\Piece.cpp > CMakeFiles\BoardGame.dir\Piece.cpp.i
+
+CMakeFiles/BoardGame.dir/Piece.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BoardGame.dir/Piece.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Work\Git\BoardGame\Piece.cpp -o CMakeFiles\BoardGame.dir\Piece.cpp.s
+
+CMakeFiles/BoardGame.dir/Board.cpp.obj: CMakeFiles/BoardGame.dir/flags.make
+CMakeFiles/BoardGame.dir/Board.cpp.obj: ../Board.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BoardGame.dir/Board.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BoardGame.dir\Board.cpp.obj -c D:\Work\Git\BoardGame\Board.cpp
+
+CMakeFiles/BoardGame.dir/Board.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BoardGame.dir/Board.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Work\Git\BoardGame\Board.cpp > CMakeFiles\BoardGame.dir\Board.cpp.i
+
+CMakeFiles/BoardGame.dir/Board.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BoardGame.dir/Board.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Work\Git\BoardGame\Board.cpp -o CMakeFiles\BoardGame.dir\Board.cpp.s
+
+CMakeFiles/BoardGame.dir/Case.cpp.obj: CMakeFiles/BoardGame.dir/flags.make
+CMakeFiles/BoardGame.dir/Case.cpp.obj: ../Case.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BoardGame.dir/Case.cpp.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BoardGame.dir\Case.cpp.obj -c D:\Work\Git\BoardGame\Case.cpp
+
+CMakeFiles/BoardGame.dir/Case.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BoardGame.dir/Case.cpp.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Work\Git\BoardGame\Case.cpp > CMakeFiles\BoardGame.dir\Case.cpp.i
+
+CMakeFiles/BoardGame.dir/Case.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BoardGame.dir/Case.cpp.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Work\Git\BoardGame\Case.cpp -o CMakeFiles\BoardGame.dir\Case.cpp.s
+
 # Object files for target BoardGame
 BoardGame_OBJECTS = \
-"CMakeFiles/BoardGame.dir/main.cpp.obj"
+"CMakeFiles/BoardGame.dir/main.cpp.obj" \
+"CMakeFiles/BoardGame.dir/Menu.cpp.obj" \
+"CMakeFiles/BoardGame.dir/Piece.cpp.obj" \
+"CMakeFiles/BoardGame.dir/Board.cpp.obj" \
+"CMakeFiles/BoardGame.dir/Case.cpp.obj"
 
 # External object files for target BoardGame
 BoardGame_EXTERNAL_OBJECTS =
 
 BoardGame.exe: CMakeFiles/BoardGame.dir/main.cpp.obj
+BoardGame.exe: CMakeFiles/BoardGame.dir/Menu.cpp.obj
+BoardGame.exe: CMakeFiles/BoardGame.dir/Piece.cpp.obj
+BoardGame.exe: CMakeFiles/BoardGame.dir/Board.cpp.obj
+BoardGame.exe: CMakeFiles/BoardGame.dir/Case.cpp.obj
 BoardGame.exe: CMakeFiles/BoardGame.dir/build.make
 BoardGame.exe: CMakeFiles/BoardGame.dir/linklibs.rsp
 BoardGame.exe: CMakeFiles/BoardGame.dir/objects1.rsp
 BoardGame.exe: CMakeFiles/BoardGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable BoardGame.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Work\Git\BoardGame\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable BoardGame.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\BoardGame.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

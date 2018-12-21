@@ -4,6 +4,7 @@
 
 #ifndef BOARDGAME_PIECE_H
 #define BOARDGAME_PIECE_H
+using namespace std;
 
 #include <string>
 
@@ -16,6 +17,7 @@ class Piece {
     public:
     Piece(string name);
     string getNom();
+
 
 
 };

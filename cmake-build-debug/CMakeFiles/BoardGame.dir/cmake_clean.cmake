@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/BoardGame.dir/main.cpp.obj"
+  "CMakeFiles/BoardGame.dir/Menu.cpp.obj"
+  "CMakeFiles/BoardGame.dir/Piece.cpp.obj"
+  "CMakeFiles/BoardGame.dir/Board.cpp.obj"
+  "CMakeFiles/BoardGame.dir/Case.cpp.obj"
   "BoardGame.pdb"
   "BoardGame.exe"
   "BoardGame.exe.manifest"

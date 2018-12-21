@@ -6,7 +6,41 @@
 
 #IncludeRegexTransform: 
 
+D:/Work/Git/BoardGame/Board.cpp
+Board.h
+D:/Work/Git/BoardGame/Board.h
+
+D:/Work/Git/BoardGame/Board.h
+Case.h
+D:/Work/Git/BoardGame/Case.h
+
+D:/Work/Git/BoardGame/Case.cpp
+Case.h
+D:/Work/Git/BoardGame/Case.h
+
+D:/Work/Git/BoardGame/Case.h
+Piece.h
+D:/Work/Git/BoardGame/Piece.h
+
+D:/Work/Git/BoardGame/Menu.cpp
+Menu.h
+D:/Work/Git/BoardGame/Menu.h
+
+D:/Work/Git/BoardGame/Menu.h
+
+D:/Work/Git/BoardGame/Piece.cpp
+Piece.h
+D:/Work/Git/BoardGame/Piece.h
+string
+-
+
+D:/Work/Git/BoardGame/Piece.h
+string
+-
+
 D:/Work/Git/BoardGame/main.cpp
 iostream
 -
+Piece.h
+D:/Work/Git/BoardGame/Piece.h
 

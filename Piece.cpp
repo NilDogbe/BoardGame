@@ -4,6 +4,8 @@
 
 #include "Piece.h"
 #include <string>
+#include <wchar.h>
+#include <windows.h>
 
 using namespace std;
 
@@ -14,4 +16,15 @@ Piece::Piece(int couleur) {
 
 int Piece::getColor(){
     return m_color;
+}
+
+bool Piece::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+    return false;
+}
+
+void Piece::toString() {
+
+    const wchar_t *white = L"♖";
+    const wchar_t *black = L"♚♛♜♝♞♟\r\n";
+    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
 }

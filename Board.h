@@ -5,8 +5,8 @@
 #ifndef BOARDGAME_BOARD_H
 #define BOARDGAME_BOARD_H
 
-#include "Case.h"
 #include <vector>
+#include "Piece.h"
 
 
 class Board {
@@ -15,12 +15,13 @@ private:
     static int const BLACK = 0;
 
     static const int m_size = 8;
-    std::vector<Case> m_board;
+    std::vector<Piece*> m_board;
 
 public:
     Board();
     void affichage();
     void initBoard(int jeu);
+    void movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
 };
 
 

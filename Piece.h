@@ -12,16 +12,14 @@ class Piece {
 
 protected:
     int m_color;
-    bool canMove();
 
 
-
-    public:
+public:
     Piece(int color);
-    int getColor();
+    virtual int getColor();
+    virtual void toString();
 
-
-
+    virtual bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
 };
 
 

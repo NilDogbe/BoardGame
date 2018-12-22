@@ -11,7 +11,11 @@ int main() {
     Board a;
     a.initBoard(1);
     a.movePiece(1,1,2,2);
+    //a.affichage();
+    a.movePiece(1,6,3,5);
     a.affichage();
+
+
     int age(0);
     string nom;
    /* cout << "Hello " << nom << " coucou quel age a tu ?" << endl;

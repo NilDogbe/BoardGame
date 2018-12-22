@@ -15,7 +15,9 @@ protected:
 
 
 public:
+
     Piece(int color);
+    int sqr(int x);
     virtual int getColor();
     virtual void toString();
 

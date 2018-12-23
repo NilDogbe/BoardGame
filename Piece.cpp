@@ -22,8 +22,8 @@ int Piece::getColor(){
 vector<int> Piece::getTravel(){
     return m_travel;
 }
-bool Piece::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
-    return false;
+int Piece::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+    return 0;
 }
 
 void Piece::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){

@@ -7,18 +7,19 @@
 #include <wchar.h>
 #include <iostream>
 using namespace std;
-bool Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Mouvemment Queen "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
 
     if(abs(x_arr - x_dep) == abs(y_arr - y_dep)){
         cout << "true1";
         cout << " Bishop "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
-
+        setTravel(x_dep,  y_dep, x_arr, y_arr);
         return true;
     }
     else if ( (x_arr == x_dep && y_arr != y_dep) || (x_arr != x_dep && y_arr == y_dep)){
         cout << "true2";
         cout << " Bishop "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
+        setTravel(x_dep,  y_dep, x_arr, y_arr);
         return true;
 
     }

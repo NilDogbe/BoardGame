@@ -26,6 +26,12 @@ void GameChess::initGameChess() {
         for (int j = 0; j < m_size; j++) {
             if (i == 0 || i == 1)
                 m_board[i * m_size + j] = new King(0);
+            else if(i==4 && j == 4){
+                m_board[i * m_size + j] = new Bishop(1);
+            }
+            else if(i==2 && j == 2){
+                m_board[i * m_size + j] =new Tower(1);
+            }
             else if (i == m_size - 1)
                 m_board[i * m_size + j] = new Cavalier(1);
             else if (i == m_size - 2 && (j == m_size - 1))

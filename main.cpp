@@ -1,15 +1,15 @@
 
 #include <iostream>
 #include "Piece.h"
-#include "Board.h"
+#include "Game.h"
 
 using namespace std;
 
 
 int main() {
    // Piece b("piece");
-    Board a;
-    a.initBoard(1);
+    Game a;
+    a.initGame(1);
     /*a.movePiece(1,1,2,2);//roi
     a.movePiece(1,7,2,5);//cavalier
     a.movePiece(6,6,5,5);//Bishop

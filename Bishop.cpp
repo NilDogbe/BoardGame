@@ -8,10 +8,11 @@
 #include <iostream>
 using namespace std;
 
-bool Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Mouvemment Bishop "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
     //TODO:
     if(abs(x_arr - x_dep) == abs(y_arr - y_dep)){
+        setTravel(x_dep,  y_dep, x_arr, y_arr);
         cout << "true";
         return true;
     }

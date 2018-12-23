@@ -21,7 +21,7 @@ public:
     virtual int getColor();
     virtual void toString();
     virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
-    virtual bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
+    virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     virtual std::vector<int> getTravel();
 };
 

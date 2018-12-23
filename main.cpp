@@ -20,8 +20,16 @@ int main() {
     a.movePiece(2,2,2,3);//roi
     a.movePiece(2,3,2,4);//roi
     a.movePiece(0,0,0,1);//roi*/
-   // a.movePiece(6,7,7,5);//cavalier
+    //a.movePiece(6,7,7,5);//cavalier
     a.movePiece(7,6,7,4);//tower
+    a.movePiece(7,4,7,5);//tower
+  //  a.movePiece(7,6,6,6);//tower
+    a.movePiece(2,1,2,2);
+    a.movePiece(2,2,2,3);//roi
+    a.movePiece(2,3,2,4);//roi
+    a.movePiece(6,6,3,3);//Bishop
+    a.movePiece(3,3,4,2);//Bishop
+    a.movePiece(4,2,6,4);//Bishop
    // a.movePiece(7,4,2,4);//tower
 
 

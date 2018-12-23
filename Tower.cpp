@@ -9,7 +9,7 @@
 #include <wchar.h>
 using namespace std;
 
-bool Tower::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int Tower::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Mouvemment Tower "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
 
     if (y_dep == y_arr && x_dep == x_arr )

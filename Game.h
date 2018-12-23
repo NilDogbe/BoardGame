@@ -14,14 +14,15 @@ private:
     static int const WHITE = 1;
     static int const BLACK = 0;
 
-    static const int m_size = 8;
+protected:
+    const int m_size;
     std::vector<Piece*> m_board;
 
 public:
-    Game();
-    void affichage();
-    void initGame(int jeu);
-    void movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
+    Game(int size);
+    virtual void affichage();
+    virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
+
 };
 
 

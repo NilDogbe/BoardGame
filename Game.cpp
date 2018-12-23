@@ -15,31 +15,9 @@
 
 using namespace std;
 
-
-Game::Game() {
-    initGame(1);
+Game::Game(int size) : m_board(size * size, nullptr), m_size(size) {
 }
 
-void Game::initGame(int jeu) {
-    for (int i = 0; i < m_size; i++) {
-        for (int j = 0; j < m_size; j++) {
-            if (i == 0 || i == 1) {
-                m_board.push_back(new King(0));
-            } else if (i == m_size - 1) {
-                m_board.push_back(new Cavalier(1));
-            } else if (i == m_size - 2 && (j == m_size -1)) {
-                m_board.push_back(new Tower(1));
-            } else if ((i == m_size - 2) && (j == m_size -2) ) {
-                m_board.push_back(new Bishop(1));
-            }  else if ((i == m_size - 2) && (j == m_size -3) )  {
-                m_board.push_back(new Queen(1));
-            }else if ((i + j) % 2 == 0)
-                m_board.push_back(nullptr);
-            else
-                m_board.push_back(nullptr);
-        }
-    }
-}
 
 void Game::affichage() {
     for (int i = m_size - 1; i >= 0; i--) {
@@ -65,37 +43,22 @@ void Game::affichage() {
         cout << i;
 }
 
-void Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
+bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
-    if (y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0) {  // dans les limites
+    if (y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0) {  // dans les limites ?
         cout << "1" << endl;
-        if (piece_dep != nullptr) { //case dep pas vide ?
+        if (piece_dep != nullptr) { //case depart pas vide ?
             cout << "2" << endl;
             if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr)) { //mouvement accessible a cette piece
-                for(int i = 0; i< piece_dep->getTravel().size();i++){
+                for (int i = 0; i < piece_dep->getTravel().size(); i++) {
                     cout << (piece_dep->getTravel().at(i)) << endl;
-                    if(m_board.at(piece_dep->getTravel().at(i)) != nullptr){
-                        return;
-                    }
+                    if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) //piece sur le chemin
+                        return false;
+                    else return true;
                 }
-                cout << "3" << endl;
-                Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
-                if (piece_arr != nullptr) {  //
-                    cout << "4" << endl;
-                    if (piece_arr->getColor() != piece_dep->getColor()) { //test si les couleurs sont diff
-                        cout << "5" << endl;
-                        m_board.at(y_dep * m_size + x_dep) = nullptr;
-                        m_board.at(y_arr * m_size + x_arr) = piece_dep;
-                    } else;//mange un point a toi meme
-                } else {
-                    cout << "6" << endl;
-                    m_board.at(y_dep * m_size + x_dep) = nullptr;
-                    m_board.at(y_arr * m_size + x_arr) = piece_dep;
-
-                }
-            }
-        }
-    }
+            } else return false;
+        } else return false;
+    } else return false;
 }
 
 

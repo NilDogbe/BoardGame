@@ -11,7 +11,7 @@ class Queen : public Piece {
 public:
     Queen(int color);
     void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
-    bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
+    int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     void toString() override;
 
 

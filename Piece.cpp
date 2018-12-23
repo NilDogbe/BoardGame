@@ -5,7 +5,7 @@
 #include "Piece.h"
 #include <string>
 #include <wchar.h>
-#include <windows.h>
+//#include <windows.h>
 #include <iostream>
 
 using namespace std;
@@ -33,7 +33,7 @@ void Piece::toString() {
 
     const wchar_t *white = L"♖";
     const wchar_t *black = L"♚♛♜♝♞♟\r\n";
-    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
+    //WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
 }
 
 int Piece::sqr(int x) {

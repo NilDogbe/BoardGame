@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include <windows.h>
+//#include <windows.h>
 #include <wchar.h>
 #include "Board.h"
 #include "Piece.h"
@@ -50,11 +50,11 @@ void Board::affichage() {
                 cur->toString();
             } else if ((i + j) % 2 == 0) {
                 const wchar_t *white = L"■";
-                WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
+                //WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
 
             } else {
                 const wchar_t *black = L"□";
-                WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
+                //WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
             }
         }
         cout << endl;

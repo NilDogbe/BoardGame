@@ -14,6 +14,13 @@ int main() {
     a.movePiece(1,7,2,5);//cavalier
     a.movePiece(7,6,7,4);//tower
     a.movePiece(7,4,2,4);//tower
+    a.movePiece(6,6,5,5);//Bishop
+    a.movePiece(5,6,6,6);//Queen
+    a.movePiece(6,6,7,5);//Queen
+
+
+
+
 
 
     a.affichage();

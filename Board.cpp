@@ -10,6 +10,8 @@
 #include "King.h"
 #include "Cavalier.h"
 #include "Tower.h"
+#include "Bishop.h"
+#include "Queen.h"
 
 
 
@@ -22,12 +24,15 @@ void Board::initBoard(int jeu) {
         for (int j = 0; j < m_size; j++) {
             if (i == 0 || i == 1) {
                 m_board.push_back(new King(0));
-            } else if (i == m_size - 1 ) {
+            } else if (i == m_size - 1) {
                 m_board.push_back(new Cavalier(1));
-            }else if (i == m_size - 2){
+            } else if (i == m_size - 2 && (j == m_size -1)) {
                 m_board.push_back(new Tower(1));
-            }
-            else if ((i + j) % 2 == 0)
+            } else if ((i == m_size - 2) && (j == m_size -2) ) {
+                m_board.push_back(new Bishop(1));
+            }  else if ((i == m_size - 2) && (j == m_size -3) ) {
+                m_board.push_back(new Queen(1));
+            }else if ((i + j) % 2 == 0)
                 m_board.push_back(nullptr);
             else
                 m_board.push_back(nullptr);

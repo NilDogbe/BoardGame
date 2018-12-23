@@ -1,16 +1,18 @@
 
 #include <iostream>
 #include "Piece.h"
-#include "Game.h"
+#include "GameChess.h"
 
 using namespace std;
 
 
 int main() {
    // Piece b("piece");
-    Game a;
-    a.initGame(1);
-    /*a.movePiece(1,1,2,2);//roi
+    GameChess a;
+    a.movePiece(7,6,7,4);//tower
+
+    // a.initGameChess();
+    a.movePiece(1,1,2,2);//roi
     a.movePiece(1,7,2,5);//cavalier
     a.movePiece(6,6,5,5);//Bishop
     a.movePiece(5,6,6,6);//Queen

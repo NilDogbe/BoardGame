@@ -9,6 +9,7 @@ using namespace std;
 int main() {
    // Piece b("piece");
     GameChess a;
+    a.movePiece(2,1,2,2);
     //a.movePiece(7,6,7,4);//tower
     /*a.movePiece(7,6,2,6);//tower
     a.movePiece(7,6,7,4);//tower

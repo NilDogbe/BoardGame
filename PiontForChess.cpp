@@ -17,7 +17,7 @@ int PiontForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (m_color == 0) {
         cout << "15 P" << endl;
 
-        if ((abs(x_dep - x_arr == 1)) && (y_dep - y_arr == 1)) {
+        if ((abs(x_dep - x_arr) == 1) && (y_dep - y_arr == 1)) {
             cout << "mange P" << endl;
             m_firstMove = false;
             return 2;
@@ -39,7 +39,7 @@ int PiontForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     } else {
         cout << "16 P" << endl;
 
-        if ((abs(x_dep - x_arr == 1)) && (y_arr - y_dep == 1)) {
+        if ((abs(x_arr - x_dep) == 1) && (y_arr - y_dep == 1)) {
             cout << "mange P" << endl;
             m_firstMove = false;
             return 2;

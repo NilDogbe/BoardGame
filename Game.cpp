@@ -44,12 +44,15 @@ void Game::affichage() {
 }
 
 bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
-    Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
+    Piece *piece_dep = m_board.at(y_dep * m_size + x_dep) ;
+    Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
+    cout<<(piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2)<< "eeeeeee";
+
     if (y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0) {  // dans les limites ?
         cout << "G1" << endl;
         if (piece_dep != nullptr) { //case depart pas vide ?
             cout << "G2" << endl;
-            if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr)) { //mouvement accessible a cette piece
+            if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) { //mouvement accessible a cette piece
                 for (int i = 0; i < piece_dep->getTravel().size(); i++) {
                     //cout << (piece_dep->getTravel().at(i)) << endl;
                     if (m_board.at(piece_dep->getTravel().at(i)) != nullptr){//piece sur le chemin
@@ -57,7 +60,10 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                         return false;
                     }
                 }
-            } else return false;
+            } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2 ) // Piont
+                if (piece_arr == nullptr || (piece_arr->getColor() == piece_dep->getColor()))
+                    return false;
+            else return false;
         } else return false;
     } else return false;
 }

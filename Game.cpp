@@ -46,15 +46,16 @@ void Game::affichage() {
 bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
     if (y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0) {  // dans les limites ?
-        cout << "1" << endl;
+        cout << "G1" << endl;
         if (piece_dep != nullptr) { //case depart pas vide ?
-            cout << "2" << endl;
+            cout << "G2" << endl;
             if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr)) { //mouvement accessible a cette piece
                 for (int i = 0; i < piece_dep->getTravel().size(); i++) {
-                    cout << (piece_dep->getTravel().at(i)) << endl;
-                    if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) //piece sur le chemin
+                    //cout << (piece_dep->getTravel().at(i)) << endl;
+                    if (m_board.at(piece_dep->getTravel().at(i)) != nullptr){//piece sur le chemin
+                        cout << "G777" << endl;
                         return false;
-                    else return true;
+                    }
                 }
             } else return false;
         } else return false;

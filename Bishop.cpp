@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <wchar.h>
 #include <iostream>
-
+using namespace std;
 
 bool Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Mouvemment Bishop "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
@@ -35,7 +35,9 @@ void Bishop::toString() {
         WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
     }
 }
-
+void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+    return;
+}
 Bishop::Bishop(int color) : Piece(color) {
 
 }

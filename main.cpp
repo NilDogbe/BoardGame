@@ -10,14 +10,17 @@ int main() {
    // Piece b("piece");
     Board a;
     a.initBoard(1);
-    a.movePiece(1,1,2,2);//roi
+    /*a.movePiece(1,1,2,2);//roi
     a.movePiece(1,7,2,5);//cavalier
-    a.movePiece(7,6,7,4);//tower
-    a.movePiece(7,4,2,4);//tower
     a.movePiece(6,6,5,5);//Bishop
     a.movePiece(5,6,6,6);//Queen
     a.movePiece(6,6,7,5);//Queen
-
+    a.movePiece(2,2,2,3);//roi
+    a.movePiece(2,3,2,4);//roi
+    a.movePiece(0,0,0,1);//roi*/
+   // a.movePiece(6,7,7,5);//cavalier
+    a.movePiece(7,6,7,4);//tower
+   // a.movePiece(7,4,2,4);//tower
 
 
 

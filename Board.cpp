@@ -13,6 +13,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 
+using namespace std;
 
 
 Board::Board() {
@@ -43,7 +44,6 @@ void Board::initBoard(int jeu) {
 void Board::affichage() {
     for (int i = m_size - 1; i >= 0; i--) {
         cout << i << "| ";
-
         for (int j = 0; j < m_size; j++) {
             Piece *cur = m_board.at(i * m_size + j);
             if (cur != nullptr) {
@@ -66,25 +66,31 @@ void Board::affichage() {
 }
 
 void Board::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
-    Piece *piece_dep = m_board.at(y_dep * 8 + x_dep);
+    Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
     if (y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0) {  // dans les limites
         cout << "1" << endl;
         if (piece_dep != nullptr) { //case dep pas vide ?
             cout << "2" << endl;
             if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr)) { //mouvement accessible a cette piece
+                for(int i = 0; i< piece_dep->getTravel().size();i++){
+                    cout << (piece_dep->getTravel().at(i)) << endl;
+                    if(m_board.at(piece_dep->getTravel().at(i)) != nullptr){
+                        return;
+                    }
+                }
                 cout << "3" << endl;
-                Piece *piece_arr = m_board.at(y_arr * 8 + x_arr);
+                Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
                 if (piece_arr != nullptr) {  //
                     cout << "4" << endl;
                     if (piece_arr->getColor() != piece_dep->getColor()) { //test si les couleurs sont identiques
                         cout << "5" << endl;
-                        m_board.at(y_dep * 8 + x_dep) = nullptr;
-                        m_board.at(y_arr * 8 + x_arr) = piece_dep;
+                        m_board.at(y_dep * m_size + x_dep) = nullptr;
+                        m_board.at(y_arr * m_size + x_arr) = piece_dep;
                     } else;//mange un point a toi meme
                 } else {
                     cout << "6" << endl;
-                    m_board.at(y_dep * 8 + x_dep) = nullptr;
-                    m_board.at(y_arr * 8 + x_arr) = piece_dep;
+                    m_board.at(y_dep * m_size + x_dep) = nullptr;
+                    m_board.at(y_arr * m_size + x_arr) = piece_dep;
 
                 }
             }

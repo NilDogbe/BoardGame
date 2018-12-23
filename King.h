@@ -11,7 +11,7 @@ class King : public Piece {
 
 public:
     King(int color);
-    //int sqr(int x);
+    void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     void toString();
 

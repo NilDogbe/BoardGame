@@ -19,10 +19,16 @@ int Piece::getColor(){
     return m_color;
 }
 
+vector<int> Piece::getTravel(){
+    return m_travel;
+}
 bool Piece::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     return false;
 }
 
+void Piece::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+    return;
+}
 void Piece::toString() {
 
     const wchar_t *white = L"♖";
@@ -34,3 +40,4 @@ int Piece::sqr(int x) {
     cout<<"sqr";
     return x*x;
 }
+

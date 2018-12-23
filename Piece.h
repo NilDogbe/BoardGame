@@ -4,15 +4,15 @@
 
 #ifndef BOARDGAME_PIECE_H
 #define BOARDGAME_PIECE_H
-using namespace std;
-
+#include <vector>
 #include <string>
 
 class Piece {
 
 protected:
+    static const int m_size = 8;
     int m_color;
-
+    std::vector<int> m_travel;
 
 public:
 
@@ -20,8 +20,9 @@ public:
     int sqr(int x);
     virtual int getColor();
     virtual void toString();
-
+    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     virtual bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
+    virtual std::vector<int> getTravel();
 };
 
 

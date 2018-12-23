@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <wchar.h>
 #include <iostream>
-
+using namespace std;
 
 /*int King::sqr(int x) {
     return x*x;
@@ -40,6 +40,9 @@ void King::toString() {
         WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
     }
 
+}
+void King::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+    return;
 }
 
 King::King(int color) : Piece(color) {

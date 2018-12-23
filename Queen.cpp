@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <wchar.h>
 #include <iostream>
-
+using namespace std;
 bool Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Mouvemment Queen "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
 
@@ -28,6 +28,10 @@ bool Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 Queen::Queen(int color) : Piece(color) {
 
+}
+
+void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+    return;
 }
 
 void Queen::toString() {

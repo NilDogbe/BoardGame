@@ -7,7 +7,7 @@
 #include <iostream>
 #include <windows.h>
 #include <wchar.h>
-
+using namespace std;
 
 bool Cavalier::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
@@ -33,6 +33,10 @@ void Cavalier::toString() {
         const wchar_t *white = L"♞";
         WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
     }
+}
+
+void Cavalier::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+    return;
 }
 
 Cavalier::Cavalier(int color) : Piece(color) {

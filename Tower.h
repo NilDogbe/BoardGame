@@ -13,6 +13,7 @@ public:
 
     bool canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     void toString() override;
+    void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
 
 };
 

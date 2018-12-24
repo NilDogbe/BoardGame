@@ -2,16 +2,9 @@
 // Created by nil on 21/12/2018.
 //
 
+#include "Game.h"
 #include <iostream>
 #include <windows.h>
-#include <wchar.h>
-#include "Game.h"
-#include "Piece.h"
-#include "King.h"
-#include "Cavalier.h"
-#include "Tower.h"
-#include "Bishop.h"
-#include "Queen.h"
 
 using namespace std;
 
@@ -42,6 +35,22 @@ void Game::affichage() {
     for (int i = 0; i < m_size; i++)
         cout << i;
 }
+
+/*void Game::affichage() {
+    for (int i = m_size - 1; i >= 0; i--) {
+        for (int j = 0; j < m_size; j++) {
+            Piece *p = m_board[i * m_size + j];
+            string s = "m  ";
+            if (p != nullptr)
+                s = ";" + to_string(p->getColor()) + "m " + p->toString();
+            if ((i + j) % 2 == 0)
+                cout << "\033[47" << s << " \033[0m";
+            else
+                cout << "\033[40" << s << " \033[0m";
+        }
+        cout << endl;
+    }
+}*/
 
 bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);

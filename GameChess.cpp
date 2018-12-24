@@ -72,8 +72,13 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
             cout << "G2" << endl;
 
             //mouvement accessible a cette piece
+            cout  << "Travel; "<<endl;
+
             for (int i = 0; i < piece_dep->getTravel().size(); i++) {
-                //cout << (piece_dep->getTravel().at(i)) << endl;
+                cout  << "x:" << (piece_dep->getTravel().at(i))%8;
+                cout  <<",y:" << (piece_dep->getTravel().at(i))/8<<endl;
+
+
                 if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) {//piece sur le chemin
                     cout << "G777" << endl;
                     return false;

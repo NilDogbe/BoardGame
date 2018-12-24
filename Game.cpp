@@ -56,7 +56,7 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
         return false;
     else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 0) // piece existe
         return false;
-    else if ((piece_arr != nullptr) && (piece_arr->getColor() == piece_arr->getColor()) ){ //manger une piece de meme couleur
+    else if ((piece_arr != nullptr) && (piece_dep->getColor() == piece_arr->getColor()) ){ //manger une piece de meme couleur
         return false;
     }
     else return true;

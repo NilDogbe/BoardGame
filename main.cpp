@@ -42,7 +42,7 @@ int main() {
     a.movePiece(3,3,4,2);//Bishop
     a.movePiece(4,2,6,4);//Bishop
    // a.movePiece(7,4,2,4);//tower*/
-
+    a.movePiece(4,4,1,7);
 
 
 

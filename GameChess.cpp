@@ -26,7 +26,7 @@ GameChess::GameChess() : Game(8) {
 void GameChess::initGameChess() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
-            if (i == 1)
+           /* if (i == 1)
                 m_board[i * m_size + j] = new PiontForChess(1);
             else if (i == 0)
                 if (j == 0 || j == m_size - 1)
@@ -51,7 +51,29 @@ void GameChess::initGameChess() {
                 else if (j == 3)
                     m_board[i * m_size + j] = new Queen(0);
                 else
-                    m_board[i * m_size + j] = new King(0);
+                    m_board[i * m_size + j] = new King(0);*/
+           if(j==4 && i == 4){
+               m_board[i * m_size + j] = new Queen(0);
+           }
+           if(j==1 && i == 4){
+               m_board[i * m_size + j] = new King(0);
+           }
+            if(j==6 && i == 2){
+                m_board[i * m_size + j] = new King(0);
+            }
+            if(j==2 && i == 2){
+                m_board[i * m_size + j] = new King(0);
+            }
+            if(j==4 && i == 2){
+                m_board[i * m_size + j] = new King(0);
+            }
+            if(j==6 && i == 6){
+                m_board[i * m_size + j] = new King(0);
+            }
+
+            if(j==2 && i == 6){
+                m_board[i * m_size + j] = new King(0);
+            }
         }
     }
 }

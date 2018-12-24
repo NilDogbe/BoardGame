@@ -44,10 +44,10 @@ void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
                 j++;
             }
         } else if (y_arr < y_dep) {
-            int j = y_arr + 1;
+            int j = y_dep - 1;
             for (int i = x_dep + 1; i < x_arr; i++) {
                 m_travel.push_back(j * m_size + i);
-                j++;
+                j--;
                 cout << "test" << (j * m_size + i) << endl;
             }
 
@@ -56,11 +56,11 @@ void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         if (y_arr == y_dep) {
             for (int i = x_arr + 1; i < x_dep; i++)
                 m_travel.push_back(y_dep * m_size + i);
-        } else if (y_arr > y_dep) {
-            int j = y_dep + 1;
+        } else if (x_arr < x_dep && y_arr > y_dep) {
+            int j = y_arr + -1;
             for (int i = x_arr + 1; i < x_dep; i++) {
                 m_travel.push_back(j * m_size + i);
-                j++;
+                j--;
             }
         } else if (y_arr < y_dep) {
             int j = y_arr + 1;

@@ -3,7 +3,6 @@
 //
 
 #include "Queen.h"
-#include <windows.h>
 #include <wchar.h>
 #include <iostream>
 
@@ -78,15 +77,7 @@ void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-void Queen::toString() {
-    if (m_color == 0) {
-        const wchar_t *black = L"♔";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
-
-    }
-    if (m_color == 1) {
-        const wchar_t *white = L"♚";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
-    }
+string Queen::toString() {
+return "Q";
 }
 

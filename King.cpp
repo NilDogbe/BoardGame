@@ -4,7 +4,6 @@
 
 #include "King.h"
 #include <cmath>
-#include <windows.h>
 #include <wchar.h>
 #include <iostream>
 using namespace std;
@@ -29,15 +28,8 @@ int King::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-void King::toString() {
-    if (m_color == 0) {
-        const wchar_t *black = L"♕";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
-    }
-    if (m_color == 1) {
-        const wchar_t *white = L"♛";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
-    }
+string King::toString() {
+    return "K";
 
 }
 void King::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){

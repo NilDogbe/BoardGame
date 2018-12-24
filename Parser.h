@@ -5,8 +5,11 @@
 #ifndef BOARDGAME_PARSER_H
 #define BOARDGAME_PARSER_H
 #include<fstream>
+#include "string.h"
 
 class Parser {
+public:
+    void ReadScipt(std::string flux);
 
 };
 

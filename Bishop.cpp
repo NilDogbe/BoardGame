@@ -3,7 +3,6 @@
 //
 
 #include "Bishop.h"
-#include <windows.h>
 #include <wchar.h>
 #include <iostream>
 
@@ -26,16 +25,8 @@ int Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 }
 
-void Bishop::toString() {
-    if (m_color == 0) {
-        const wchar_t *black = L"♗";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
-
-    }
-    if (m_color == 1) {
-        const wchar_t *white = L"♝";
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
-    }
+string Bishop::toString() {
+   return "B";
 }
 
 void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {

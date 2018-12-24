@@ -4,7 +4,6 @@
 
 #include "GameChess.h"
 #include <iostream>
-#include <windows.h>
 #include <wchar.h>
 #include "Game.h"
 #include "Piece.h"
@@ -26,40 +25,40 @@ GameChess::GameChess() : Game(8) {
 void GameChess::initGameChess() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
-           /* if (i == 1)
-                m_board[i * m_size + j] = new PiontForChess(1);
+            if (i == 1)
+                m_board[i * m_size + j] = new PiontForChess(WHITE);
             else if (i == 0)
                 if (j == 0 || j == m_size - 1)
-                    m_board[i * m_size + j] = new Tower(1);
+                    m_board[i * m_size + j] = new Tower(WHITE);
                 else if (j == 1 || j == m_size - 2)
-                    m_board[i * m_size + j] = new Cavalier(1);
+                    m_board[i * m_size + j] = new Cavalier(WHITE);
                 else if (j == 2 || j == m_size - 3)
-                    m_board[i * m_size + j] = new Bishop(1);
+                    m_board[i * m_size + j] = new Bishop(WHITE);
                 else if (j == 3)
-                    m_board[i * m_size + j] = new King(1);
+                    m_board[i * m_size + j] = new King(WHITE);
                 else
-                    m_board[i * m_size + j] = new Queen(1);
+                    m_board[i * m_size + j] = new Queen(WHITE);
             else if (i == m_size - 2)
-                m_board[i * m_size + j] = new PiontForChess(0);
+                m_board[i * m_size + j] = new PiontForChess(BLACK);
             else if (i == m_size - 1)
                 if (j == 0 || j == m_size - 1)
-                    m_board[i * m_size + j] = new Tower(0);
+                    m_board[i * m_size + j] = new Tower(BLACK);
                 else if (j == 1 || j == m_size - 2)
-                    m_board[i * m_size + j] = new Cavalier(0);
+                    m_board[i * m_size + j] = new Cavalier(BLACK);
                 else if (j == 2 || j == m_size - 3)
-                    m_board[i * m_size + j] = new Bishop(0);
+                    m_board[i * m_size + j] = new Bishop(BLACK);
                 else if (j == 3)
-                    m_board[i * m_size + j] = new Queen(0);
+                    m_board[i * m_size + j] = new Queen(BLACK);
                 else
-                    m_board[i * m_size + j] = new King(0);*/
-           if(j==4 && i == 4){
-               m_board[i * m_size + j] = new Queen(0);
+                    m_board[i * m_size + j] = new King(BLACK);
+          /* if(j==4 && i == 4){
+               m_board[i * m_size + j] = new Queen(BLACK);
            }
            if(j==1 && i == 4){
-               m_board[i * m_size + j] = new King(0);
+               m_board[i * m_size + j] = new King(BLACK);
            }
             if(j==6 && i == 2){
-                m_board[i * m_size + j] = new King(0);
+                m_board[i * m_size + j] = new King(BLACK);
             }
             if(j==2 && i == 2){
                 m_board[i * m_size + j] = new King(0);
@@ -73,7 +72,7 @@ void GameChess::initGameChess() {
 
             if(j==2 && i == 6){
                 m_board[i * m_size + j] = new King(0);
-            }
+            }*/
         }
     }
 }

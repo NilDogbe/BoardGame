@@ -11,6 +11,8 @@ class GameChess : public Game {
 
 protected:
     void initGameChess();
+    const static int BLACK = 31;
+    const static int WHITE = 30;
 
 public:
     GameChess();

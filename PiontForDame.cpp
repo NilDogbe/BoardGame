@@ -12,7 +12,7 @@ PiontForDame::PiontForDame(int color) : Piece{color} {
 }
 
 string PiontForDame::toString() {
-    return "♟";
+    return "O";
 }
 
 int PiontForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {

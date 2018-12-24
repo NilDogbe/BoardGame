@@ -10,10 +10,6 @@
 
 
 class Game {
-private:
-    static int const WHITE = 1;
-    static int const BLACK = 0;
-
 protected:
     const int m_size;
     std::vector<Piece*> m_board;

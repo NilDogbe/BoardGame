@@ -20,7 +20,7 @@ int Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
         return true;
     } else if ((x_arr == x_dep && y_arr != y_dep) || (x_arr != x_dep && y_arr == y_dep)) {
         cout << "true2";
-        cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+         cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
         setTravel(x_dep, y_dep, x_arr, y_arr);
         return true;
 

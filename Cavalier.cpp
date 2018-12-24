@@ -10,6 +10,7 @@
 using namespace std;
 
 int Cavalier::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+    m_travel.clear();
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
     cout << "Mouvemment Cav "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
     if (y_dep == y_arr || x_dep == x_arr )

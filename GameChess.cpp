@@ -52,9 +52,6 @@ void GameChess::initGameChess() {
                     m_board[i * m_size + j] = new Queen(0);
                 else
                     m_board[i * m_size + j] = new King(0);
-
-
-
         }
     }
 }
@@ -70,19 +67,33 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
-        if (piece_arr != nullptr) {  //
-            cout << "4" << endl;
-            if (piece_arr->getColor() != piece_dep->getColor()) { //test si les couleurs sont diff
-                cout << "5" << endl;
-                m_board.at(y_dep * m_size + x_dep) = nullptr;
-                m_board.at(y_arr * m_size + x_arr) = piece_dep;
-                return true;
-            } else return false;//mange un point a toi meme
-        } else {
-            cout << "6" << endl;
+
+        if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
+            cout << "G2" << endl;
+
+            //mouvement accessible a cette piece
+            for (int i = 0; i < piece_dep->getTravel().size(); i++) {
+                //cout << (piece_dep->getTravel().at(i)) << endl;
+                if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) {//piece sur le chemin
+                    cout << "G777" << endl;
+                    return false;
+                }
+            }
+            cout << "G3";
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             return true;
+        } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
+            cout << "G3" << endl;// Piont
+            if (piece_arr == nullptr)
+                return false;
         }
-    } else return false;
+            else {
+                cout << "6" << endl;
+                m_board.at(y_dep * m_size + x_dep) = nullptr;
+                m_board.at(y_arr * m_size + x_arr) = piece_dep;
+                return true;
+            }
+    }
+    else return false;
 }

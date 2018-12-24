@@ -4,20 +4,12 @@
 
 #include <iostream>
 #include <windows.h>
-#include <wchar.h>
 #include "Game.h"
-#include "Piece.h"
-#include "King.h"
-#include "Cavalier.h"
-#include "Tower.h"
-#include "Bishop.h"
-#include "Queen.h"
 
 using namespace std;
 
 Game::Game(int size) : m_board(size * size, nullptr), m_size(size) {
 }
-
 
 void Game::affichage() {
     for (int i = m_size - 1; i >= 0; i--) {
@@ -43,6 +35,22 @@ void Game::affichage() {
         cout << i;
 }
 
+/*void Game::affichage() {
+    for (int i = m_size - 1; i >= 0; i--) {
+        for (int j = 0; j < m_size; j++) {
+            Piece *p = m_board[i * m_size + j];
+            string s = "m  ";
+            if (p != nullptr)
+                s = ";" + to_string(p->getColor()) + "m " + p->toString();
+            if ((i + j) % 2 == 0)
+                cout << "\033[47" << s << " \033[0m";
+            else
+                cout << "\033[40" << s << " \033[0m";
+        }
+        cout << endl;
+    }
+}*/
+
 bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
     Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
@@ -51,18 +59,12 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (!(y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0)) { // hors des  limites ?
         cout << "G1" << endl;
         return false;
-    }
-    else if (piece_dep == nullptr) // piece existe
+    } else if (piece_dep == nullptr) // piece existe
         return false;
     else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 0) // piece existe
         return false;
-    else if ((piece_arr != nullptr) && (piece_arr->getColor() == piece_arr->getColor()) ){ //manger une piece de meme couleur
+    else if ((piece_arr != nullptr) &&
+             (piece_dep->getColor() == piece_arr->getColor())) { //manger une piece de meme couleur
         return false;
-    }
-    else return true;
-
-
+    } else return true;
 }
-
-
-

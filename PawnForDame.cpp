@@ -2,20 +2,20 @@
 // Created by netbook on 23/12/18.
 //
 
-#include "PiontForDame.h"
+#include "PawnForDame.h"
 #include "GameDame.h"
 #include "iostream"
 
 using namespace std;
 
-PiontForDame::PiontForDame(int color) : Piece{color} {
+PawnForDame::PawnForDame(int color) : Piece{color} {
 }
 
-string PiontForDame::toString() {
+string PawnForDame::toString() {
     return "O";
 }
 
-int PiontForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int PawnForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (abs(x_dep - x_arr) == 1 && abs(y_dep - y_arr) == 1) {
         if (y_arr > y_dep)
             return 1;
@@ -25,7 +25,7 @@ int PiontForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
         return 0;
 }
 
-vector<int> PiontForDame::getTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
+vector<int> PawnForDame::getTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     int addX{0};
     int addY{0};
     if (x_arr > x_dep)

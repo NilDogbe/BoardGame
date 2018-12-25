@@ -3,7 +3,7 @@
 //
 
 #include "GameDame.h"
-#include "PiontForDame.h"
+#include "PawnForDame.h"
 #include <iostream>
 
 GameDame::GameDame() : Game{SIZE} {
@@ -14,13 +14,13 @@ void GameDame::initGame() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
-                m_board[i * SIZE + j] = new PiontForDame(WHITE);
+                m_board[i * SIZE + j] = new PawnForDame(WHITE);
         }
     }
     for (int i = SIZE - 1; i >= SIZE - 4; i--) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 != 0)
-                m_board[i * SIZE + j] = new PiontForDame(BLACK);
+                m_board[i * SIZE + j] = new PawnForDame(BLACK);
         }
     }
 }

@@ -2,7 +2,7 @@
 // Created by nil on 23/12/2018.
 //
 
-#include "PiontForChess.h"
+#include "PawnForChess.h"
 #include <cmath>
 #include <wchar.h>
 #include <iostream>
@@ -10,7 +10,7 @@
 using namespace std;
 
 
-int PiontForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int PawnForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     cout << "Mouvemment Piont " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
     if (m_color == 0) {
@@ -60,14 +60,14 @@ int PiontForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-string PiontForChess::toString() {
+string PawnForChess::toString() {
    return "P";
 }
 
-void PiontForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
+void PawnForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     Piece::setTravel(x_dep, y_dep, x_arr, y_arr);
 }
 
-PiontForChess::PiontForChess(int color) : Piece(color) {
+PawnForChess::PawnForChess(int color) : Piece(color) {
 
 }

@@ -2,13 +2,13 @@
 // Created by nil on 22/12/2018.
 //
 
-#include "Cavalier.h"
+#include "Knight.h"
 #include <cmath>
 #include <iostream>
 #include <wchar.h>
 using namespace std;
 
-int Cavalier::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
+int Knight::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
     cout << "Mouvemment Cav "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
@@ -27,14 +27,14 @@ int Cavalier::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 
-string Cavalier::toString() {
+string Knight::toString() {
 return "C";
 }
 
-void Cavalier::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
+void Knight::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
     return;
 }
 
-Cavalier::Cavalier(int color) : Piece(color) {
+Knight::Knight(int color) : Piece(color) {
 
 }

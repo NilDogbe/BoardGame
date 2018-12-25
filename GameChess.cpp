@@ -8,11 +8,11 @@
 #include "Game.h"
 #include "Piece.h"
 #include "King.h"
-#include "Cavalier.h"
+#include "Knight.h"
 #include "Tower.h"
 #include "Bishop.h"
 #include "Queen.h"
-#include "PiontForChess.h"
+#include "PawnForChess.h"
 #include "Parser.h"
 
 
@@ -27,12 +27,12 @@ void GameChess::initGameChess() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
             if (i == 1)
-                m_board[i * m_size + j] = new PiontForChess(WHITE);
+                m_board[i * m_size + j] = new PawnForChess(WHITE);
             else if (i == 0)
                 if (j == 0 || j == m_size - 1)
                     m_board[i * m_size + j] = new Tower(WHITE);
                 else if (j == 1 || j == m_size - 2)
-                    m_board[i * m_size + j] = new Cavalier(WHITE);
+                    m_board[i * m_size + j] = new Knight(WHITE);
                 else if (j == 2 || j == m_size - 3)
                     m_board[i * m_size + j] = new Bishop(WHITE);
                 else if (j == 3)
@@ -40,12 +40,12 @@ void GameChess::initGameChess() {
                 else
                     m_board[i * m_size + j] = new Queen(WHITE);
             else if (i == m_size - 2)
-                m_board[i * m_size + j] = new PiontForChess(BLACK);
+                m_board[i * m_size + j] = new PawnForChess(BLACK);
             else if (i == m_size - 1)
                 if (j == 0 || j == m_size - 1)
                     m_board[i * m_size + j] = new Tower(BLACK);
                 else if (j == 1 || j == m_size - 2)
-                    m_board[i * m_size + j] = new Cavalier(BLACK);
+                    m_board[i * m_size + j] = new Knight(BLACK);
                 else if (j == 2 || j == m_size - 3)
                     m_board[i * m_size + j] = new Bishop(BLACK);
                 else if (j == 3)
@@ -131,7 +131,7 @@ GameChess::GameChess(int id_test) : Game(SIZE) {
 void GameChess::getTest(int id_test) {
     initGameChess();
     Parser p;
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
+    vector<vector<int>> vector = p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
     int acc = 0;
     string sens;
     while (acc >= 0 && acc < vector.size()) {

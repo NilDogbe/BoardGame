@@ -81,43 +81,43 @@ void GameChess::initGameChess() {
 bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
-        cout << "test:::" << endl;
+       // cout << "test:::" << endl;
 
 
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
 
         if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
-            cout << "G2" << endl;
+           // cout << "G2" << endl;
 
             //mouvement accessible a cette piece
-            cout << "Travel; " << endl;
+           // cout << "Travel; " << endl;
 
             for (int i = 0; i < piece_dep->getTravel().size(); i++) {
-                cout << "x:" << (piece_dep->getTravel().at(i)) % 8;
-                cout << ",y:" << (piece_dep->getTravel().at(i)) / 8 << endl;
+               // cout << "x:" << (piece_dep->getTravel().at(i)) % 8;
+               // cout << ",y:" << (piece_dep->getTravel().at(i)) / 8 << endl;
 
 
                 if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) {//piece sur le chemin
-                    cout << "G777" << endl;
+                  //  cout << "G777" << endl;
                     return false;
                 }
             }
             if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
                 m_endGame = true;
-                cout << "G8888888888";
+              //  cout << "G8888888888";
 
             }
-            cout << "G3";
+           // cout << "G3";
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             return true;
         } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
-            cout << "G3" << endl;// Piont
+           // cout << "G3" << endl;// Piont
             if (piece_arr == nullptr)
                 return false;
         } else {
-            cout << "6" << endl;
+           // cout << "6" << endl;
             if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0)
                 m_endGame = true;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
@@ -129,7 +129,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 
 GameChess::GameChess(int id_test) : Game(SIZE) {
-    cout << m_caseBlackKing << "aaaaaaaaaaaa";
+   // cout << m_caseBlackKing << "aaaaaaaaaaaa";
 
     getTest(id_test);
 }

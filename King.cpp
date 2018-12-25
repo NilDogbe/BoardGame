@@ -41,3 +41,8 @@ King::King(int color) : Piece(color) {
 
 }
 
+int King::sqr(int x) {
+    cout<<"sqr";
+    return x*x;
+}
+

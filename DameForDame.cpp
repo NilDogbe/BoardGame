@@ -23,7 +23,7 @@ int DameForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
         return 0;
 }
 
-vector<int> DameForDame::getTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
+void DameForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     int addX{0};
     int addY{0};
     if (x_arr > x_dep)
@@ -35,7 +35,7 @@ vector<int> DameForDame::getTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     else
         addY = -1;
 
-    vector<int> vector;
+    m_travel.clear();
     while (true) {
         x_dep += addX;
         y_dep += addY;
@@ -43,8 +43,6 @@ vector<int> DameForDame::getTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         if (x_dep == x_arr && y_dep == y_arr)
             break;
 
-        vector.push_back(y_dep * GameDame::SIZE + x_dep);
+        m_travel.push_back(y_dep * GameDame::SIZE + x_dep);
     }
-
-    return vector;
 }

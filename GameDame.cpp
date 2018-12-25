@@ -17,13 +17,13 @@ void GameDame::initGame() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
-                m_board[i * SIZE + j] = new DameForDame(WHITE);
+                m_board[i * SIZE + j] = new PawnForDame(WHITE);
         }
     }
     for (int i = SIZE - 1; i >= SIZE - 4; i--) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
-                m_board[i * SIZE + j] = new DameForDame(BLACK);
+                m_board[i * SIZE + j] = new PawnForDame(BLACK);
         }
     }
 }
@@ -36,8 +36,9 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
         if (arr == nullptr) {
             std::cout << "2" << std::endl;
             if (dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
+                dep->setTravel(x_dep, y_dep, x_arr, y_arr);
                 int nbr_pieces{0};
-                vector<int> v = dep->getTravel(x_dep, y_dep, x_arr, y_arr);
+                vector<int> v = dep->getTravel();
                 for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
                     if (m_board[*it] != nullptr)
                         nbr_pieces += 1;
@@ -49,7 +50,7 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                     std::cout << "bouger" << std::endl;
                     return true;
                 } else if (nbr_pieces == 1) {
-                    int i = dep->getTravel(x_dep, y_dep, x_arr, y_arr).back();
+                    int i = dep->getTravel().back();
                     //if (m_board[i] != nullptr) {
                         m_board[y_dep * SIZE + x_dep] = nullptr;
                         m_board[y_arr * SIZE + x_arr] = dep;

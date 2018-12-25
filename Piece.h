@@ -13,15 +13,12 @@ protected:
     static const int m_size = 8;
     int m_color;
     std::vector<int> m_travel;
-
 public:
-
     Piece(int color);
-    int sqr(int x);
     virtual int getColor();
     virtual std::string toString() = 0;
-    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
-    virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
+    virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr) = 0;
+    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr) = 0;
     virtual std::vector<int> getTravel();
 };
 

@@ -10,12 +10,12 @@
 
 class GameDame : public Game {
 private:
-    const static int BLACK = 37;
-    const static int WHITE = 30;
 protected:
     virtual void initGame();
 public:
     const static int SIZE = 10;
+    const static int BLACK = 37;
+    const static int WHITE = 30;
     GameDame();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
 };

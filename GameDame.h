@@ -17,6 +17,9 @@ public:
     const static int BLACK = 37;
     const static int WHITE = 30;
     GameDame();
+    GameDame(int id_test);
+    void getTest(int id_test);
+
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
 };
 

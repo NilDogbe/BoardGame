@@ -10,7 +10,17 @@ using namespace std;
 
 
 int main() {
-   // Piece b("piece");
+
+   /* Parser p;
+    Game* g = new GameChess(0);*/
+
+    Game* gd = new GameDame(0);
+   // gd->affichage();
+
+
+
+
+    // Piece b("piece");
    /* GameChess a;
     a.movePiece(2,1,2,3);//piont
     a.movePiece(3,1,3,2);//Piont
@@ -64,11 +74,8 @@ cout << endl;
     e->movePiece(2,0,4,2);//fou
     e->movePiece(4,0,1,3);//reine
     e->affichage();*/
-    Parser p;
     //Game_Processing\\Script_Test.txt" pour leo
     //p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
-    Game* g = new GameChess(0);
-    //g->affichage();
 
     cout<<  " \033[33;7mLe texte\033[0m" ;
 

@@ -12,7 +12,7 @@ class Parser {
 private:
     std::vector<std::string> m_vectorOfMove;
 public:
-    std::vector<std::vector<int>> ReadScipt(std::string flux, int id);
+    std::vector<std::vector<int>> ReadScipt(std::string flux, int id, std::string idBalise);
 
 };
 

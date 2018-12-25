@@ -18,7 +18,7 @@ public:
     virtual int getColor();
     virtual std::string toString() = 0;
     virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr) = 0;
-    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr) = 0;
+    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     virtual std::vector<int> getTravel();
 };
 

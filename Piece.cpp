@@ -22,3 +22,6 @@ vector<int> Piece::getTravel(){
     return m_travel;
 }
 
+void Piece::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
+    return;
+}

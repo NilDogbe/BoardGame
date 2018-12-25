@@ -11,7 +11,7 @@ public:
     Bishop(int color);
     virtual std::string toString();
     virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
-    virtual std::vector<int> setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
+    virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
 };
 
 

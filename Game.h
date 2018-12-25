@@ -18,12 +18,8 @@ protected:
     const int m_p1 = WHITE;
     const int m_p2 = BLACK;
     int m_curP = WHITE;
-   bool m_endGame;
-
+    bool m_endGame;
     Game(int size);
-
-
-
 
 public:
     virtual void affichage();

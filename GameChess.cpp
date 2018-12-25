@@ -137,17 +137,17 @@ GameChess::GameChess(int id_test) : Game(SIZE) {
 void GameChess::getTest(int id_test) {
     initGameChess();
     Parser p;
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
+    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test,"<Chess>\r");
     int acc = 0;
     string sens;
     while (acc >= 0 && acc < vector.size() && !m_endGame) {
 
         getline(cin, sens);
-        acc++;
         movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
+        acc++;
         affichage();
         cout<<"endgame: "<<m_endGame;
-        cout<<"tailleeeee: "<< acc;
+        cout << vector.size()<<": "<< acc;
 
     }
     cout<<"fin du jeu"<<endl;

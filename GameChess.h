@@ -11,16 +11,17 @@ class GameChess : public Game {
 
 protected:
     void initGameChess();
-    const static int BLACK = 31;
-    const static int WHITE = 30;
     const static int SIZE = 8;
+    int m_caseBlackKing = (m_size - 1) * m_size + 5; // 61
+    int m_caseWhitekKing = m_size * 0 + 3;
+
 
 public:
     GameChess();
     GameChess(int id_test);
     void getTest(int id_test);
-    virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
+
 
 };
 

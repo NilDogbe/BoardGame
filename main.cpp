@@ -12,6 +12,8 @@ using namespace std;
 int main() {
    // Piece b("piece");
    /* GameChess a;
+    a.movePiece(2,1,2,3);//piont
+    a.movePiece(3,1,3,2);//Piont
     a.movePiece(0,7,4,7);//tour
     a.movePiece(5,7,2,4);//fou
     a.movePiece(2,0,4,2);//fou
@@ -55,6 +57,8 @@ int main() {
 Game* d = new GameDame();
 d->affichage();
 cout << endl;
+    e->movePiece(2,1,2,3);//piont
+    e->movePiece(3,1,3,2);//Piont
     e->movePiece(0,7,4,7);//tour
     e->movePiece(5,7,2,4);//fou
     e->movePiece(2,0,4,2);//fou
@@ -62,9 +66,9 @@ cout << endl;
     e->affichage();*/
     Parser p;
     //Game_Processing\\Script_Test.txt" pour leo
-   // p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt",0);
+    //p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
     Game* g = new GameChess(0);
-    g->affichage();
+    //g->affichage();
 
     cout<<  " \033[33;7mLe texte\033[0m" ;
 

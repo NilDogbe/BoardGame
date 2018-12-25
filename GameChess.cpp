@@ -78,14 +78,11 @@ void GameChess::initGameChess() {
     }
 }
 
-void GameChess::affichage() {
-    Game::affichage();
-}
-
 bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
         cout << "test:::" << endl;
+
 
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
@@ -106,6 +103,11 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                     return false;
                 }
             }
+            if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
+                m_endGame = true;
+                cout << "G8888888888";
+
+            }
             cout << "G3";
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
@@ -116,6 +118,8 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                 return false;
         } else {
             cout << "6" << endl;
+            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0)
+                m_endGame = true;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             return true;
@@ -125,19 +129,32 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 
 GameChess::GameChess(int id_test) : Game(SIZE) {
+    cout << m_caseBlackKing << "aaaaaaaaaaaa";
+
     getTest(id_test);
 }
 
 void GameChess::getTest(int id_test) {
     initGameChess();
     Parser p;
-    vector<vector<int>> vector = p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
+    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
     int acc = 0;
     string sens;
-    while (acc >= 0 && acc < vector.size()) {
+    while (acc >= 0 && acc < vector.size() && !m_endGame) {
+
         getline(cin, sens);
         acc++;
         movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
         affichage();
+        cout<<"endgame: "<<m_endGame;
+        cout<<"tailleeeee: "<< acc;
+
     }
+    cout<<"fin du jeu"<<endl;
+
 }
+
+/* if( y_dep * m_size + x_dep == m_caseWhitekKing){
+     cout<<"king  blanc"<< y_dep * m_size + x_dep << endl;
+     y_arr * m_size + x_arr == m_caseWhitekKing
+ }*/

@@ -47,7 +47,7 @@ void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
             for (int i = x_dep + 1; i < x_arr; i++) {
                 m_travel.push_back(j * m_size + i);
                 j--;
-                cout << "test" << (j * m_size + i) << endl;
+               // cout << "test" << (j * m_size + i) << endl;
             }
 
         }

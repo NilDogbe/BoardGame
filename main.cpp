@@ -66,9 +66,9 @@ cout << endl;
     e->affichage();*/
     Parser p;
     //Game_Processing\\Script_Test.txt" pour leo
-    p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
+    //p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
     Game* g = new GameChess(0);
-    g->affichage();
+    //g->affichage();
 
     cout<<  " \033[33;7mLe texte\033[0m" ;
 

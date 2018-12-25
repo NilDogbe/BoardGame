@@ -12,6 +12,7 @@ Game::Game(int size) : m_board(size * size, nullptr), m_size(size) {
 
 void Game::affichage() {
     for (int i = m_size - 1; i >= 0; i--) {
+        cout<<i<<" ";
         for (int j = 0; j < m_size; j++) {
             Piece *p = m_board[i * m_size + j];
             string s = "m  ";
@@ -25,6 +26,11 @@ void Game::affichage() {
             //[31;1;4;5;7mLe texte[0m
         }
         cout << endl;
+    }
+    cout << "   ";
+
+    for (int i = 0; i < m_size; i++) {
+        cout << i << "  ";
     }
 }
 

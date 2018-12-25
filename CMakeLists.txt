@@ -8,12 +8,12 @@ add_executable(BoardGame
         Piece.cpp Piece.h
         Game.cpp Game.h
         King.cpp King.h
-        Cavalier.cpp Cavalier.h
+        Knight.cpp Knight.h
         Tower.cpp Tower.h
         Bishop.cpp Bishop.h
         Queen.cpp Queen.h
-        PiontForChess.cpp PiontForChess.h
+        PawnForChess.cpp PawnForChess.h
         GameChess.cpp GameChess.h
         GameDame.cpp GameDame.h
-        PiontForDame.cpp PiontForDame.h
+        PawnForDame.cpp PawnForDame.h
         Parser.cpp Parser.h)

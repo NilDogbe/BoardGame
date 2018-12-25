@@ -2,14 +2,14 @@
 // Created by nil on 22/12/2018.
 //
 
-#ifndef BOARDGAME_CAVALIER_H
-#define BOARDGAME_CAVALIER_H
+#ifndef BOARDGAME_KNIGHT_H
+#define BOARDGAME_KNIGHT_H
 #include "Piece.h"
 
 
-class Cavalier : public Piece {
+class Knight : public Piece {
 public:
-    Cavalier(int color);
+    Knight(int color);
     void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     std::string toString() override;
@@ -17,4 +17,4 @@ public:
 };
 
 
-#endif //BOARDGAME_CAVALIER_H
+#endif //BOARDGAME_KNIGHT_H

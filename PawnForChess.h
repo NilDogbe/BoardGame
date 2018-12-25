@@ -2,17 +2,17 @@
 // Created by nil on 23/12/2018.
 //
 
-#ifndef BOARDGAME_PIONT_H
-#define BOARDGAME_PIONT_H
+#ifndef BOARDGAME_PAWN_H
+#define BOARDGAME_PAWN_H
 
 #include "Piece.h"
 
-class PiontForChess : public Piece{
+class PawnForChess : public Piece{
 private:
     bool m_firstMove = true;
 
 public:
-    PiontForChess(int color);
+    PawnForChess(int color);
     void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
     std::string toString() override;
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //BOARDGAME_PIONT_H
+#endif //BOARDGAME_PAWN_H

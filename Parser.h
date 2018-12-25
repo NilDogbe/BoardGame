@@ -5,11 +5,14 @@
 #ifndef BOARDGAME_PARSER_H
 #define BOARDGAME_PARSER_H
 #include<fstream>
+#include <vector>
 #include "string.h"
 
 class Parser {
+private:
+    std::vector<std::string> m_vectorOfMove;
 public:
-    void ReadScipt(std::string flux);
+    std::vector<std::vector<int>> ReadScipt(std::string flux, int id);
 
 };
 

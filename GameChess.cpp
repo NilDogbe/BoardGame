@@ -13,6 +13,7 @@
 #include "Bishop.h"
 #include "Queen.h"
 #include "PiontForChess.h"
+#include "Parser.h"
 
 
 using namespace std;
@@ -51,28 +52,28 @@ void GameChess::initGameChess() {
                     m_board[i * m_size + j] = new Queen(BLACK);
                 else
                     m_board[i * m_size + j] = new King(BLACK);
-          /* if(j==4 && i == 4){
-               m_board[i * m_size + j] = new Queen(BLACK);
-           }
-           if(j==1 && i == 4){
-               m_board[i * m_size + j] = new King(BLACK);
-           }
-            if(j==6 && i == 2){
-                m_board[i * m_size + j] = new King(BLACK);
-            }
-            if(j==2 && i == 2){
-                m_board[i * m_size + j] = new King(0);
-            }
-            if(j==4 && i == 2){
-                m_board[i * m_size + j] = new King(0);
-            }
-            if(j==6 && i == 6){
-                m_board[i * m_size + j] = new King(0);
-            }
+            /* if(j==4 && i == 4){
+                 m_board[i * m_size + j] = new Queen(BLACK);
+             }
+             if(j==1 && i == 4){
+                 m_board[i * m_size + j] = new King(BLACK);
+             }
+              if(j==6 && i == 2){
+                  m_board[i * m_size + j] = new King(BLACK);
+              }
+              if(j==2 && i == 2){
+                  m_board[i * m_size + j] = new King(0);
+              }
+              if(j==4 && i == 2){
+                  m_board[i * m_size + j] = new King(0);
+              }
+              if(j==6 && i == 6){
+                  m_board[i * m_size + j] = new King(0);
+              }
 
-            if(j==2 && i == 6){
-                m_board[i * m_size + j] = new King(0);
-            }*/
+              if(j==2 && i == 6){
+                  m_board[i * m_size + j] = new King(0);
+              }*/
         }
     }
 }
@@ -93,11 +94,11 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
             cout << "G2" << endl;
 
             //mouvement accessible a cette piece
-            cout  << "Travel; "<<endl;
+            cout << "Travel; " << endl;
 
             for (int i = 0; i < piece_dep->getTravel().size(); i++) {
-                cout  << "x:" << (piece_dep->getTravel().at(i))%8;
-                cout  <<",y:" << (piece_dep->getTravel().at(i))/8<<endl;
+                cout << "x:" << (piece_dep->getTravel().at(i)) % 8;
+                cout << ",y:" << (piece_dep->getTravel().at(i)) / 8 << endl;
 
 
                 if (m_board.at(piece_dep->getTravel().at(i)) != nullptr) {//piece sur le chemin
@@ -113,13 +114,30 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
             cout << "G3" << endl;// Piont
             if (piece_arr == nullptr)
                 return false;
+        } else {
+            cout << "6" << endl;
+            m_board.at(y_dep * m_size + x_dep) = nullptr;
+            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+            return true;
         }
-            else {
-                cout << "6" << endl;
-                m_board.at(y_dep * m_size + x_dep) = nullptr;
-                m_board.at(y_arr * m_size + x_arr) = piece_dep;
-                return true;
-            }
+    } else return false;
+}
+
+
+GameChess::GameChess(int id_test) : Game(SIZE) {
+    getTest(id_test);
+}
+
+void GameChess::getTest(int id_test) {
+    initGameChess();
+    Parser p;
+    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test);
+    int acc = 0;
+    string sens;
+    while (acc >= 0 && acc < vector.size()) {
+        getline(cin, sens);
+        acc++;
+        movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
+        affichage();
     }
-    else return false;
 }

@@ -13,9 +13,10 @@ class Game {
 protected:
     const int m_size;
     std::vector<Piece*> m_board;
+    Game(int size);
+
 
 public:
-    Game(int size);
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
 

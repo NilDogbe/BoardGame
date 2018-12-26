@@ -10,16 +10,16 @@ using namespace std;
 
 int Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
-    cout << "Mouvemment Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+    //cout << "Mouvemment Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
 
     if (abs(x_arr - x_dep) == abs(y_arr - y_dep)) {
-        cout << "true1";
-        cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+   //     cout << "true1";
+     //   cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
         setTravel(x_dep, y_dep, x_arr, y_arr);
         return true;
     } else if ((x_arr == x_dep && y_arr != y_dep) || (x_arr != x_dep && y_arr == y_dep)) {
-        cout << "true2";
-         cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+       // cout << "true2";
+         //cout << " Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
         setTravel(x_dep, y_dep, x_arr, y_arr);
         return true;
 

@@ -79,7 +79,7 @@ void GameChess::initGameChess() {
 }
 
 bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
-    cout<<"Bidule";
+    //cout<<"Bidule";
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
        // cout << "test:::" << endl;
 
@@ -107,7 +107,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
               //  cout << "G8888888888";
 
             }
-            cout << "VRAI";
+            cout << "VRAI" << endl;
             return true;
         } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
            // cout << "G3" << endl;// Piont

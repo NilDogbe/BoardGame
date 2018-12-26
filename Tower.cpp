@@ -11,7 +11,7 @@ using namespace std;
 
 int Tower::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
-    cout << "Mouvemment Tower " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+   // cout << "Mouvemment Tower " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
 
     if (y_dep == y_arr && x_dep == x_arr)
         return false;
@@ -48,6 +48,11 @@ Tower::Tower(int color) : Piece(color) {
 }
 
 std::vector<int> Tower::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+    vector<int> res;
+    for(int i = 0;i<m_size;i++){
+        res.push_back(current_y * m_size + i);
+        res.push_back(i* m_size + current_x);
+    }
+    return res;
 
 }

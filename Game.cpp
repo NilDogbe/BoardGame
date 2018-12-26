@@ -4,11 +4,12 @@
 
 #include "Game.h"
 #include "Parser.h"
+#include "PawnForChess.h"
 #include <iostream>
 
 using namespace std;
 
-Game::Game(int size) : m_board(size * size, nullptr), m_size(size), m_endGame{0}{
+Game::Game(int size) : m_board(size * size, nullptr), m_size(size), m_endGame{0} {
 }
 
 void Game::affichage() {
@@ -41,7 +42,7 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     // cout << (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) << "eeeeeee";
 
     if (!(y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0)) { // hors des  limites ?
-        cout << "G1" << endl;
+      //  cout << "G1" << endl;
         return false;
     }
     else if (piece_dep == nullptr) // piece existe
@@ -52,28 +53,67 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
         return false;
     }
     else return true;
+}
 
+void Game::getPossibleMove(int current_x, int current_y) {
+    //cout<< "ca vas dedans" <<endl;
+    Piece *current_piece = m_board.at(current_y * m_size + current_x);
+    if(current_piece != nullptr) {
+        vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
+        int s = res.size();
+        for (int i = 0; i < res.size(); i++) {
+            int tmp = res.at(i);
+            int x = tmp % m_size;
+            int y = division(tmp, m_size);
+           /* cout <<"tmp = " << tmp;
+            cout <<"x = " << x;
+            cout <<"y = " << y << endl;*/
+            if (movePiece(current_x, current_y, x, y)) {
+                cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
+            }
+        }
+    }
+}
 
+void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
+    if(movePiece(x_dep,y_dep,x_arr,y_arr)){
+        Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
+        if(piece_dep->toString() == "P")
+            ((PawnForChess*) piece_dep)->setFirstMove();
+        m_board.at(y_dep * m_size + x_dep) = nullptr;
+        m_board.at(y_arr * m_size + x_arr) = piece_dep;
+    }
+}
+
+int Game::division(int x, int modulo) {
+    int res = 0;
+    int tmp = x;
+    while(tmp >= modulo){
+        tmp -= modulo;
+        res++;
+    }
+    return  res;
 }
 
 void Game::getTest(int idTest, std::string idBalise) {
 
     Parser p;
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,idBalise);
+    vector<vector<int>> vector = p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,idBalise);
     int acc = 0;
-    string next;
+    string sens;
     while (acc >= 0 && acc < vector.size() && !m_endGame) {
 
-        getline(cin, next);
-        movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
+        getline(cin, sens);
+        getPossibleMove(vector[acc][0],vector[acc][1]);
+        move(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
+
         acc++;
         affichage();
         cout<<"endgame: "<<m_endGame;
         cout << vector.size()<<": "<< acc;
 
     }
-   // acc = 0;
-    cout<<"fin du jeu car endgame="<<m_endGame<< "et acc = "<< acc<<endl;
+    cout<<"fin du jeu"<<endl;
 
 }
 

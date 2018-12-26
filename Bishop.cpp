@@ -10,15 +10,15 @@ using namespace std;
 
 int Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
-    cout << "Mouvemment Bishop " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+    //cout << "Mouvemment Bishop " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
     //TODO:
     if (abs(x_arr - x_dep) == abs(y_arr - y_dep)) {
         setTravel(x_dep, y_dep, x_arr, y_arr);
-        cout << "true";
+       // cout << "true";
         return true;
     } else {
-        cout << abs(x_arr - x_dep) << " " << abs(y_arr - y_dep) << endl;
-        cout << "false" << endl;
+       // cout << abs(x_arr - x_dep) << " " << abs(y_arr - y_dep) << endl;
+        //cout << "false" << endl;
 
         return false;
     }
@@ -57,7 +57,6 @@ void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
            // cout << "test" << (j * m_size + i) << endl;
         }
     }
-    return;
 }
 
 Bishop::Bishop(int color) : Piece(color) {
@@ -65,5 +64,12 @@ Bishop::Bishop(int color) : Piece(color) {
 }
 
 std::vector<int> Bishop::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+    vector<int> res;
+    for(int i = current_x;i<m_size;i++){
+        if(current_y + i <m_size)
+        res.push_back(current_y + i * m_size + current_x + i);
+        if(current_y - i >=0)
+        res.push_back(current_y - i * m_size + current_x + i);
+    }
+    return res;
 }

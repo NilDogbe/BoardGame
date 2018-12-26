@@ -25,3 +25,8 @@ vector<int> Piece::getTravel(){
 void Piece::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     return;
 }
+
+vector<int> Piece::getPossibleMoves(int current_x, int current_y){
+    vector<int> res;
+    return res;
+}

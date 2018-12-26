@@ -46,3 +46,8 @@ string Tower::toString() {
 Tower::Tower(int color) : Piece(color) {
 
 }
+
+std::vector<int> Tower::getPossibleMoves(int current_x, int current_y){
+    return Piece::getPossibleMoves(current_x,current_x);
+
+}

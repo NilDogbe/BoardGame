@@ -46,3 +46,7 @@ void PawnForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         m_travel.push_back(y_dep * GameDame::SIZE + x_dep);
     }
 }
+
+std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y){
+    return Piece::getPossibleMoves(current_x,current_x);
+}

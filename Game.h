@@ -13,8 +13,6 @@ class Game {
 protected:
     const int m_size;
     std::vector<Piece*> m_board;
-    const static int BLACK = 31;
-    const static int WHITE = 30;
     const int m_p1 = WHITE;
     const int m_p2 = BLACK;
     int m_curP = WHITE;
@@ -22,9 +20,14 @@ protected:
     Game(int size);
 
 public:
+    const static int BLACK = 31;
+    const static int WHITE = 30;
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
     void getTest(int idTest, std::string idBalise);
+    void getPossibleMove(int current_x, int current_y);
+    int division(int x, int modulo);
+    void move(int x_dep, int y_dep, int x_arr, int y_arr);
 
 
 };

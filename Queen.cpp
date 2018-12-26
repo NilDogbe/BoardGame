@@ -81,3 +81,7 @@ string Queen::toString() {
 return "Q";
 }
 
+std::vector<int> Queen::getPossibleMoves(int current_x, int current_y){
+    return Piece::getPossibleMoves(current_x,current_x);
+}
+

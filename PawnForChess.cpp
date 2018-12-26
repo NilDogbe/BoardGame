@@ -71,3 +71,37 @@ void PawnForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 PawnForChess::PawnForChess(int color) : Piece(color) {
 
 }
+
+vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y){
+    vector<int> res;
+    if(this->getColor() == 30){
+        if(current_y < m_size - 1){
+            res.push_back((current_y + 1) * m_size + current_x);
+            if(m_firstMove == true){
+                res.push_back((current_y + 2) * m_size + current_x);
+            }
+            if(current_x < m_size - 1){
+                res.push_back((current_y + 1) * m_size + (current_x + 1));
+            }
+            if(current_x > 0){
+                res.push_back((current_y + 1) * m_size + (current_x - 1));
+            }
+        }
+    }
+    else{
+        if(current_y > 0){
+            res.push_back((current_y - 1) * m_size + current_x);
+            if(m_firstMove == true){
+                res.push_back((current_y + -2) * m_size + current_x);
+            }
+            if(current_x < m_size - 1){
+                res.push_back((current_y - 1) * m_size + (current_x + 1));
+            }
+            if(current_x > 0){
+                res.push_back((current_y - 1) * m_size + (current_x - 1));
+            }
+        }
+    }
+    return res;
+
+}

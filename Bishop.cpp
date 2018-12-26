@@ -63,3 +63,7 @@ void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 Bishop::Bishop(int color) : Piece(color) {
 
 }
+
+std::vector<int> Bishop::getPossibleMoves(int current_x, int current_y){
+    return Piece::getPossibleMoves(current_x,current_x);
+}

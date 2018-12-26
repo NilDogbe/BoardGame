@@ -104,3 +104,4 @@ void GameDame::getTest(int id_test) {
     Game::getTest(id_test, "<Dame>\r");
 }
 
+

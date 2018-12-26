@@ -38,3 +38,7 @@ void Knight::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
 Knight::Knight(int color) : Piece(color) {
 
 }
+
+std::vector<int> Knight::getPossibleMoves(int current_x, int current_y){
+    return Piece::getPossibleMoves(current_x,current_x);
+}

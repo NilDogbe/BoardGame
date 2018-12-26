@@ -83,7 +83,6 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
        // cout << "test:::" << endl;
 
-
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
 
@@ -108,9 +107,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
               //  cout << "G8888888888";
 
             }
-           // cout << "G3";
-            m_board.at(y_dep * m_size + x_dep) = nullptr;
-            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+            cout << "VRAI";
             return true;
         } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
            // cout << "G3" << endl;// Piont
@@ -120,8 +117,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
            // cout << "6" << endl;
             if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0)
                 m_endGame = true;
-            m_board.at(y_dep * m_size + x_dep) = nullptr;
-            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+            cout << "VRAI";
             return true;
         }
     } else return false;

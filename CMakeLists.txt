@@ -16,4 +16,5 @@ add_executable(BoardGame
         GameChess.cpp GameChess.h
         GameDame.cpp GameDame.h
         PawnForDame.cpp PawnForDame.h
-        Parser.cpp Parser.h)
+        Parser.cpp Parser.h
+        DameForDame.cpp DameForDame.h)

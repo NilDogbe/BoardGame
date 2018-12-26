@@ -65,11 +65,19 @@ Bishop::Bishop(int color) : Piece(color) {
 
 std::vector<int> Bishop::getPossibleMoves(int current_x, int current_y){
     vector<int> res;
-    for(int i = current_x;i<m_size;i++){
+    for(int i = 0;i<m_size - current_x;i++){
         if(current_y + i <m_size)
-        res.push_back(current_y + i * m_size + current_x + i);
+        res.push_back((current_y + i) * m_size + (current_x + i));
         if(current_y - i >=0)
-        res.push_back(current_y - i * m_size + current_x + i);
+        res.push_back((current_y - i) * m_size + (current_x + i));
     }
+
+    for(int i = 0;i<current_x;i++){
+        if(current_y + i <m_size)
+            res.push_back((current_y + i) * m_size + (current_x - i));
+        if(current_y - i >=0)
+            res.push_back((current_y - i) * m_size + (current_x - i));
+    }
+
     return res;
 }

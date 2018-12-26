@@ -130,28 +130,12 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 GameChess::GameChess(int id_test) : Game(SIZE) {
    // cout << m_caseBlackKing << "aaaaaaaaaaaa";
-
+    initGameChess();
     getTest(id_test);
 }
 
 void GameChess::getTest(int id_test) {
-    initGameChess();
-    Parser p;
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test,"<Chess>\r");
-    int acc = 0;
-    string sens;
-    while (acc >= 0 && acc < vector.size() && !m_endGame) {
-
-        getline(cin, sens);
-        movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
-        acc++;
-        affichage();
-        cout<<"endgame: "<<m_endGame;
-        cout << vector.size()<<": "<< acc;
-
-    }
-    cout<<"fin du jeu"<<endl;
-
+    Game::getTest(id_test,"<Chess>\r");
 }
 
 /* if( y_dep * m_size + x_dep == m_caseWhitekKing){

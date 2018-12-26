@@ -20,26 +20,27 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
         endBalise = "</Chess>\r";
     else if (idBalise.compare("<Dame>\r") == 0)
         endBalise = "</Dame>\r";
+    int nbr_chessTest = 0;
 
     if (monFlux) {
         string ligne;
         vector<vector<int>> vector;
         bool add{false};
         while (getline(monFlux, ligne)) { //Tant qu'on n'est pas à la fin, on lit
-            //cout << "Balise aaaaaaaa "<< (idBalise.compare(ligne) == 0) << endl;
+            cout << "Balise aaaaaaaa "<< (idBalise.compare(ligne) == 0) << endl;
 
-            int nbr_chessTest = 0;
 
             if (ligne.compare(idBalise) == 0) {
+                cout << "niportr" << ligne;
+
                 if (idTest == nbr_chessTest) {
-                    cout << "niportr" << ligne;
 
                     // boucler et remplir jusqua \chess
                     add = true;
 
                 } else
                     nbr_chessTest++;
-            } else if (ligne.compare(endBalise) == 0) {
+            } else if (ligne.compare(endBalise) == 0 && add) {
                 /*cout<<"eeeeee";
                 cout << "test ";*/
                 cout << (ligne.compare(endBalise) == 0) << endBalise;

@@ -14,7 +14,7 @@ int main() {
    /* Parser p;
     Game* g = new GameChess(0);*/
 
-    Game* gd = new GameDame(0);
+    Game* gd = new GameChess(0);
    // gd->affichage();
 
 

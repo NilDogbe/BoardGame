@@ -52,11 +52,11 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                 } else if (nbr_pieces == 1) {
                     int i = dep->getTravel().back();
                     //if (m_board[i] != nullptr) {
-                        m_board[y_dep * SIZE + x_dep] = nullptr;
-                        m_board[y_arr * SIZE + x_arr] = dep;
-                        m_board[i] = nullptr;
-                        std::cout << "manger" << std::endl;
-                        return true;
+                    m_board[y_dep * SIZE + x_dep] = nullptr;
+                    m_board[y_arr * SIZE + x_arr] = dep;
+                    m_board[i] = nullptr;
+                    std::cout << "manger" << std::endl;
+                    return true;
                     //}
                 }
             }
@@ -96,28 +96,11 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }*/
 
 GameDame::GameDame(int id_test) : Game(SIZE) {
-      getTest(id_test);
+    initGame();
+    getTest(id_test);
 }
 
 void GameDame::getTest(int id_test) {
-
-    initGame();
-    affichage();
-
-    Parser p;
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", id_test,"<Dame>\r");
-    int acc = 0;
-    string sens;
-    while (acc >= 0 && acc < vector.size() && !m_endGame) {
-        getline(cin, sens);
-        movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
-        acc++;
-        affichage();
-        cout<<"endgame: "<<m_endGame;
-        cout << vector.size()<<"tailleeeee: "<< acc;
-
-    }
-    cout<<"fin du jeu"<<endl;
-
+    Game::getTest(id_test, "<Dame>\r");
 }
 

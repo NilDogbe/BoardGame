@@ -3,6 +3,7 @@
 //
 
 #include "Game.h"
+#include "Parser.h"
 #include <iostream>
 
 using namespace std;
@@ -54,6 +55,28 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 
 }
+
+void Game::getTest(int idTest, std::string idBalise) {
+
+    Parser p;
+    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,idBalise);
+    int acc = 0;
+    string sens;
+    while (acc >= 0 && acc < vector.size() && !m_endGame) {
+
+        getline(cin, sens);
+        movePiece(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
+        acc++;
+        affichage();
+        cout<<"endgame: "<<m_endGame;
+        cout << vector.size()<<": "<< acc;
+
+    }
+    cout<<"fin du jeu"<<endl;
+
+}
+
+
 
 
 

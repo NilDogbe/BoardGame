@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Game::Game(int size) : m_board(size * size, nullptr), m_size(size) {
+Game::Game(int size) : m_board(size * size, nullptr), m_size(size), m_endGame{0} {
 }
 
 void Game::affichage() {
@@ -42,7 +42,7 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     // cout << (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) << "eeeeeee";
 
     if (!(y_arr < m_size && y_arr >= 0 && x_arr < m_size && x_dep >= 0)) { // hors des  limites ?
-        cout << "G1" << endl;
+      //  cout << "G1" << endl;
         return false;
     }
     else if (piece_dep == nullptr) // piece existe
@@ -56,7 +56,7 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 void Game::getPossibleMove(int current_x, int current_y) {
-    cout<< "ca vas dedans" <<endl;
+    //cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
     if(current_piece != nullptr) {
         vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
@@ -65,9 +65,9 @@ void Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = division(tmp, m_size);
-            cout <<"tmp = " << tmp;
+           /* cout <<"tmp = " << tmp;
             cout <<"x = " << x;
-            cout <<"y = " << y;
+            cout <<"y = " << y << endl;*/
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
             }

@@ -14,17 +14,17 @@ using namespace std;
 
 int King::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
-    cout << "Mouvemment King "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
+   // cout << "Mouvemment King "<< x_dep << ","<< y_dep <<  " to " << x_arr <<","<< y_arr << endl;
 
     int distance = sqrt(sqr(y_arr - y_dep) + sqr(x_dep - x_arr));
     if (distance > 1) {
-        cout<<"ffffff";
+       // cout<<"ffffff";
 
         return false;
     }
     else{
 
-        cout<<"ttttt";
+        //cout<<"ttttt";
         return true;
     }
 }
@@ -42,7 +42,7 @@ King::King(int color) : Piece(color) {
 }
 
 int King::sqr(int x) {
-    cout<<"sqr";
+   // cout<<"sqr";
     return x*x;
 }
 

@@ -27,7 +27,7 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
         vector<vector<int>> vector;
         bool add{false};
         while (getline(monFlux, ligne)) { //Tant qu'on n'est pas à la fin, on lit
-            cout << "Balise aaaaaaaa "<< (idBalise.compare(ligne) == 0) << endl;
+            cout << "Balise aaaaaaaa "<< ligne << endl;
 
 
             if (ligne.compare(idBalise) == 0) {

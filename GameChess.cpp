@@ -21,6 +21,7 @@ using namespace std;
 
 GameChess::GameChess() : Game(8) {
     initGameChess();
+    Game::start();
 }
 
 void GameChess::initGameChess() {

@@ -15,18 +15,30 @@ int main() {
     Game *g;
     string typeGame;
     string testOrGame;
-    int idTest = -1;
-    cout << "Pour tester : 't'" << endl << "Pour jouer : 'j'" << endl;
-    do {
-        getline(cin, testOrGame);
+    string action;
+    int idTest;
 
-        if (testOrGame.compare("t") == 0) {// rentre dans test
+
+    do {
+        cout << "***********************************************" << endl
+             << "Pour tester : 't'" << endl
+             << "Pour jouer : 'j'" << endl
+             << "Pour quitter : 'exit'" << endl;
+        getline(cin, action);
+
+        if (action.compare("t") == 0) {// rentre dans test
             do {
-                cout << "Pour test echecs : 'e'" << endl << "Pour test Dames: 'd'" << endl;
-                getline(cin, typeGame);
-                if (typeGame.compare("e") == 0) {
+                cout << "***********************************************" << endl
+                     << "Pour test echecs : 'e'" << endl
+                     << "Pour test Dames: 'd'" << endl
+                     << "Pour quitter les test: 'retour'" << endl;
+                idTest = -1;
+                getline(cin, action);
+                if (action.compare("e") == 0) {
                     do {
-                        cout << "Choisir un test echec entre 0(compris) et " << Parser::NBR_TEST_CHESS << "(compris)" << endl;
+                        cout << "***********************************************" << endl
+                             << "Choisir un test echec entre 0(compris) et " << Parser::NBR_TEST_CHESS << "(compris)"
+                             << endl;
                         cin >> idTest;
                         cin.ignore();
                         if (idTest <= Parser::NBR_TEST_CHESS && idTest > -1) {
@@ -38,10 +50,12 @@ int main() {
                     } while (1);
                     break; // fin du test
 
-                } else if (typeGame.compare("d") == 0) { // rentre dans un jeu
+                } else if (action.compare("d") == 0) { // rentre dans un jeu
 
                     do {
-                        cout << "Choisir un test dame entre 0(compris) et " << Parser::NBR_TEST_DAME << "(compris)" << endl;
+                        cout << "***********************************************" << endl
+                             << "Choisir un test dame entre 0(compris) et " << Parser::NBR_TEST_DAME << "(compris)"
+                             << endl;
                         cin >> idTest;
                         cin.ignore();
                         if (idTest <= Parser::NBR_TEST_CHESS && idTest > -1) {
@@ -52,16 +66,41 @@ int main() {
                         } else cout << "Recommencez!" << endl;
                     } while (1);
                     break; // fin du test
+                } else if (action.compare("retour") == 0) {
+                    break;
                 }
-            }while(1);
+                else cout << "PAS COMPRIS1!"<<endl;
+
+            } while (1);
 
 
+        } else if (action.compare("j") == 0) {
+            cout << "**********************************************" << endl
+                 << "A quel jeu voulez-vous jouer ?"<<endl
+                 << "Echec tappez : 'e'"<<endl
+                 << "Dame tappez : 'd'"<<endl
+                 << "Revenir en arriere : 'retour'"<<endl;
+            getline(cin,action);
+            //cin.ignore();
+            if (action.compare("e") == 0) {
+                cout << "*********************************" << endl
+                     << "Binvenue dans la partie d'echec " << endl;
+                Game* e = new GameChess();
+            }
+            else if (action.compare("d") == 0) {
+                cout << "*********************************" << endl
+                     << "Binvenue dans la partie de dame " << endl;
+                Game* d = new GameDame();
 
-        } else if (testOrGame.compare("j") == 0) {
-            cout << "vous allez commencer une partie" << endl;
-            break;
+            }
+
+            else if (action.compare("retour") == 0)
+                break;
+        } else if (action.compare("exit") == 0) {
+            cout << "Ciao!" << endl;
+            return 0;
         } else
-            cout << "Recommencez222!" << endl;
+            cout << "PAS COMPRIS0!" << endl;
 
 
     } while (1);

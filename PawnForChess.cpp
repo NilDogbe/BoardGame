@@ -18,20 +18,15 @@ int PawnForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 
         if ((abs(x_dep - x_arr) == 1) && (y_dep - y_arr == 1)) {
             cout << "mange P" << endl;
-            m_firstMove = false;
             return 2;
         } else if (x_dep == x_arr && (y_dep - y_arr == 2 || y_dep - y_arr == 1)) {
             cout << "1 P" << endl;
 
             if (m_firstMove) {
                 cout << "2 P" << endl;
-
-                m_firstMove = false;
                 return 1;
             } else if (y_dep - y_arr == 1) {
                 cout << "3 P" << endl;
-
-                m_firstMove = false;
                 return 1;
             } else return 0;
         } else return 0;
@@ -40,20 +35,15 @@ int PawnForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 
         if ((abs(x_arr - x_dep) == 1) && (y_arr - y_dep == 1)) {
             cout << "mange P" << endl;
-            m_firstMove = false;
             return 2;
         } else if (x_dep == x_arr && (y_arr - y_dep == 2 || y_arr - y_dep == 1)) {
             cout << "10 P" << endl;
 
             if (m_firstMove) {
                 cout << "20 P" << endl;
-
-                m_firstMove = false;
                 return 1;
             } else if (y_arr - y_dep == 1) {
                 cout << "30 P" << endl;
-
-                m_firstMove = false;
                 return 1;
             } else return 0;
         } else return 0;
@@ -104,4 +94,8 @@ vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y){
     }
     return res;
 
+}
+
+void PawnForChess::setFirstMove() {
+     m_firstMove = false;
 }

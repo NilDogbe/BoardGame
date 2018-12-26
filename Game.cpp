@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "Parser.h"
+#include "PawnForChess.h"
 #include <iostream>
 
 using namespace std;
@@ -77,6 +78,8 @@ void Game::getPossibleMove(int current_x, int current_y) {
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     if(movePiece(x_dep,y_dep,x_arr,y_arr)){
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
+        if(piece_dep->toString() == "P")
+            ((PawnForChess*) piece_dep)->setFirstMove();
         m_board.at(y_dep * m_size + x_dep) = nullptr;
         m_board.at(y_arr * m_size + x_arr) = piece_dep;
     }

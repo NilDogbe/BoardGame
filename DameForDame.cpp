@@ -10,17 +10,18 @@ using namespace std;
 DameForDame::DameForDame(int color) : Piece{color} {
 }
 
+DameForDame::DameForDame(Piece *p) : Piece{p->getColor()} {
+}
+
 string DameForDame::toString() {
     return "D";
 }
 
 int DameForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
-    if ((m_color == GameDame::WHITE) && (x_dep != x_arr) && (y_arr - y_dep > 0))
+    if (abs(x_dep - x_arr) == abs(y_arr - y_dep))
         return 1;
-    else if ((m_color == GameDame::BLACK) && (x_dep != x_arr) && (y_arr - y_dep < 0))
-        return 1;
-    else
-        return 0;
+
+    return 0;
 }
 
 void DameForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
@@ -47,6 +48,6 @@ void DameForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y) {
+    return Piece::getPossibleMoves(current_x, current_y);
 }

@@ -15,12 +15,16 @@ string PawnForDame::toString() {
 }
 
 int PawnForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
-    if ((m_color == GameDame::WHITE) && (x_dep != x_arr) && (y_arr - y_dep <= 2))
-        return 1;
-    else if ((m_color == GameDame::BLACK) && (x_dep != x_arr) && (y_arr - y_dep >= -2))
-        return 1;
-    else
-        return 0;
+    if (abs(x_dep - x_arr) == abs(y_arr - y_dep)) {
+        if (abs(y_arr - y_dep) == 2)
+            return 2;
+        else if (m_color == GameDame::WHITE && y_arr - y_dep == 1)
+            return 1;
+        else if (m_color == GameDame::BLACK && y_arr - y_dep == -1)
+            return 1;
+    }
+
+    return 0;
 }
 
 void PawnForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
@@ -47,6 +51,6 @@ void PawnForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y) {
+    return Piece::getPossibleMoves(current_x, current_y);
 }

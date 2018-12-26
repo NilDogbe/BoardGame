@@ -10,12 +10,13 @@
 
 class GameDame : public Game {
 private:
+    void checkPawnTransform(int x, int y);
 protected:
     virtual void initGame();
 public:
-    const static int SIZE = 10;
-    const static int BLACK = 37;
+    const static int BLACK = 31;
     const static int WHITE = 30;
+    const static int SIZE = 10;
     GameDame();
     GameDame(int id_test);
     void getTest(int id_test);

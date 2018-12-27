@@ -3,7 +3,7 @@
 //
 
 #include "DameForDame.h"
-#include "GameDame.h"
+#include "Definitions.h"
 
 using namespace std;
 
@@ -44,7 +44,7 @@ void DameForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         if (x_dep == x_arr && y_dep == y_arr)
             break;
 
-        m_travel.push_back(y_dep * GameDame::SIZE + x_dep);
+        m_travel.push_back(y_dep * Definitions::GAME_DAME_SIZE + x_dep);
     }
 }
 

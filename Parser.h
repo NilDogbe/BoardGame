@@ -16,7 +16,7 @@ public:
     static const int NBR_TEST_CHESS = 1;
     static const int NBR_TEST_DAME = 1;
     std::vector<std::vector<int>> ReadScipt(std::string flux, int id, std::string idBalise);
-
+    static std::vector<std::string> getLines(std::string fileName);
 };
 
 

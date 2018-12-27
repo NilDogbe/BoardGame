@@ -7,14 +7,7 @@ add_executable(BoardGame
         main.cpp
         Piece.cpp Piece.h
         Game.cpp Game.h
-        King.cpp King.h
-        Knight.cpp Knight.h
-        Tower.cpp Tower.h
-        Bishop.cpp Bishop.h
-        Queen.cpp Queen.h
-        PawnForChess.cpp PawnForChess.h
-        GameChess.cpp GameChess.h
         GameDame.cpp GameDame.h
         PawnForDame.cpp PawnForDame.h
-        Parser.cpp Parser.h
-        DameForDame.cpp DameForDame.h)
+        DameForDame.cpp DameForDame.h
+        Parser.cpp Parser.h PawnForDame.cpp PawnForDame.h Definitions.cpp Definitions.h)

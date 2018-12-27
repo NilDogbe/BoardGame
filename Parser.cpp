@@ -77,3 +77,19 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
     }
 }
+
+vector<string> Parser::getLines(string fileName) {
+    ifstream fichier(fileName, ios::in);
+    vector<string> vector;
+
+    if (fichier) {
+        string s;
+
+        while (getline(fichier, s)) {
+            vector.push_back(s);
+        }
+    } else
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+
+    return vector;
+}

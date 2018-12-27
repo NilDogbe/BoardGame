@@ -136,8 +136,9 @@ void Game::getTest(int idTest, std::string idBalise) {
 
 void Game::start() {
 
-    cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
-    int x_dep(-1),y_dep(-1),x_arr(-1),y_arr(-1);
+    cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
+    << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' "<<endl;
+    int x_dep(-1),y_dep(-1),x_arr(-1),y_arr(-1),x_help(-1),y_help(-1);
     string move("");
 
 
@@ -152,12 +153,25 @@ void Game::start() {
             affichage();
             cout<<endl;
             getline(cin, move);
-            x_dep = (int)(move.at(0)) - 65;
-            y_dep = (int)(move.at(1)) - 48;
-            x_arr = (int)(move.at(2)) - 65;
-            y_arr = (int)(move.at(3)) - 48;
+            cout << move.substr(0, 4)<<endl;
 
-            if(!movePiece(x_dep,y_dep,x_arr,y_arr)) {
+            x_dep = (int) (move.at(0)) - 65;
+            y_dep = (int) (move.at(1)) - 48;
+            x_arr = (int) (move.at(2)) - 65;
+            y_arr = (int) (move.at(3)) - 48;
+
+            if (move.substr(0, 4).compare("HELP") == 0){
+                if(move.size() == 7){
+                    x_help =(int) (move.at(5))-65;
+                    y_help = (int) (move.at(6))-48;
+                    cout << "HELP:"<<x_help<<y_help<<endl;
+                    cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;
+
+                }
+            }
+            //cout << "AAAA :"<<x_dep<<y_dep<<x_dep<<y_arr<< move.size()<<endl;
+
+            else if(!movePiece(x_dep,y_dep,x_arr,y_arr)) {
                 cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;

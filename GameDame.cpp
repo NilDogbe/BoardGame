@@ -12,6 +12,7 @@ using namespace std;
 
 GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
     initGame();
+    start();
 }
 
 

@@ -199,7 +199,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (s.compare("<Game>") == 0 && id == 0) {
+        if (((s.compare("<Game>") == 0)||(s.compare("<Game>\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {

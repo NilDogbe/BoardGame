@@ -101,7 +101,7 @@ void Game::getTest(int idTest, std::string idBalise) {
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
     // D:\Work\Git\BoardGame\Game_Processing : nil
 
-    vector<vector<int>> vector = p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,
+    vector<vector<int>> vector = p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,
                                              idBalise);
     int acc = 0;
     string sens;

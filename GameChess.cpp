@@ -91,11 +91,14 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
 
         if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
-           // cout << "G2" << endl;
+         //   cout << "On test" << (piece_dep->toString().compare("P") && piece_arr != nullptr) << endl;
 
             //mouvement accessible a cette piece
            // cout << "Travel; " << endl;
+            if(piece_dep->toString().compare("P") == 0 && piece_arr != nullptr){
 
+                return false;
+            }
             for (int i = 0; i < piece_dep->getTravel().size(); i++) {
                // cout << "x:" << (piece_dep->getTravel().at(i)) % 8;
                // cout << ",y:" << (piece_dep->getTravel().at(i)) / 8 << endl;

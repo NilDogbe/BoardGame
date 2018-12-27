@@ -50,8 +50,12 @@ Tower::Tower(int color) : Piece(color) {
 std::vector<int> Tower::getPossibleMoves(int current_x, int current_y){
     vector<int> res;
     for(int i = 0;i<m_size;i++){
-        res.push_back(current_y * m_size + i);
-        res.push_back(i* m_size + current_x);
+        if(i!= current_x) {
+            res.push_back(current_y * m_size + i);
+        }
+        if(i!= current_y) {
+            res.push_back(i * m_size + current_x);
+        }
     }
     return res;
 

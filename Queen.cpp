@@ -82,6 +82,31 @@ return "Q";
 }
 
 std::vector<int> Queen::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+    vector<int> res;
+    for(int i = 1;i<m_size - current_x;i++){
+        if(current_y + i <m_size)
+            res.push_back((current_y + i) * m_size + (current_x + i));
+        if(current_y - i >=0)
+            res.push_back((current_y - i) * m_size + (current_x + i));
+    }
+
+    for(int i = 1;i<=current_x;i++){
+        if(current_y + i <m_size)
+            res.push_back((current_y + i) * m_size + (current_x - i));
+        if(current_y - i >=0)
+            res.push_back((current_y - i) * m_size + (current_x - i));
+    }
+
+    for(int i = 0;i<m_size;i++){
+        if(i!= current_x) {
+            res.push_back(current_y * m_size + i);
+        }
+        if(i!= current_y) {
+            res.push_back(i * m_size + current_x);
+        }
+    }
+
+    return res;
+
 }
 

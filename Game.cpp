@@ -56,7 +56,8 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 void Game::getPossibleMove(int current_x, int current_y) {
-    //cout<< "ca vas dedans" <<endl;
+    int nb_move = 0;
+    cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
     if (current_piece != nullptr) {
         vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
@@ -65,13 +66,15 @@ void Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = division(tmp, m_size);
-            /* cout <<"tmp = " << tmp;
+             cout <<"tmp = " << tmp;
              cout <<"x = " << x;
-             cout <<"y = " << y << endl;*/
+             cout <<"y = " << y << endl;
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
+                nb_move++;
             }
         }
+        cout<<"Il y a "<<nb_move<<" move possible."<<endl;
     }
 }
 

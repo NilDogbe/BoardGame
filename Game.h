@@ -41,9 +41,9 @@ public:
     void start();
     int getColor(int x, int y);
 
-    void save();
+    //void save();
 
-    Game* initWithFile(std::string file);
+    //Game* initWithFile(std::string file);
 };
 
 

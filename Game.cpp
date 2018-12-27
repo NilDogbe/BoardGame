@@ -8,12 +8,12 @@
 #include "GameDame.h"
 #include "GameChess.h"
 #include "Piece.h"
-#include "PawnForDame.h"
-#include "DameForDame.h"
 #include <iostream>
 
 using namespace std;
-class PawnForDame;
+
+string const Game::GAME_DAME = "DAME";
+string const Game::GAME_CHESS = "CHESS";
 
 Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
@@ -123,7 +123,7 @@ void Game::getTest(int idTest, std::string idBalise) {
 
 }
 
-void Game::save() {
+/*void Game::save() {
     string mon_fichier = "../Game_Processing/save.txt";
 
     ofstream fichier(mon_fichier.c_str(), ios::out | ios::trunc);
@@ -156,7 +156,7 @@ void Game::save() {
         fichier.close();
     } else
         cerr << "Erreur à l'ouverture !" << endl;
-}
+}*/
 
 
 /*Game* Game::initGameWithFile(file) {

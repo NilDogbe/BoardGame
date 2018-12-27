@@ -19,7 +19,7 @@
 using namespace std;
 
 
-GameChess::GameChess() : Game(8) {
+GameChess::GameChess() : Game(8, GAME_CHESS) {
     initGameChess();
     Game::start();
 }
@@ -131,7 +131,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 
-GameChess::GameChess(int id_test) : Game(SIZE) {
+GameChess::GameChess(int id_test) : Game(SIZE, GAME_DAME) {
     cout << m_endGame << ": endame" << endl;
 
     initGameChess();

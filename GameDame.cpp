@@ -7,7 +7,6 @@
 #include "DameForDame.h"
 #include "Parser.h"
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -15,7 +14,8 @@ GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
     initGame();
 }
 
-GameDame::GameDame(string fileName) : Game{SIZE, Game::GAME_DAME} {
+
+/*GameDame::GameDame(string fileName) : Game{SIZE, Game::GAME_DAME} {
     vector<string> vector{Parser::getLines(fileName)};
 
     for (int i{0}; i < 2; i++) {
@@ -49,7 +49,7 @@ GameDame::GameDame(string fileName) : Game{SIZE, Game::GAME_DAME} {
         }
     }
 
-}
+}*/
 
 void GameDame::initGame() {
     for (int i = 0; i < 4; i++) {

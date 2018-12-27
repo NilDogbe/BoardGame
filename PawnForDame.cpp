@@ -3,7 +3,7 @@
 //
 
 #include "PawnForDame.h"
-#include "Definitions.h"
+#include "GameDame.h"
 
 using namespace std;
 
@@ -18,9 +18,9 @@ int PawnForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (abs(x_dep - x_arr) == abs(y_arr - y_dep)) {
         if (abs(y_arr - y_dep) == 2)
             return 2;
-        else if (m_color == Definitions::WHITE && y_arr - y_dep == 1)
+        else if (m_color == GameDame::WHITE && y_arr - y_dep == 1)
             return 1;
-        else if (m_color == Definitions::BLACK && y_arr - y_dep == -1)
+        else if (m_color == GameDame::BLACK && y_arr - y_dep == -1)
             return 1;
     }
 
@@ -47,7 +47,7 @@ void PawnForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         if (x_dep == x_arr && y_dep == y_arr)
             break;
 
-        m_travel.push_back(y_dep * Definitions::GAME_DAME_SIZE + x_dep);
+        m_travel.push_back(y_dep * GameDame::SIZE + x_dep);
     }
 }
 

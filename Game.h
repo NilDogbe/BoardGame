@@ -14,8 +14,6 @@ private:
 protected:
     const int m_size;
     std::vector<Piece *> m_board;
-    const static int BLACK = 31;
-    const static int WHITE = 30;
     const int m_p1 = WHITE;
     const int m_p2 = BLACK;
     int m_curP = WHITE;
@@ -27,6 +25,8 @@ protected:
     const static std::string GAME_CHESS;
 
 public:
+    const static int BLACK = 31;
+    const static int WHITE = 30;
     virtual void affichage();
 
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);

@@ -8,11 +8,11 @@
 #include "Game.h"
 
 class GameDame : public Game {
-private:
-    void checkPawnTransform(int x, int y);
+
 protected:
     virtual void initGame();
 public:
+    void checkPawnTransform(int x, int y);
     const static int BLACK = 31;
     const static int WHITE = 30;
     const static int SIZE = 10;

@@ -135,17 +135,19 @@ void Game::start() {
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
     int x_dep(-1),y_dep(-1),x_arr(-1),y_arr(-1);
-    do {
-        string move("");
+    string move("");
 
 
         do{
+            cout << "*************************************************" << endl;
+
 
             if (m_curP == WHITE)
-                cout << "Joeur:" << 1 << "a vous de jouer " << endl;
+                cout << "Joueur: " << 1 << " a vous de jouer " << endl;
             else
-                cout << "Joeur:" << 2 << "a vous de jouer " << endl;
+                cout << "Joueur: " << 2 << " a vous de jouer " << endl;
             affichage();
+            cout<<endl;
             getline(cin, move);
             x_dep = (int)(move.at(0)) - 65;
             y_dep = (int)(move.at(1)) - 48;
@@ -153,7 +155,7 @@ void Game::start() {
             y_arr = (int)(move.at(3)) - 48;
 
             if(!movePiece(x_dep,y_dep,x_arr,y_arr)) {
-                cout << "Oups raté" << endl;
+                cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;
             }
@@ -161,24 +163,19 @@ void Game::start() {
                 cout << "Recommencez ce n'est pas votre couleur:" << endl;
             }
             else{
-                cout <<"aaaaaaaaaaa" << endl;
+                cout <<"OK" << endl;
                 Game::move(x_dep,y_dep,x_arr,y_arr);
                 if (m_curP == m_p1)
                     m_curP = m_p2;
                 else m_curP = m_p1;
-                // break;
             }
         }while(!m_endGame);
-        if (m_curP == m_p1) {
-            getColor(x_arr,y_arr);
-        }
+        cout<<"LA PARTIE EST FINIE"<<endl
+        <<"LE GAGNANT EST: "<< m_curP;
 
-
-    } while (!m_endGame);
 }
 
 int Game::getColor(int x, int y) {
-    cout << "couleur :" << m_board.at(y * m_size + x)->getColor();
     m_board[y * m_size + x]->getColor();
 }
 

@@ -115,11 +115,13 @@ void Game::getTest(int idTest, std::string idBalise) {
 
         move(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
         // cout<<"endgame:aaaaaaaaaaaaaaaa3 "<<m_endGame;
-
-        acc++;
         affichage();
-        cout << "endgame: " << m_endGame << endl;
-        cout << vector.size() << ": " << acc;
+        cout << endl << "endgame: " << m_endGame << endl;
+        cout << vector[acc][0] << "," << vector[acc][1] << " -> "
+        << vector[acc][2] << "," << vector[acc][3] <<endl
+        <<" numCoup" << acc<<endl;
+        acc++;
+
 
     }
     cout << "fin du jeu" << endl;
@@ -133,12 +135,13 @@ void Game::start() {
     do {
         string move("");
 
-        if (m_curP == WHITE)
-            cout << "Joeur:" << 1 << "a vous de jouer " << endl;
-        else
-            cout << "Joeur:" << 2 << "a vous de jouer " << endl;
 
         do{
+
+            if (m_curP == WHITE)
+                cout << "Joeur:" << 1 << "a vous de jouer " << endl;
+            else
+                cout << "Joeur:" << 2 << "a vous de jouer " << endl;
             affichage();
             getline(cin, move);
             x_dep = (int)(move.at(0)) - 65;

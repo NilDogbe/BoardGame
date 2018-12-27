@@ -3,6 +3,7 @@
 //
 
 #include "PawnForChess.h"
+#include "Game.h"
 #include <cmath>
 #include <wchar.h>
 #include <iostream>
@@ -72,7 +73,7 @@ PawnForChess::PawnForChess(int color) : Piece(color) {
 
 vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
-    if (this->getColor() == 30) {
+    if (this->getColor() == Game::BLACK) {
         if (current_y < m_size - 1) {
             res.push_back((current_y + 1) * m_size + current_x);
             if (m_firstMove) {

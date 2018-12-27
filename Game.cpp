@@ -103,6 +103,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                    break;
                }
            }
+
             cout<<"Les dames c'est trop bien"<<endl;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;

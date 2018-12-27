@@ -24,6 +24,10 @@ GameChess::GameChess() : Game(8, GAME_CHESS) {
     Game::start();
 }
 
+GameChess::GameChess(string fileName, int id) : Game{fileName, id, SIZE, Game::GAME_CHESS} {
+    Game::start();
+}
+
 void GameChess::initGameChess() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {

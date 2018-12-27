@@ -11,7 +11,7 @@ PawnForDame::PawnForDame(int color) : Piece{color} {
 }
 
 string PawnForDame::toString() {
-    return "P";
+    return "O";
 }
 
 int PawnForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {

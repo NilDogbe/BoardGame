@@ -24,6 +24,8 @@ protected:
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
 
+    Game(std::string fileName, int id, int size,  std::string name);
+
 public:
     const static int BLACK = 31;
     const static int WHITE = 30;
@@ -35,7 +37,7 @@ public:
     void start();
     int getColor(int x, int y);
 
-    //void save();
+    void save();
 
     //Game* initWithFile(std::string file);
 };

@@ -4,10 +4,16 @@
 
 #include "Game.h"
 #include "Parser.h"
-#include "PawnForChess.h"
 #include "GameDame.h"
 #include "GameChess.h"
 #include "Piece.h"
+#include "PawnForDame.h"
+#include "DameForDame.h"
+#include "PawnForChess.h"
+#include "Tower.h"
+#include "King.h"
+#include "Knight.h"
+#include "Queen.h"
 #include <iostream>
 
 using namespace std;
@@ -152,13 +158,12 @@ void Game::getTest(int idTest, std::string idBalise) {
 
 }
 
-/*void Game::save() {
+void Game::save() {
     string mon_fichier = "../Game_Processing/save.txt";
 
-    ofstream fichier(mon_fichier.c_str(), ios::out | ios::trunc);
+    ofstream fichier(mon_fichier.c_str(), ios::out | ios::app);
     if (fichier) {
-        if (m_name.compare(GAME_DAME) == 0)
-            fichier << m_name << " \n";
+        fichier << "<Game>\n";
 
         if (m_curP == WHITE)
             fichier << "WHITE\n";
@@ -178,59 +183,86 @@ void Game::getTest(int idTest, std::string idBalise) {
             } else
                 fichier << "N";
 
-            if (i != size - 1)
-                fichier << ", ";
+            //if (i != size - 1)
+            fichier << ";";
         }
+
+        fichier << "\n</Game>\n";
 
         fichier.close();
     } else
         cerr << "Erreur à l'ouverture !" << endl;
-}*/
+}
 
+Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
+    vector<string> vector{Parser::getLines(fileName)};
 
-/*Game* Game::initGameWithFile(file) {
-    ifstream fichier("../Game_Processing/save.txt", ios::in);
-
-    if (fichier) {
-        string s;
-
-        for (int i{0}; i < 2; i++) {
-            getline(fichier, s);
-            if (i == 0) {
-                size_t pos{0};
-                string token;
-                string delimiter = ", ";
-                while ((pos = s.find(delimiter)) != string::npos) {
-                    token = s.substr(0, pos);
-                    Piece *p{nullptr};
-                    if (token.size() == 2) {
-                        switch (token.at(0)) {
-                            case 'P':
-                                p = new PawnForDame(token.at(1));
-                            case 'D':
-                                p = new DameForDame(token.at(1));
+    for (int i{0}; i < vector.size(); i++) {
+        string s = vector.at(i);
+        if (s.compare("<Game>") == 0 && id == 0) {
+            for (int j{0}; j < 2; j++) {
+                s = vector.at(i + j + 1);
+                if (j == 0) {
+                    if (s.compare("WHITE") == 0)
+                        m_curP = WHITE;
+                    else
+                        m_curP = BLACK;
+                } else {
+                    size_t pos{0};
+                    string token;
+                    string delimiter = ";";
+                    int k{0};
+                    while ((pos = s.find(delimiter)) != string::npos) {
+                        token = s.substr(0, pos);
+                        cout << token << endl;
+                        Piece *p{nullptr};
+                        if (token.size() == 2) {
+                            int color{0};
+                            if (token.at(1) == 'B')
+                                color = BLACK;
+                            else
+                                color = WHITE;
+                            switch (token.at(0)) {
+                                case 'O':
+                                    p = new PawnForDame(color);
+                                    break;
+                                case 'D':
+                                    p = new DameForDame(color);
+                                    break;
+                                case 'K':
+                                    p = new King(color);
+                                    break;
+                                case 'C':
+                                    p = new Knight(color);
+                                    break;
+                                case 'P':
+                                    p = new PawnForChess(color);
+                                    break;
+                                case 'Q':
+                                    p = new Queen(color);
+                                    break;
+                                case 'T':
+                                    p = new Tower(color);
+                                    break;
+                            }
                         }
+                        m_board[k] = (p);
+                        k++;
+                        //cout << token << endl;
+                        s.erase(0, pos + delimiter.length());
                     }
-                    game->m_board.push_back(p);
-                    cout << token << endl;
-                    s.erase(0, pos + delimiter.length());
                 }
-            } else {
-                if (s.compare("WHITE") == 0)
-                    game->m_curP = WHITE;
-                else
-                    game->m_curP = BLACK;
             }
-        }
-        fichier.close();
+        } else if (s.compare("</Game>") == 0)
+            id--;
+    }
+}
 
-    } else
-        cerr << "Impossible d'ouvrir le fichier !" << endl;
-}*/
 void Game::start() {
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl;
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " <<endl
+         << "Pour save une partie : 'SAVE'" <<endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
 
@@ -265,7 +297,11 @@ void Game::start() {
                     /* cout << "HELP:"<<x_help<<y_help<<endl;
                      cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
                 }
-            } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
+            }
+            else if (move.substr(0, 4).compare("SAVE") == 0){
+                save();
+            }
+            else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
                 cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;

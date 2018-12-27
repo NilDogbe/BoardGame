@@ -19,6 +19,7 @@ protected:
 public:
     GameChess();
     GameChess(int id_test);
+    GameChess(std::string fileName, int id);
     void getTest(int id_test);
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
 

@@ -15,42 +15,8 @@ GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
     start();
 }
 
-
-/*GameDame::GameDame(string fileName) : Game{SIZE, Game::GAME_DAME} {
-    vector<string> vector{Parser::getLines(fileName)};
-
-    for (int i{0}; i < 2; i++) {
-        string s = vector.at(i);
-        if (i == 0) {
-            size_t pos{0};
-            string token;
-            string delimiter = ", ";
-            int j{0};
-            while ((pos = s.find(delimiter)) != string::npos) {
-                token = s.substr(0, pos);
-                Piece *p{nullptr};
-                if (token.size() == 2) {
-                    switch (token.at(0)) {
-                        case 'P':
-                            p = new PawnForDame(token.at(1));
-                        case 'D':
-                            p = new DameForDame(token.at(1));
-                    }
-                }
-                m_board[j] = (p);
-                j++;
-                cout << token << endl;
-                s.erase(0, pos + delimiter.length());
-            }
-        } else {
-            if (s.compare("WHITE") == 0)
-                m_curP = WHITE;
-            else
-                m_curP = BLACK;
-        }
-    }
-
-}*/
+GameDame::GameDame(string fileName, int id) : Game{fileName, id, SIZE, Game::GAME_DAME} {
+}
 
 void GameDame::initGame() {
     for (int i = 0; i < 4; i++) {
@@ -66,10 +32,10 @@ void GameDame::initGame() {
         }
     }
 
-    m_board[6*SIZE+4] = nullptr;
-    m_board[7*SIZE+5] = nullptr;
-    m_board[8*SIZE+6] = nullptr;
-    m_board[9*SIZE+7] = nullptr;
+    m_board[6 * SIZE + 4] = nullptr;
+    m_board[7 * SIZE + 5] = nullptr;
+    m_board[8 * SIZE + 6] = nullptr;
+    m_board[9 * SIZE + 7] = nullptr;
 }
 
 /*bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
@@ -155,12 +121,13 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     return false;
 }
 
-GameDame::GameDame(int id_test) : Game(SIZE, Game::GAME_DAME) {
+GameDame::GameDame(int
+                   id_test) : Game(SIZE, Game::GAME_DAME) {
     initGame();
     getTest(id_test);
 }
 
 void GameDame::getTest(int id_test) {
-    Game::getTest(id_test, "<Dame>\r");
+    Game::getTest(id_test, "<Dame>");
 }
 

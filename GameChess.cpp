@@ -91,7 +91,6 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
 
         if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
-         //   cout << "On test" << (piece_dep->toString().compare("P") && piece_arr != nullptr) << endl;
 
             //mouvement accessible a cette piece
            // cout << "Travel; " << endl;
@@ -111,19 +110,25 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
             }
             if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
                 m_endGame = true;
-              //  cout << "G8888888888";
+                cout << "G8888888888";
 
             }
             cout << "VRAI" << endl;
             return true;
         } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
+            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0) {
+                m_endGame = true;
+                cout << "iiiiiiiiiiiiiiiiiiiii";
+            }
            // cout << "G3" << endl;// Piont
-            if (piece_arr == nullptr)
+            else if (piece_arr == nullptr)
                 return false;
         } else {
            // cout << "6" << endl;
-            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0)
+            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0) {
                 m_endGame = true;
+                cout << "iiiiiiiiiiiiiiiiiiiii";
+            }
             cout << "VRAI";
             return true;
         }

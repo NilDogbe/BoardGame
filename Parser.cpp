@@ -73,6 +73,7 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
                 vector.push_back(v);
             }
         }
+        cout<<"fin du parser";
     } else {
         cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
     }

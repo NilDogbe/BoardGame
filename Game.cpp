@@ -125,9 +125,9 @@ void Game::getTest(int idTest, std::string idBalise) {
 
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
-    // D:\Work\Git\BoardGame\Game_Processing : nil
+    // D:\Work\Git\BoardGame\Game_Processing\Script_Test.txt : nil
 
-    vector<vector<int>> vector = p.ReadScipt("C:\\Users\\Leo\\CLionProjects\\BoardGame\\Game_Processing\\Script_Test.txt", idTest,
+    vector<vector<int>> vector = p.ReadScipt("../Game_Processing/Script_Test.txt", idTest,
                                              idBalise);
     int acc = 0;
     string sens;
@@ -154,6 +154,81 @@ void Game::getTest(int idTest, std::string idBalise) {
 
 }
 
+/*void Game::save() {
+    string mon_fichier = "../Game_Processing/save.txt";
+
+    ofstream fichier(mon_fichier.c_str(), ios::out | ios::trunc);
+    if (fichier) {
+        if (m_name.compare(GAME_DAME) == 0)
+            fichier << m_name << " \n";
+
+        if (m_curP == WHITE)
+            fichier << "WHITE\n";
+        else
+            fichier << "BLACK\n";
+
+        int size = m_size * m_size;
+        for (int i = 0; i < size; i++) {
+            Piece *p = m_board[i];
+            if (p != nullptr) {
+                fichier << p->toString();
+
+                if (p->getColor() == WHITE)
+                    fichier << "W";
+                else
+                    fichier << "B";
+            } else
+                fichier << "N";
+
+            if (i != size - 1)
+                fichier << ", ";
+        }
+
+        fichier.close();
+    } else
+        cerr << "Erreur à l'ouverture !" << endl;
+}*/
+
+
+/*Game* Game::initGameWithFile(file) {
+    ifstream fichier("../Game_Processing/save.txt", ios::in);
+
+    if (fichier) {
+        string s;
+
+        for (int i{0}; i < 2; i++) {
+            getline(fichier, s);
+            if (i == 0) {
+                size_t pos{0};
+                string token;
+                string delimiter = ", ";
+                while ((pos = s.find(delimiter)) != string::npos) {
+                    token = s.substr(0, pos);
+                    Piece *p{nullptr};
+                    if (token.size() == 2) {
+                        switch (token.at(0)) {
+                            case 'P':
+                                p = new PawnForDame(token.at(1));
+                            case 'D':
+                                p = new DameForDame(token.at(1));
+                        }
+                    }
+                    game->m_board.push_back(p);
+                    cout << token << endl;
+                    s.erase(0, pos + delimiter.length());
+                }
+            } else {
+                if (s.compare("WHITE") == 0)
+                    game->m_curP = WHITE;
+                else
+                    game->m_curP = BLACK;
+            }
+        }
+        fichier.close();
+
+    } else
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+}*/
 void Game::start() {
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
@@ -161,39 +236,39 @@ void Game::start() {
     string move("");
 
 
-        do{
-            cout << "*************************************************" << endl;
+    do{
+        cout << "*************************************************" << endl;
 
 
-            if (m_curP == WHITE)
-                cout << "Joueur: " << 1 << " a vous de jouer " << endl;
-            else
-                cout << "Joueur: " << 2 << " a vous de jouer " << endl;
-            affichage();
-            cout<<endl;
-            getline(cin, move);
-            x_dep = (int)(move.at(0)) - 65;
-            y_dep = (int)(move.at(1)) - 48;
-            x_arr = (int)(move.at(2)) - 65;
-            y_arr = (int)(move.at(3)) - 48;
+        if (m_curP == WHITE)
+            cout << "Joueur: " << 1 << " a vous de jouer " << endl;
+        else
+            cout << "Joueur: " << 2 << " a vous de jouer " << endl;
+        affichage();
+        cout<<endl;
+        getline(cin, move);
+        x_dep = (int)(move.at(0)) - 65;
+        y_dep = (int)(move.at(1)) - 48;
+        x_arr = (int)(move.at(2)) - 65;
+        y_arr = (int)(move.at(3)) - 48;
 
-            if(!movePiece(x_dep,y_dep,x_arr,y_arr)) {
-                cout << "MOUVEMENT IMPOSSIBLE" << endl;
-                cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
-                cout << "Recommencez :" << endl;
-            }
-            else if(getColor(x_dep,y_dep) != m_curP){
-                cout << "Recommencez ce n'est pas votre couleur:" << endl;
-            }
-            else{
-                cout <<"OK" << endl;
-                Game::move(x_dep,y_dep,x_arr,y_arr);
-                if (m_curP == m_p1)
-                    m_curP = m_p2;
-                else m_curP = m_p1;
-            }
-        }while(!m_endGame);
-        cout<<"LA PARTIE EST FINIE"<<endl
+        if(!movePiece(x_dep,y_dep,x_arr,y_arr)) {
+            cout << "MOUVEMENT IMPOSSIBLE" << endl;
+            cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
+            cout << "Recommencez :" << endl;
+        }
+        else if(getColor(x_dep,y_dep) != m_curP){
+            cout << "Recommencez ce n'est pas votre couleur:" << endl;
+        }
+        else{
+            cout <<"OK" << endl;
+            Game::move(x_dep,y_dep,x_arr,y_arr);
+            if (m_curP == m_p1)
+                m_curP = m_p2;
+            else m_curP = m_p1;
+        }
+    }while(!m_endGame);
+    cout<<"LA PARTIE EST FINIE"<<endl
         <<"LE GAGNANT EST: "<< m_curP;
 
 }
@@ -201,7 +276,3 @@ void Game::start() {
 int Game::getColor(int x, int y) {
     m_board[y * m_size + x]->getColor();
 }
-
-
-
-

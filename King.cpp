@@ -47,5 +47,17 @@ int King::sqr(int x) {
 }
 
 std::vector<int> King::getPossibleMoves(int current_x, int current_y){
-    return Piece::getPossibleMoves(current_x,current_x);
+    vector<int> res;
+    int val[3] = { -1, 0, 1};
+    for(int i = 0;i<3;i++){
+        int next_x = current_x + (val[i]);
+        for(int j = 0; j<3;j++){
+           // cout<<"i = "<< i <<" j = " << j <<endl;
+            int next_y = current_y + (val[j]);
+            if((next_y >=0 && next_y <m_size ) && (next_x >=0 && next_x <m_size ) && !(val[i]==0 && val[j]==0) ){
+                res.push_back(next_y * m_size + next_x);
+            }
+        }
+    }
+    return res;
 }

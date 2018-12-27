@@ -5,11 +5,17 @@
 #include "Game.h"
 #include "Parser.h"
 #include "PawnForChess.h"
+#include "GameDame.h"
+#include "GameChess.h"
+#include "Piece.h"
 #include <iostream>
 
 using namespace std;
 
-Game::Game(int size) : m_board(size * size, nullptr), m_size(size), m_endGame{0} {
+string const Game::GAME_DAME = "DAME";
+string const Game::GAME_CHESS = "CHESS";
+
+Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
 
 void Game::affichage() {
@@ -76,7 +82,7 @@ void Game::getPossibleMove(int current_x, int current_y) {
 }
 
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
-    if (movePiece(x_dep, y_dep, x_arr, y_arr)) { // a enlever plus tard
+    if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         if (piece_dep->toString() == "P")
             ((PawnForChess *) piece_dep)->setFirstMove();

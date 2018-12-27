@@ -10,9 +10,46 @@
 
 using namespace std;
 
-GameDame::GameDame() : Game{SIZE} {
+GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
     initGame();
 }
+
+
+/*GameDame::GameDame(string fileName) : Game{SIZE, Game::GAME_DAME} {
+    vector<string> vector{Parser::getLines(fileName)};
+
+    for (int i{0}; i < 2; i++) {
+        string s = vector.at(i);
+        if (i == 0) {
+            size_t pos{0};
+            string token;
+            string delimiter = ", ";
+            int j{0};
+            while ((pos = s.find(delimiter)) != string::npos) {
+                token = s.substr(0, pos);
+                Piece *p{nullptr};
+                if (token.size() == 2) {
+                    switch (token.at(0)) {
+                        case 'P':
+                            p = new PawnForDame(token.at(1));
+                        case 'D':
+                            p = new DameForDame(token.at(1));
+                    }
+                }
+                m_board[j] = (p);
+                j++;
+                cout << token << endl;
+                s.erase(0, pos + delimiter.length());
+            }
+        } else {
+            if (s.compare("WHITE") == 0)
+                m_curP = WHITE;
+            else
+                m_curP = BLACK;
+        }
+    }
+
+}*/
 
 void GameDame::initGame() {
     for (int i = 0; i < 4; i++) {
@@ -121,7 +158,7 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     return false;
 }
 
-GameDame::GameDame(int id_test) : Game(SIZE) {
+GameDame::GameDame(int id_test) : Game(SIZE, Game::GAME_DAME) {
     initGame();
     getTest(id_test);
 }

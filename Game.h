@@ -31,7 +31,6 @@ public:
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
     void getTest(int idTest, std::string idBalise);
     void getPossibleMove(int current_x, int current_y);
-    int division(int x, int modulo);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
     void start();
     int getColor(int x, int y);

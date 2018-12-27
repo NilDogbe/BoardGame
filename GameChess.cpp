@@ -27,7 +27,7 @@ GameChess::GameChess() : Game(8, GAME_CHESS) {
 void GameChess::initGameChess() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
-            if (i == 3 && j == 4)
+            if (i == 2 && j == 4)
                 m_board[i * m_size + j] = new King(BLACK);
 
             else if (i == 1)
@@ -108,28 +108,16 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                     return false;
                 }
             }
-            if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
-                m_endGame = true;
-                cout << "G8888888888";
 
-            }
-            cout << "VRAI" << endl;
+            //cout << "VRAI" << endl;
             return true;
         } else if (piece_dep->canMove(x_dep, y_dep, x_arr, y_arr) == 2) {
-            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0) {
-                m_endGame = true;
-                cout << "iiiiiiiiiiiiiiiiiiiii";
-            }
-           // cout << "G3" << endl;// Piont
-            else if (piece_arr == nullptr)
+
+             if (piece_arr == nullptr)
                 return false;
         } else {
            // cout << "6" << endl;
-            if (piece_arr!= nullptr && piece_arr->toString().compare("K")==0) {
-                m_endGame = true;
-                cout << "iiiiiiiiiiiiiiiiiiiii";
-            }
-            cout << "VRAI";
+           // cout << "VRAI";
             return true;
         }
     } else return false;

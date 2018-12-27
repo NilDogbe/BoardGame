@@ -63,7 +63,7 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 void Game::getPossibleMove(int current_x, int current_y) {
     int nb_move = 0;
-    cout<< "ca vas dedans" <<endl;
+   // cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
     if (current_piece != nullptr) {
         vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
@@ -71,10 +71,10 @@ void Game::getPossibleMove(int current_x, int current_y) {
         for (int i = 0; i < res.size(); i++) {
             int tmp = res.at(i);
             int x = tmp % m_size;
-            int y = division(tmp, m_size);
-             cout <<"tmp = " << tmp;
+            int y = tmp/m_size;
+            /* cout <<"tmp = " << tmp;
              cout <<"x = " << x;
-             cout <<"y = " << y << endl;
+             cout <<"y = " << y << endl;*/
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
                 nb_move++;
@@ -88,9 +88,15 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout<<"Dans move " << m_name<<endl;
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
+        Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
         if (m_name.compare(Game::GAME_CHESS) == 0) {
             if (piece_dep->toString() == "P")
                 ((PawnForChess *) piece_dep)->setFirstMove();
+            if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
+                cout<<"aaaaaaaaaaaaaaa";
+                m_endGame = true;
+                return;
+            }
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
         }
@@ -112,15 +118,6 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
-int Game::division(int x, int modulo) {
-    int res = 0;
-    int tmp = x;
-    while (tmp >= modulo) {
-        tmp -= modulo;
-        res++;
-    }
-    return res;
-}
 
 void Game::getTest(int idTest, std::string idBalise) {
 
@@ -260,8 +257,9 @@ void Game::start() {
                 if(move.size() == 7){
                     x_help =(int) (move.at(5))-65;
                     y_help = (int) (move.at(6))-48;
-                    cout << "HELP:"<<x_help<<y_help<<endl;
-                    cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;
+                    getPossibleMove(x_help,y_help);
+                   /* cout << "HELP:"<<x_help<<y_help<<endl;
+                    cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
 
                 }
             }

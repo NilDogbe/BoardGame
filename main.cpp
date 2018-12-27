@@ -37,19 +37,10 @@ int main() {
                 if (action.compare("e") == 0) {
                     do {
                         cout << "***********************************************" << endl
-                             << "Choisir un test echec entre 1(compris) et " << Parser::NBR_TEST_CHESS+1 << "(compris)"
+                             << "Choisir un test echec entre 0(compris) et " << Parser::NBR_TEST_CHESS << "(compris)"
                              << endl;
-                        getline(cin,action);
-                        if (std::atoi(action.c_str()) == 0){
-                            cout << "tapper un nombre supp "<<endl;
-                        }
-                        else {
-
-                            idTest = std::atoi(action.c_str()) -1;
-                            cout << "idTest:"<<idTest<<endl;
-
-                        }
-
+                        cin >> idTest;
+                        cin.ignore();
                         if (idTest <= Parser::NBR_TEST_CHESS && idTest > -1) {
                             cout << "Bonsoir" << endl;
                             g = new GameChess(idTest);
@@ -93,51 +84,13 @@ int main() {
             //cin.ignore();
             if (action.compare("e") == 0) {
                 cout << "*********************************" << endl
-                     << "Binvenue dans ECHEC " << endl
-                     << "Nouvelle partie : 'new'"<<endl
-                     << "Charger partie : 'char'"<<endl
-                     << "Revenir en arriere : 'retour'"<<endl;
-
-                do {
-                    getline(cin, action);
-                    if ( action.compare("new") == 0) {
-                        Game *e = new GameChess();
-                        break;
-                    }
-                    else if (action.compare("char") == 0){
-                        //Rhodier char un partie
-                        break;
-                    }
-                    else if (action.compare("retour") == 0)
-                        break;
-                    else
-                        cout<<"Pas compris Recommence!"<<endl;
-                }while(1);
-
+                     << "Binvenue dans la partie d'echec " << endl;
+                Game* e = new GameChess();
             }
             else if (action.compare("d") == 0) {
                 cout << "*********************************" << endl
-                     << "Binvenue dans DAME " << endl
-                     << "Nouvelle partie : 'new'"<<endl
-                     << "Charger partie : 'char'"<<endl
-                     << "Revenir en arriere : 'retour'"<<endl;
-
-                do {
-                    getline(cin, action);
-                    if ( action.compare("new") == 0) {
-                        Game *e = new GameDame();
-                        break;
-                    }
-                    else if (action.compare("char") == 0){
-                        //Rhodier char un partie
-                        break;
-                    }
-                    else if (action.compare("retour") == 0)
-                        break;
-                    else
-                        cout<<"Pas compris Recommence!"<<endl;
-                }while(1);
-
+                     << "Binvenue dans la partie de dame " << endl;
+                Game* d = new GameDame();
 
             }
 

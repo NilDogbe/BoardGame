@@ -136,7 +136,7 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 
-GameChess::GameChess(int id_test) : Game(SIZE, GAME_DAME) {
+GameChess::GameChess(int id_test) : Game(SIZE, GAME_CHESS) {
     cout << m_endGame << ": endame" << endl;
 
     initGameChess();

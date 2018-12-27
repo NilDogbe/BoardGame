@@ -62,7 +62,8 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 void Game::getPossibleMove(int current_x, int current_y) {
-    //cout<< "ca vas dedans" <<endl;
+    int nb_move = 0;
+    cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
     if (current_piece != nullptr) {
         vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
@@ -71,23 +72,43 @@ void Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = division(tmp, m_size);
-            /* cout <<"tmp = " << tmp;
+             cout <<"tmp = " << tmp;
              cout <<"x = " << x;
-             cout <<"y = " << y << endl;*/
+             cout <<"y = " << y << endl;
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
+                nb_move++;
             }
         }
+        cout<<"Il y a "<<nb_move<<" move possible."<<endl;
     }
 }
 
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
+    cout<<"Dans move " << m_name<<endl;
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
-        if (piece_dep->toString() == "P")
-            ((PawnForChess *) piece_dep)->setFirstMove();
-        m_board.at(y_dep * m_size + x_dep) = nullptr;
-        m_board.at(y_arr * m_size + x_arr) = piece_dep;
+        if (m_name.compare(Game::GAME_CHESS) == 0) {
+            if (piece_dep->toString() == "P")
+                ((PawnForChess *) piece_dep)->setFirstMove();
+            m_board.at(y_dep * m_size + x_dep) = nullptr;
+            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+        }
+        else if(m_name.compare(Game::GAME_DAME) == 0){
+           vector<int> travel = piece_dep->getTravel();
+           for(int i = 0;i<travel.size();i++){
+               if(m_board.at(travel.at(i)) != nullptr){
+                   cout<<"Les dames ca fait peur"<<endl;
+                   m_board.at(travel.at(i)) = nullptr;
+                   break;
+               }
+           }
+
+            cout<<"Les dames c'est trop bien"<<endl;
+            m_board.at(y_dep * m_size + x_dep) = nullptr;
+            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+            ((GameDame*)this)->checkPawnTransform(x_arr, y_arr);
+        }
     }
 }
 
@@ -134,6 +155,81 @@ void Game::getTest(int idTest, std::string idBalise) {
 
 }
 
+/*void Game::save() {
+    string mon_fichier = "../Game_Processing/save.txt";
+
+    ofstream fichier(mon_fichier.c_str(), ios::out | ios::trunc);
+    if (fichier) {
+        if (m_name.compare(GAME_DAME) == 0)
+            fichier << m_name << " \n";
+
+        if (m_curP == WHITE)
+            fichier << "WHITE\n";
+        else
+            fichier << "BLACK\n";
+
+        int size = m_size * m_size;
+        for (int i = 0; i < size; i++) {
+            Piece *p = m_board[i];
+            if (p != nullptr) {
+                fichier << p->toString();
+
+                if (p->getColor() == WHITE)
+                    fichier << "W";
+                else
+                    fichier << "B";
+            } else
+                fichier << "N";
+
+            if (i != size - 1)
+                fichier << ", ";
+        }
+
+        fichier.close();
+    } else
+        cerr << "Erreur à l'ouverture !" << endl;
+}*/
+
+
+/*Game* Game::initGameWithFile(file) {
+    ifstream fichier("../Game_Processing/save.txt", ios::in);
+
+    if (fichier) {
+        string s;
+
+        for (int i{0}; i < 2; i++) {
+            getline(fichier, s);
+            if (i == 0) {
+                size_t pos{0};
+                string token;
+                string delimiter = ", ";
+                while ((pos = s.find(delimiter)) != string::npos) {
+                    token = s.substr(0, pos);
+                    Piece *p{nullptr};
+                    if (token.size() == 2) {
+                        switch (token.at(0)) {
+                            case 'P':
+                                p = new PawnForDame(token.at(1));
+                            case 'D':
+                                p = new DameForDame(token.at(1));
+                        }
+                    }
+                    game->m_board.push_back(p);
+                    cout << token << endl;
+                    s.erase(0, pos + delimiter.length());
+                }
+            } else {
+                if (s.compare("WHITE") == 0)
+                    game->m_curP = WHITE;
+                else
+                    game->m_curP = BLACK;
+            }
+        }
+        fichier.close();
+
+    } else
+        cerr << "Impossible d'ouvrir le fichier !" << endl;
+}*/
 void Game::start() {
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
@@ -195,8 +291,3 @@ void Game::start() {
 int Game::getColor(int x, int y) {
     m_board[y * m_size + x]->getColor();
 }
-
-
-
-
-

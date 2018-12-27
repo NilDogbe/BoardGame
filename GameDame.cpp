@@ -137,20 +137,16 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                     std::cout << "bouger" << std::endl;
                 }
             } else if (canMove == 2 || nbr_pieces == 1) {
-                if (dep->getTravel().size() > 0) {
-                    int i = dep->getTravel().back();
-                    if (m_board[i] != nullptr) {
+                vector<int> travel = dep->getTravel();
+                for(int i = 0;i<travel.size();i++) {
+                    if (m_board.at(travel.at(i)) != nullptr) {
                         move = true;
-                        m_board[i] = nullptr;
-                        std::cout << "manger" << std::endl;
+                        break;
                     }
                 }
             }
 
             if (move) {
-                m_board[y_dep * SIZE + x_dep] = nullptr;
-                m_board[y_arr * SIZE + x_arr] = dep;
-                checkPawnTransform(x_arr, y_arr);
                 return true;
             }
         }

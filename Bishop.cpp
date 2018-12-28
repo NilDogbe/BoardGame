@@ -9,6 +9,16 @@
 
 using namespace std;
 
+Bishop::Bishop(int color) : Piece(color) {
+}
+
+Bishop::Bishop(const Piece *p) : Piece{p} {
+}
+
+Piece* Bishop::copy() {
+    return new Bishop(this);
+}
+
 int Bishop::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     //cout << "Mouvemment Bishop " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
@@ -56,10 +66,6 @@ void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
             j++;
         }
     }
-}
-
-Bishop::Bishop(int color) : Piece(color) {
-
 }
 
 std::vector<int> Bishop::getPossibleMoves(int current_x, int current_y){

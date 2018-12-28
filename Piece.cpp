@@ -14,6 +14,9 @@ Piece::Piece(int couleur) {
     m_color = couleur;
 }
 
+Piece::Piece(const Piece* p) : m_color{p->m_color} {
+}
+
 int Piece::getColor(){
     return m_color;
 }

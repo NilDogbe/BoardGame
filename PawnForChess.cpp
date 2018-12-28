@@ -11,6 +11,15 @@
 
 using namespace std;
 
+PawnForChess::PawnForChess(int color) : Piece(color) {
+}
+
+PawnForChess::PawnForChess(const Piece *p) : Piece{p} {
+}
+
+Piece* PawnForChess::copy() {
+    return new PawnForChess(this);
+}
 
 int PawnForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
@@ -66,10 +75,6 @@ void PawnForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
             m_travel.push_back((y_dep + 1) * GameChess::SIZE + x_arr);
     } else
         Piece::setTravel(x_dep, y_dep, x_arr, y_arr);
-}
-
-PawnForChess::PawnForChess(int color) : Piece(color) {
-
 }
 
 vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y) {

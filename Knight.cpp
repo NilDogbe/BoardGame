@@ -9,6 +9,16 @@
 #include <wchar.h>
 using namespace std;
 
+Knight::Knight(int color) : Piece(color) {
+}
+
+Knight::Knight(const Piece *p) : Piece{p} {
+}
+
+Piece* Knight::copy() {
+    return new Knight(this);
+}
+
 int Knight::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
@@ -34,10 +44,6 @@ return "C";
 
 void Knight::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
     return;
-}
-
-Knight::Knight(int color) : Piece(color) {
-
 }
 
 std::vector<int> Knight::getPossibleMoves(int current_x, int current_y){

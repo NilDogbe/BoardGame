@@ -2,13 +2,19 @@
 // Created by netbook on 25/12/18.
 //
 
-#include <iostream>
 #include "PawnForDame.h"
 #include "GameDame.h"
 
 using namespace std;
 
 PawnForDame::PawnForDame(int color) : Piece{color} {
+}
+
+PawnForDame::PawnForDame(const Piece *p) : Piece{p} {
+}
+
+Piece* PawnForDame::copy() {
+    return new PawnForDame(this);
 }
 
 string PawnForDame::toString() {

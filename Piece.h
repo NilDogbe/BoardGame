@@ -9,12 +9,13 @@
 
 
 class Piece {
-
 protected:
     int m_color;
     std::vector<int> m_travel;
 public:
     Piece(int color);
+    Piece(const Piece* p);
+    virtual Piece* copy() = 0;
     virtual int getColor();
     virtual std::string toString() = 0;
     virtual int canMove(int x_dep, int y_dep, int x_arr, int y_arr) = 0;

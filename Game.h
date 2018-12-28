@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Piece.h"
+#include "Move.h"
 
 class Game {
 private:
@@ -24,7 +25,8 @@ protected:
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
 
-    Game(std::string fileName, int id, int size,  std::string name);
+    Game(std::string fileName, int id, int size, std::string name);
+    std::vector<Move> moves;
 
 public:
     const static int BLACK = 31;
@@ -39,8 +41,7 @@ public:
     std::vector<std::vector<int>> getCurrentPieces();
     void chooseMove();
     void save();
-
-    //Game* initWithFile(std::string file);
+    void back();
 };
 
 

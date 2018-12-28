@@ -100,6 +100,10 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
+        Move move;
+        move.setPieceMove(piece_dep->copy());
+        move.setDep(x_dep, y_dep);
+        move.setArr(x_arr, y_arr);
         if (m_name.compare(Game::GAME_CHESS) == 0) {
             if (piece_dep->toString() == "P")
                 ((PawnForChess *) piece_dep)->setFirstMove();
@@ -110,11 +114,17 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
             }
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
+            if (piece_arr != nullptr) {
+                move.setPieceDelete(piece_arr->copy());
+                move.setDel(x_arr, y_arr);
+            }
         } else if (m_name.compare(Game::GAME_DAME) == 0) {
             vector<int> travel = piece_dep->getTravel();
             for (int i = 0; i < travel.size(); i++) {
                 if (m_board.at(travel.at(i)) != nullptr) {
                     cout << "Les dames ca fait peur" << endl;
+                    move.setPieceDelete(m_board.at(travel.at(i))->copy());
+                    move.setDel(travel.at(i) % m_size, travel.at(i) / m_size);
                     m_board.at(travel.at(i)) = nullptr;
                     break;
                 }
@@ -125,6 +135,8 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
         }
+
+        moves.push_back(move);
     }
 }
 
@@ -193,7 +205,7 @@ void Game::save() {
 
     ofstream fichier(mon_fichier.c_str(), ios::out | ios::app);
     if (fichier) {
-        fichier << "<Game>\n";
+        fichier << "<" << m_name << ">" << "\n";
 
         if (m_curP == WHITE)
             fichier << "WHITE\n";
@@ -217,7 +229,7 @@ void Game::save() {
             fichier << ";";
         }
 
-        fichier << "\n</Game>\n";
+        fichier << "\n</" << m_name << ">\n";
 
         fichier.close();
     } else
@@ -229,7 +241,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<Game>") == 0) || (s.compare("<Game>\r") == 0)) && id == 0) {
+        if (((s.compare("<" + name + ">") == 0)||(s.compare("<" + name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -283,7 +295,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                     }
                 }
             }
-        } else if (s.compare("</Game>") == 0)
+        } else if (s.compare("</" + name + ">") == 0 || s.compare("</" + name + ">\r") == 0)
             id--;
     }
 }
@@ -327,9 +339,13 @@ void Game::start() {
                     /* cout << "HELP:"<<x_help<<y_help<<endl;
                      cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
                 }
-            } else if (move.substr(0, 4).compare("SAVE") == 0) {
+            }
+            else if (move.substr(0, 4).compare("SAVE") == 0){
                 save();
-            } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
+            } else if (move.substr(0, 4).compare("BACK") == 0) {
+                back();
+            }
+            else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
                 cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;
@@ -358,4 +374,15 @@ void Game::start() {
 
 int Game::getColor(int x, int y) {
     m_board[y * m_size + x]->getColor();
+}
+
+void Game::back() {
+    if (moves.size() > 0) {
+        Move move = moves.back();
+        moves.pop_back();
+        m_board[move.getYDep() * m_size + move.getXDep()] = move.getPieceMove()->copy();
+        m_board[move.getYArr() * m_size + move.getXArr()] = nullptr;
+        if (move.getPieceDelete() != nullptr)
+            m_board[move.getYDel() * m_size + move.getXDel()] = move.getPieceDelete()->copy();
+    }
 }

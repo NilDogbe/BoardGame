@@ -9,9 +9,15 @@
 #include <iostream>
 using namespace std;
 
-/*int King::sqr(int x) {
-    return x*x;
-}*/
+King::King(int color) : Piece(color) {
+}
+
+King::King(const Piece *p) : Piece{p} {
+}
+
+Piece* King::copy() {
+    return new King(this);
+}
 
 int King::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     //   res=sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p1.y));
@@ -36,10 +42,6 @@ string King::toString() {
 }
 void King::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
     return;
-}
-
-King::King(int color) : Piece(color) {
-
 }
 
 int King::sqr(int x) {

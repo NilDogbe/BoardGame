@@ -10,6 +10,16 @@
 
 using namespace std;
 
+Tower::Tower(int color) : Piece(color) {
+}
+
+Tower::Tower(const Piece *p) : Piece{p} {
+}
+
+Piece* Tower::copy() {
+    return new Tower(this);
+}
+
 int Tower::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
    // cout << "Mouvemment Tower " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
@@ -42,10 +52,6 @@ void Tower::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 string Tower::toString() {
     return "T";
-}
-
-Tower::Tower(int color) : Piece(color) {
-
 }
 
 std::vector<int> Tower::getPossibleMoves(int current_x, int current_y){

@@ -136,7 +136,7 @@ GameChess::GameChess(int id_test) : Game(SIZE, GAME_CHESS) {
 }
 
 void GameChess::getTest(int id_test) {
-    Game::getTest(id_test,"<Chess>\r");
+    Game::getTest(id_test,"<Chess>");
 }
 
 /* if( y_dep * m_size + x_dep == m_caseWhitekKing){

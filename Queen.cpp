@@ -9,6 +9,16 @@
 
 using namespace std;
 
+Queen::Queen(int color) : Piece(color) {
+}
+
+Queen::Queen(const Piece *p) : Piece{p} {
+}
+
+Piece* Queen::copy() {
+    return new Queen(this);
+}
+
 int Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     //cout << "Mouvemment Queen " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
@@ -25,10 +35,6 @@ int Queen::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
         return true;
 
     } else return false;
-
-}
-
-Queen::Queen(int color) : Piece(color) {
 
 }
 

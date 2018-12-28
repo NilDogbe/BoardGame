@@ -10,7 +10,7 @@ using namespace std;
 DameForDame::DameForDame(int color) : Piece{color} {
 }
 
-DameForDame::DameForDame(Piece *p) : Piece{p->getColor()} {
+DameForDame::DameForDame(const Piece *p) : Piece{p} {
 }
 
 string DameForDame::toString() {
@@ -66,4 +66,8 @@ std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y) {
             res.push_back((current_y - i) * GameDame::SIZE + (current_x - i));
     }
     return res;
+}
+
+Piece* DameForDame::copy() {
+    return new DameForDame(this);
 }

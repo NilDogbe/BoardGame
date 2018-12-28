@@ -32,11 +32,12 @@ public:
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
     void getTest(int idTest, std::string idBalise);
-    void getPossibleMove(int current_x, int current_y);
+    std::vector<int> getPossibleMove(int current_x, int current_y);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
     void start();
     int getColor(int x, int y);
-
+    std::vector<std::vector<int>> getCurrentPieces();
+    void chooseMove();
     void save();
 
     //Game* initWithFile(std::string file);

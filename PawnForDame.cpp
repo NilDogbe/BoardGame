@@ -61,13 +61,6 @@ std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y) {
             if (current_x > 0)
                 res.push_back((current_y + 1) * GameDame::SIZE + current_x - 1);
         }
-        if (current_y < GameDame::SIZE - 2) {
-            if (current_x < GameDame::SIZE - 2)
-                res.push_back((current_y + 2) * GameDame::SIZE + current_x + 2);
-            if (current_x > 1)
-                res.push_back((current_y + 2) * GameDame::SIZE + current_x - 2);
-        }
-
     } else {
         if (current_y > 0) {
             if (current_x < GameDame::SIZE - 1)
@@ -75,13 +68,19 @@ std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y) {
             if (current_x > 0)
                 res.push_back((current_y - 1) * GameDame::SIZE + current_x - 1);
         }
-        if (current_y > 1) {
-            if (current_x < GameDame::SIZE - 2)
-                res.push_back((current_y - 2) * GameDame::SIZE + current_x + 2);
-            if (current_x > 1)
-                res.push_back((current_y - 2) * GameDame::SIZE + current_x - 2);
-        }
+    }
+    if (current_y < GameDame::SIZE - 2) {
+        if (current_x < GameDame::SIZE - 2)
+            res.push_back((current_y + 2) * GameDame::SIZE + current_x + 2);
+        if (current_x > 1)
+            res.push_back((current_y + 2) * GameDame::SIZE + current_x - 2);
+    }
 
+    if (current_y > 1) {
+        if (current_x < GameDame::SIZE - 2)
+            res.push_back((current_y - 2) * GameDame::SIZE + current_x + 2);
+        if (current_x > 1)
+            res.push_back((current_y - 2) * GameDame::SIZE + current_x - 2);
     }
     return res;
 }

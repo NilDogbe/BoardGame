@@ -68,7 +68,8 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     } else return true;
 }
 
-void Game::getPossibleMove(int current_x, int current_y) {
+vector<int> Game::getPossibleMove(int current_x, int current_y) {
+    vector<int> moves;
     int nb_move = 0;
     // cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
@@ -79,17 +80,20 @@ void Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = tmp / m_size;
-             cout <<"tmp = " << tmp;
-             cout <<"x = " << x;
-             cout <<"y = " << y << endl;
+            cout << "tmp = " << tmp;
+            cout << "x = " << x;
+            cout << "y = " << y << endl;
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
                 nb_move++;
+                moves.push_back(tmp);
             }
         }
     }
     cout << "Il y a " << nb_move << " move possible." << endl;
+    return moves;
 }
+
 
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Dans move " << m_name << endl;
@@ -124,6 +128,32 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 }
 
+
+vector<vector<int>> Game::getCurrentPieces() {
+    vector<vector<int>> res;
+    for (int i = 0; i < m_board.size(); i++) {
+        if (m_board.at(i) != nullptr && m_board.at(i)->getColor() == m_curP) {
+            if(getPossibleMove(i % m_size, i / m_size).size() > 0) {
+                vector<int> x_y;
+                x_y.push_back(i % m_size);
+                x_y.push_back(i / m_size);
+                res.push_back(x_y);
+            }
+        }
+    }
+    return res;
+}
+
+void Game::chooseMove() {
+    vector<vector<int>> pieces = getCurrentPieces();
+    int rand = std::rand() % pieces.size();
+    vector<int> piece_choosed = pieces.at(rand);
+    vector<int> mooves = getPossibleMove(piece_choosed.at(0),piece_choosed.at(1));
+    int rand2 = std::rand() % mooves.size();
+    int moove_choosed = mooves.at(rand2);
+    move(piece_choosed.at(0),piece_choosed.at(1), moove_choosed % m_size, moove_choosed / m_size);
+    cout<<"random "<<rand << endl;
+}
 
 void Game::getTest(int idTest, std::string idBalise) {
 
@@ -199,7 +229,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<Game>") == 0)||(s.compare("<Game>\r") == 0)) && id == 0) {
+        if (((s.compare("<Game>") == 0) || (s.compare("<Game>\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -261,8 +291,8 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
 void Game::start() {
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " <<endl
-         << "Pour save une partie : 'SAVE'" <<endl;
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
+         << "Pour save une partie : 'SAVE'" << endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
 
@@ -297,11 +327,9 @@ void Game::start() {
                     /* cout << "HELP:"<<x_help<<y_help<<endl;
                      cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
                 }
-            }
-            else if (move.substr(0, 4).compare("SAVE") == 0){
+            } else if (move.substr(0, 4).compare("SAVE") == 0) {
                 save();
-            }
-            else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
+            } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
                 cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;
@@ -310,6 +338,12 @@ void Game::start() {
             } else {
                 cout << "OK" << endl;
                 Game::move(x_dep, y_dep, x_arr, y_arr);
+              //  chooseMove();
+              /*  vector<vector<int>> tmp = getCurrentPieces();
+                for(int i=0;i<tmp.size();i++){
+                    Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
+                    cout << "Piece "<<p->toString()<<endl;
+                }*/
                 if (m_curP == m_p1)
                     m_curP = m_p2;
                 else m_curP = m_p1;

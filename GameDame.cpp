@@ -105,7 +105,7 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
             } else if (canMove == 2 || nbr_pieces == 1) {
                 vector<int> travel = dep->getTravel();
                 for(int i = 0;i<travel.size();i++) {
-                    if (m_board.at(travel.at(i)) != nullptr) {
+                    if (m_board.at(travel.at(i)) != nullptr && m_board.at(travel.at(i))->getColor() != dep->getColor()) {
                         move = true;
                         break;
                     }

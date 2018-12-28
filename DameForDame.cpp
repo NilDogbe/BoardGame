@@ -65,4 +65,5 @@ std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y) {
         if(current_y - i >=0)
             res.push_back((current_y - i) * GameDame::SIZE + (current_x - i));
     }
+    return res;
 }

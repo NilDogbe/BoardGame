@@ -17,11 +17,11 @@ cout<< "eeee" << idBalise << endl;
     //faire un switch case
     string endBalise;
     if (idBalise.compare("<Chess>\r") == 0 || idBalise.compare("<Chess>") == 0){
-        endBalise = "</Chess>\r";
+        endBalise = "</Chess>";
 cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
     }
     else if (idBalise.compare("<Dame>\r") == 0 || idBalise.compare("<Dame>") == 0){
-        endBalise = "</Dame>\r";
+        endBalise = "</Dame>";
         cout<< "eeee" << idBalise << " dddddddd " << endBalise <<  endl;
 
     }
@@ -103,8 +103,6 @@ vector<string> Parser::getLines(string fileName) {
 
 
         while (getline(fichier, s)) {
-            if (s.compare("<Chess>\r") == 0)
-            cout << s << endl ;
             vector.push_back(s);
         }
     } else

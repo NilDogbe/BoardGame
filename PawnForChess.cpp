@@ -113,3 +113,7 @@ vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y) {
 void PawnForChess::setFirstMove() {
     m_firstMove = false;
 }
+
+bool PawnForChess::getFirstMove() {
+    return m_firstMove;
+}

@@ -7,8 +7,6 @@
 
 class Piece;
 
-#include "Piece.h"
-
 class Move {
 private:
     Piece* piece_move;

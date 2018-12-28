@@ -19,6 +19,7 @@ public:
     std::string toString() override;
     std::vector<int> getPossibleMoves(int current_x, int current_y);
     void setFirstMove();
+    bool getFirstMove();
 };
 
 

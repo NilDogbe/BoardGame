@@ -128,6 +128,6 @@ GameDame::GameDame(int
 }
 
 void GameDame::getTest(int id_test) {
-    Game::getTest(id_test, "<Dame>\r");
+    Game::getTest(id_test, "<Dame>");
 }
 

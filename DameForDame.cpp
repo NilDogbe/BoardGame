@@ -49,5 +49,18 @@ void DameForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y) {
-    return Piece::getPossibleMoves(current_x, current_y);
+    vector<int> res;
+    for(int i = 1;i<GameDame::SIZE - current_x;i++){
+        if(current_y + i <GameDame::SIZE)
+            res.push_back((current_y + i) * GameDame::SIZE + (current_x + i));
+        if(current_y - i >=0)
+            res.push_back((current_y - i) * GameDame::SIZE + (current_x + i));
+    }
+
+    for(int i = 1;i<=current_x ;i++){
+        if(current_y + i <GameDame::SIZE)
+            res.push_back((current_y + i) * GameDame::SIZE + (current_x - i));
+        if(current_y - i >=0)
+            res.push_back((current_y - i) * GameDame::SIZE + (current_x - i));
+    }
 }

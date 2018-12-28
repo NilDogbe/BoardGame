@@ -11,7 +11,6 @@
 class Piece {
 
 protected:
-    static const int m_size = 8;
     int m_color;
     std::vector<int> m_travel;
 public:

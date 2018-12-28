@@ -3,6 +3,7 @@
 //
 
 #include "Bishop.h"
+#include "GameChess.h"
 #include <wchar.h>
 #include <iostream>
 
@@ -33,28 +34,26 @@ void Bishop::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (x_arr > x_dep && y_arr > y_dep) {
         int j = y_dep + 1;
         for (int i = x_dep + 1; i < x_arr; i++) {
-            m_travel.push_back(j * m_size + i);
+            m_travel.push_back(j * GameChess::SIZE + i);
             j++;
         }
     } else if (x_arr < x_dep && y_arr > y_dep) {
         int j = y_arr + -1;
         for (int i = x_arr + 1; i < x_dep; i++) {
-            m_travel.push_back(j * m_size + i);
+            m_travel.push_back(j * GameChess::SIZE + i);
             j--;
         }
     } else if (x_arr > x_dep && y_arr < y_dep) {
         int j = y_dep - 1;
         for (int i = x_dep + 1; i < x_arr; i++) {
-            m_travel.push_back(j * m_size + i);
+            m_travel.push_back(j * GameChess::SIZE + i);
             j--;
-           // cout << "test" << (j * m_size + i) << endl;
         }
     } else if (x_arr < x_dep && y_arr < y_dep) {
         int j = y_arr + 1;
         for (int i = x_arr + 1; i < x_dep; i++) {
-            m_travel.push_back(j * m_size + i);
+            m_travel.push_back(j * GameChess::SIZE + i);
             j++;
-           // cout << "test" << (j * m_size + i) << endl;
         }
     }
 }
@@ -65,18 +64,18 @@ Bishop::Bishop(int color) : Piece(color) {
 
 std::vector<int> Bishop::getPossibleMoves(int current_x, int current_y){
     vector<int> res;
-    for(int i = 1;i<m_size - current_x;i++){
-        if(current_y + i <m_size)
-        res.push_back((current_y + i) * m_size + (current_x + i));
+    for(int i = 1;i<GameChess::SIZE - current_x;i++){
+        if(current_y + i <GameChess::SIZE)
+        res.push_back((current_y + i) * GameChess::SIZE + (current_x + i));
         if(current_y - i >=0)
-        res.push_back((current_y - i) * m_size + (current_x + i));
+        res.push_back((current_y - i) * GameChess::SIZE + (current_x + i));
     }
 
     for(int i = 1;i<=current_x ;i++){
-        if(current_y + i <m_size)
-            res.push_back((current_y + i) * m_size + (current_x - i));
+        if(current_y + i <GameChess::SIZE)
+            res.push_back((current_y + i) * GameChess::SIZE + (current_x - i));
         if(current_y - i >=0)
-            res.push_back((current_y - i) * m_size + (current_x - i));
+            res.push_back((current_y - i) * GameChess::SIZE + (current_x - i));
     }
 
     return res;

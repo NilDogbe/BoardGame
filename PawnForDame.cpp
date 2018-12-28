@@ -2,6 +2,7 @@
 // Created by netbook on 25/12/18.
 //
 
+#include <iostream>
 #include "PawnForDame.h"
 #include "GameDame.h"
 
@@ -18,9 +19,9 @@ int PawnForDame::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (abs(x_dep - x_arr) == abs(y_arr - y_dep)) {
         if (abs(y_arr - y_dep) == 2)
             return 2;
-        else if (m_color == GameDame::WHITE && y_arr - y_dep == 1)
+        else if (m_color == Game::WHITE && y_arr - y_dep == 1)
             return 1;
-        else if (m_color == GameDame::BLACK && y_arr - y_dep == -1)
+        else if (m_color == Game::BLACK && y_arr - y_dep == -1)
             return 1;
     }
 
@@ -52,5 +53,35 @@ void PawnForDame::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 }
 
 std::vector<int> PawnForDame::getPossibleMoves(int current_x, int current_y) {
-    return Piece::getPossibleMoves(current_x, current_y);
+    vector<int> res;
+    if (this->getColor() == Game::WHITE) {
+        if (current_y < GameDame::SIZE - 1) {
+            if (current_x < GameDame::SIZE - 1)
+                res.push_back((current_y + 1) * GameDame::SIZE + current_x + 1);
+            if (current_x > 0)
+                res.push_back((current_y + 1) * GameDame::SIZE + current_x - 1);
+        }
+        if (current_y < GameDame::SIZE - 2) {
+            if (current_x < GameDame::SIZE - 2)
+                res.push_back((current_y + 2) * GameDame::SIZE + current_x + 2);
+            if (current_x > 1)
+                res.push_back((current_y + 2) * GameDame::SIZE + current_x - 2);
+        }
+
+    } else {
+        if (current_y > 0) {
+            if (current_x < GameDame::SIZE - 1)
+                res.push_back((current_y - 1) * GameDame::SIZE + current_x + 1);
+            if (current_x > 0)
+                res.push_back((current_y - 1) * GameDame::SIZE + current_x - 1);
+        }
+        if (current_y > 1) {
+            if (current_x < GameDame::SIZE - 2)
+                res.push_back((current_y - 2) * GameDame::SIZE + current_x + 2);
+            if (current_x > 1)
+                res.push_back((current_y - 2) * GameDame::SIZE + current_x - 2);
+        }
+
+    }
+    return res;
 }

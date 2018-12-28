@@ -79,9 +79,9 @@ void Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = tmp / m_size;
-            /* cout <<"tmp = " << tmp;
+             cout <<"tmp = " << tmp;
              cout <<"x = " << x;
-             cout <<"y = " << y << endl;*/
+             cout <<"y = " << y << endl;
             if (movePiece(current_x, current_y, x, y)) {
                 cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
                 nb_move++;

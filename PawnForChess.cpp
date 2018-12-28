@@ -4,6 +4,7 @@
 
 #include "PawnForChess.h"
 #include "Game.h"
+#include "GameChess.h"
 #include <cmath>
 #include <wchar.h>
 #include <iostream>
@@ -60,9 +61,9 @@ string PawnForChess::toString() {
 void PawnForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (abs(y_dep - y_arr) > 1) {
         if (y_dep > y_arr) {
-            m_travel.push_back((y_arr + 1) * m_size + x_arr);
+            m_travel.push_back((y_arr + 1) * GameChess::SIZE + x_arr);
         } else
-            m_travel.push_back((y_dep + 1) * m_size + x_arr);
+            m_travel.push_back((y_dep + 1) * GameChess::SIZE + x_arr);
     } else
         Piece::setTravel(x_dep, y_dep, x_arr, y_arr);
 }
@@ -74,29 +75,29 @@ PawnForChess::PawnForChess(int color) : Piece(color) {
 vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
     if (this->getColor() == Game::WHITE) {
-        if (current_y < m_size - 1) {
-            res.push_back((current_y + 1) * m_size + current_x);
+        if (current_y < GameChess::SIZE - 1) {
+            res.push_back((current_y + 1) * GameChess::SIZE + current_x);
             if (m_firstMove) {
-                res.push_back((current_y + 2) * m_size + current_x);
+                res.push_back((current_y + 2) * GameChess::SIZE + current_x);
             }
-            if (current_x < m_size - 1) {
-                res.push_back((current_y + 1) * m_size + (current_x + 1));
+            if (current_x < GameChess::SIZE - 1) {
+                res.push_back((current_y + 1) * GameChess::SIZE + (current_x + 1));
             }
             if (current_x > 0) {
-                res.push_back((current_y + 1) * m_size + (current_x - 1));
+                res.push_back((current_y + 1) * GameChess::SIZE + (current_x - 1));
             }
         }
     } else {
         if (current_y > 0) {
-            res.push_back((current_y - 1) * m_size + current_x);
+            res.push_back((current_y - 1) * GameChess::SIZE + current_x);
             if (m_firstMove) {
-                res.push_back((current_y + -2) * m_size + current_x);
+                res.push_back((current_y + -2) * GameChess::SIZE + current_x);
             }
-            if (current_x < m_size - 1) {
-                res.push_back((current_y - 1) * m_size + (current_x + 1));
+            if (current_x < GameChess::SIZE - 1) {
+                res.push_back((current_y - 1) * GameChess::SIZE + (current_x + 1));
             }
             if (current_x > 0) {
-                res.push_back((current_y - 1) * m_size + (current_x - 1));
+                res.push_back((current_y - 1) * GameChess::SIZE + (current_x - 1));
             }
         }
     }

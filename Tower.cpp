@@ -3,6 +3,7 @@
 //
 
 #include "Tower.h"
+#include "GameChess.h"
 #include <cmath>
 #include <iostream>
 #include <wchar.h>
@@ -25,16 +26,16 @@ int Tower::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
 void Tower::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (x_arr > x_dep) {
         for (int i = x_dep + 1; i < x_arr; i++)
-            m_travel.push_back(y_dep * m_size + i);
+            m_travel.push_back(y_dep * GameChess::SIZE + i);
     } else if (x_arr < x_dep) {
         for (int i = x_arr + 1; i < x_dep; i++)
-            m_travel.push_back(y_dep * m_size + i);
+            m_travel.push_back(y_dep * GameChess::SIZE + i);
     } else if (y_arr > y_dep) {
         for (int i = y_dep + 1; i < y_arr; i++)
-            m_travel.push_back(i * m_size + x_dep);
+            m_travel.push_back(i * GameChess::SIZE + x_dep);
     } else if (y_arr < y_dep) {
         for (int i = y_arr + 1; i < y_dep; i++)
-            m_travel.push_back(i * m_size + x_dep);
+            m_travel.push_back(i * GameChess::SIZE + x_dep);
     }
 }
 
@@ -49,12 +50,12 @@ Tower::Tower(int color) : Piece(color) {
 
 std::vector<int> Tower::getPossibleMoves(int current_x, int current_y){
     vector<int> res;
-    for(int i = 0;i<m_size;i++){
+    for(int i = 0;i<GameChess::SIZE;i++){
         if(i!= current_x) {
-            res.push_back(current_y * m_size + i);
+            res.push_back(current_y * GameChess::SIZE + i);
         }
         if(i!= current_y) {
-            res.push_back(i * m_size + current_x);
+            res.push_back(i * GameChess::SIZE + current_x);
         }
     }
     return res;

@@ -3,6 +3,7 @@
 //
 
 #include "Queen.h"
+#include "GameChess.h"
 #include <wchar.h>
 #include <iostream>
 
@@ -35,45 +36,44 @@ void Queen::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (x_arr > x_dep) {
         if (y_arr == y_dep) {
             for (int i = x_dep + 1; i < x_arr; i++)
-                m_travel.push_back(y_dep * m_size + i);
+                m_travel.push_back(y_dep * GameChess::SIZE + i);
         } else if (y_arr > y_dep) {
             int j = y_dep + 1;
             for (int i = x_dep + 1; i < x_arr; i++) {
-                m_travel.push_back(j * m_size + i);
+                m_travel.push_back(j * GameChess::SIZE + i);
                 j++;
             }
         } else if (y_arr < y_dep) {
             int j = y_dep - 1;
             for (int i = x_dep + 1; i < x_arr; i++) {
-                m_travel.push_back(j * m_size + i);
+                m_travel.push_back(j * GameChess::SIZE + i);
                 j--;
-               // cout << "test" << (j * m_size + i) << endl;
             }
 
         }
     } else if (x_arr < x_dep) {
         if (y_arr == y_dep) {
             for (int i = x_arr + 1; i < x_dep; i++)
-                m_travel.push_back(y_dep * m_size + i);
+                m_travel.push_back(y_dep * GameChess::SIZE + i);
         } else if (x_arr < x_dep && y_arr > y_dep) {
             int j = y_arr + -1;
             for (int i = x_arr + 1; i < x_dep; i++) {
-                m_travel.push_back(j * m_size + i);
+                m_travel.push_back(j * GameChess::SIZE + i);
                 j--;
             }
         } else if (y_arr < y_dep) {
             int j = y_arr + 1;
             for (int i = x_arr + 1; i < x_dep; i++) {
-                m_travel.push_back(j * m_size + i);
+                m_travel.push_back(j * GameChess::SIZE + i);
                 j++;
             }
         }
     } else if (y_arr < y_dep) {
         for (int i = y_arr + 1; i < y_dep; i++)
-            m_travel.push_back(i * m_size + x_dep);
+            m_travel.push_back(i * GameChess::SIZE + x_dep);
     } else if (y_arr > y_dep) {
         for (int i = y_dep + 1; i < y_arr; i++)
-            m_travel.push_back(i * m_size + x_dep);
+            m_travel.push_back(i * GameChess::SIZE + x_dep);
     }
 }
 
@@ -83,26 +83,26 @@ return "Q";
 
 std::vector<int> Queen::getPossibleMoves(int current_x, int current_y){
     vector<int> res;
-    for(int i = 1;i<m_size - current_x;i++){
-        if(current_y + i <m_size)
-            res.push_back((current_y + i) * m_size + (current_x + i));
+    for(int i = 1;i<GameChess::SIZE - current_x;i++){
+        if(current_y + i <GameChess::SIZE)
+            res.push_back((current_y + i) * GameChess::SIZE + (current_x + i));
         if(current_y - i >=0)
-            res.push_back((current_y - i) * m_size + (current_x + i));
+            res.push_back((current_y - i) * GameChess::SIZE + (current_x + i));
     }
 
     for(int i = 1;i<=current_x;i++){
-        if(current_y + i <m_size)
-            res.push_back((current_y + i) * m_size + (current_x - i));
+        if(current_y + i <GameChess::SIZE)
+            res.push_back((current_y + i) * GameChess::SIZE + (current_x - i));
         if(current_y - i >=0)
-            res.push_back((current_y - i) * m_size + (current_x - i));
+            res.push_back((current_y - i) * GameChess::SIZE + (current_x - i));
     }
 
-    for(int i = 0;i<m_size;i++){
+    for(int i = 0;i<GameChess::SIZE;i++){
         if(i!= current_x) {
-            res.push_back(current_y * m_size + i);
+            res.push_back(current_y * GameChess::SIZE + i);
         }
         if(i!= current_y) {
-            res.push_back(i * m_size + current_x);
+            res.push_back(i * GameChess::SIZE + current_x);
         }
     }
 

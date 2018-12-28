@@ -51,7 +51,7 @@ int main() {
 
                         if (idTest <= Parser::NBR_TEST_CHESS && idTest > -1) {
                             cout << "Bonsoir" << endl;
-                            g = new GameDame(idTest);
+                            g = new GameChess(idTest);
                             break;
                         } else cout << "Recommencez!" << endl;
 

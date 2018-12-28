@@ -11,12 +11,12 @@ class GameChess : public Game {
 
 protected:
     void initGameChess();
-    const static int SIZE = 8;
     int m_caseBlackKing = (m_size - 1) * m_size + 5; // 61
     int m_caseWhitekKing = m_size * 0 + 3;
 
 
 public:
+    const static int SIZE = 8;
     GameChess();
     GameChess(int id_test);
     GameChess(std::string fileName, int id);

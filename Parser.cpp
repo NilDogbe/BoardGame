@@ -12,18 +12,19 @@
 using namespace std;
 
 vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) {
-
+    cout << " Read"<< idBalise<<endl;
     ifstream monFlux(flux);//Ouverture d'un fichier en lecture
     //faire un switch case
     string endBalise;
     if (idBalise.compare("<Chess>\r") == 0 || idBalise.compare("<Chess>") == 0){
-        endBalise = "</Chess>";
+        endBalise = "</Chess>\r";
 cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
     }
     else if (idBalise.compare("<Dame>\r") == 0 || idBalise.compare("<Dame>") == 0)
-        endBalise = "</Dame>";
+        endBalise = "</Dame>\r";
+
     int nbr_chessTest = 0;
-    cout << " zzzzzzzzzzzzzzzzzzzz"<<endl;
+    cout << " zzzzzzzzzzzzzzzzzzzz" <<endl;
 
 
     if (monFlux) {

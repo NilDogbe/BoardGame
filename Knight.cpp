@@ -3,6 +3,7 @@
 //
 
 #include "Knight.h"
+#include "GameChess.h"
 #include <cmath>
 #include <iostream>
 #include <wchar.h>
@@ -46,15 +47,15 @@ std::vector<int> Knight::getPossibleMoves(int current_x, int current_y){
     for(int i = 0;i<4;i++){
         int next_y = current_y + (y[(i*2)]);
         int next_x = current_x + (x[i]);
-        int tmp = next_y * m_size + next_x;
-        if((next_y >=0 && next_y <m_size ) && (next_x >=0 && next_x <m_size ) ){
+        int tmp = next_y * GameChess::SIZE + next_x;
+        if((next_y >=0 && next_y <GameChess::SIZE ) && (next_x >=0 && next_x <GameChess::SIZE ) ){
 
             res.push_back(tmp);
         }
         next_y = current_y + (y[(i*2)+1]);
         next_x = current_x + (x[i]);
-        tmp = next_y * m_size + next_x;
-        if((next_y >=0 && next_y <m_size ) && (next_x >=0 && next_x <m_size ) ){
+        tmp = next_y * GameChess::SIZE + next_x;
+        if((next_y >=0 && next_y <GameChess::SIZE ) && (next_x >=0 && next_x <GameChess::SIZE ) ){
             res.push_back(tmp);
         }
     }

@@ -12,7 +12,7 @@
 using namespace std;
 
 vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) {
-    cout << " Read"<< idBalise<<endl;
+cout<< "eeee" << idBalise << endl;
     ifstream monFlux(flux);//Ouverture d'un fichier en lecture
     //faire un switch case
     string endBalise;
@@ -20,11 +20,18 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
         endBalise = "</Chess>\r";
 cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
     }
-    else if (idBalise.compare("<Dame>\r") == 0 || idBalise.compare("<Dame>") == 0)
+    else if (idBalise.compare("<Dame>\r") == 0 || idBalise.compare("<Dame>") == 0){
         endBalise = "</Dame>\r";
+        cout<< "eeee" << idBalise << " dddddddd " << endBalise <<  endl;
+
+    }
+    cout<< "eeee" << idBalise << " " << endBalise <<  endl;
 
     int nbr_chessTest = 0;
-    cout << " zzzzzzzzzzzzzzzzzzzz" <<endl;
+    //int nbr_DameTest = 0;
+
+    cout << " zzzzzzzzzzzzzzzzzzzz"<<endl;
+    cout  <<nbr_chessTest << " idididididididi "<< idTest << endl;
 
 
     if (monFlux) {
@@ -32,22 +39,23 @@ cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
         vector<vector<int>> vector;
         bool add{false};
         while (getline(monFlux, ligne)) { //Tant qu'on n'est pas à la fin, on lit
-            cout << "Balise aaaaaaaa "<< ligne << endl;
+            cout << "ligne: "<< ligne << endl;
+            cout <<  (ligne.compare(idBalise) == 0) << endl;
 
 
             if (ligne.compare(idBalise) == 0) {
                 cout << "niportr" << ligne;
 
                 if (idTest == nbr_chessTest) {
-
+                    cout  <<nbr_chessTest << "aaaaaaaaaaaaaaa idididididididi "<< idTest << endl;
                     // boucler et remplir jusqua \chess
                     add = true;
 
                 } else
                     nbr_chessTest++;
             } else if (ligne.compare(endBalise) == 0 && add) {
-                /*cout<<"eeeeee";
-                cout << "test ";*/
+                cout<<"eeeeee";
+                cout << "test ";
                 cout << (ligne.compare(endBalise) == 0) << endBalise;
                 for (int i = 0; i < vector.size(); i++) {
                     cout << vector[i][0];
@@ -87,11 +95,16 @@ cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
 vector<string> Parser::getLines(string fileName) {
     ifstream fichier(fileName, ios::in);
     vector<string> vector;
+    cout << "eeee"<<endl ;
 
     if (fichier) {
         string s;
+        cout << "eeee" ;
+
 
         while (getline(fichier, s)) {
+            if (s.compare("<Chess>\r") == 0)
+            cout << s << endl ;
             vector.push_back(s);
         }
     } else

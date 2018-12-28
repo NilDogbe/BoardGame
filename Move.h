@@ -1,0 +1,37 @@
+//
+// Created by netbook on 28/12/18.
+//
+
+#ifndef BOARDGAME_MOVE_H
+#define BOARDGAME_MOVE_H
+
+class Piece;
+
+#include "Piece.h"
+
+class Move {
+private:
+    Piece* piece_move;
+    Piece* piece_delete;
+    int x_dep, y_dep;
+    int x_arr, y_arr;
+    int x_del, y_del;
+public:
+    Move();
+    Piece* getPieceMove() const;
+    Piece* getPieceDelete() const;
+    int getXDep() const;
+    int getYDep() const;
+    int getXArr() const;
+    int getYArr() const;
+    int getXDel() const;
+    int getYDel() const;
+    void setPieceMove(Piece*);
+    void setPieceDelete(Piece*);
+    void setDep(int x, int y);
+    void setArr(int x, int y);
+    void setDel(int x, int y);
+};
+
+
+#endif //BOARDGAME_MOVE_H

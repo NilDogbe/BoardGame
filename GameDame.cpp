@@ -11,14 +11,10 @@
 using namespace std;
 
 GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
-    initGame();
-    start();
+
 }
 
-GameDame::GameDame(string fileName, int id) : Game{fileName, id, SIZE, Game::GAME_DAME} {
-}
-
-void GameDame::initGame() {
+void GameDame::init() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
@@ -119,15 +115,5 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     }
 
     return false;
-}
-
-GameDame::GameDame(int
-                   id_test) : Game(SIZE, Game::GAME_DAME) {
-    initGame();
-    getTest(id_test);
-}
-
-void GameDame::getTest(int id_test) {
-    Game::getTest(id_test, "<Dame>");
 }
 

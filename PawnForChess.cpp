@@ -77,6 +77,10 @@ void PawnForChess::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
         Piece::setTravel(x_dep, y_dep, x_arr, y_arr);
 }
 
+PawnForChess::PawnForChess(int color, bool firstMove) : m_firstMove{firstMove},  Piece(color) {
+
+}
+
 vector<int> PawnForChess::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
     if (this->getColor() == Game::WHITE) {

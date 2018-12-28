@@ -44,10 +44,6 @@ void King::setTravel(int x_dep, int y_dep, int x_arr, int y_arr){
     return;
 }
 
-int King::sqr(int x) {
-   // cout<<"sqr";
-    return x*x;
-}
 
 std::vector<int> King::getPossibleMoves(int current_x, int current_y){
     vector<int> res;

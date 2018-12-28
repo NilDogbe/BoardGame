@@ -19,8 +19,8 @@
 
 using namespace std;
 
-string const Game::GAME_DAME = "DAME";
-string const Game::GAME_CHESS = "CHESS";
+string const Game::GAME_DAME = "Dame";
+string const Game::GAME_CHESS = "Chess";
 
 Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
@@ -168,8 +168,9 @@ void Game::chooseMove() {
     cout<<"random "<<rand << endl;
 }
 
-void Game::getTest(int idTest, std::string idBalise) {
-
+void Game::startTest(int idTest) {
+    string idBalise{"<"+m_name+">\r"};
+    init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
     // D:\Work\Git\BoardGame\Game_Processing\Script_Test.txt : nil
@@ -244,12 +245,13 @@ void Game::save() {
         cerr << "Erreur à l'ouverture !" << endl;
 }
 
-Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
+void Game::continueParty(int id) {
+    string fileName{"../Game_Processing/save.txt"};
     vector<string> vector{Parser::getLines(fileName)};
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + name + ">") == 0)||(s.compare("<" + name + ">\r") == 0)) && id == 0) {
+        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -308,16 +310,19 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                     }
                 }
             }
-        } else if (s.compare("</" + name + ">") == 0 || s.compare("</" + name + ">\r") == 0)
+        } else if (s.compare("</" + m_name + ">") == 0 || s.compare("</" + m_name + ">\r") == 0)
             id--;
     }
+
+    start(false);
 }
 
-void Game::start() {
-
+void Game::start(bool initialisation) {
+    if (initialisation)
+        init();
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
-         << "Pour save une partie : 'SAVE'" << endl;
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " <<endl
+         << "Pour save une partie : 'SAVE'" <<endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
 

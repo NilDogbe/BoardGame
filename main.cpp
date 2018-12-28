@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Piece.h"
 #include "GameChess.h"
+#include "GameMakruk.h"
+
 #include "Parser.h"
 #include "GameDame.h"
 
@@ -76,10 +78,14 @@ int main() {
                 if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0) {
                     if (idTest <= nbrTest(nameGame) && idTest > -1) {
                         cout << "Bonsoir" << endl;
-                        if (nameGame.compare("e") == 0)
-                            g = new GameChess(idTest);
-                        else if (nameGame.compare("d") == 0)
-                            g = new GameDame(idTest);
+                        if (nameGame.compare("e") == 0){
+                            g = new GameChess();
+                            g->startTest(idTest);
+                        }
+                        else if (nameGame.compare("d") == 0){
+                            g = new GameDame();
+                            g->startTest(idTest);
+                        }
                         break;
                     }
                 } else cout << "Recommencez!" << endl;
@@ -107,7 +113,9 @@ int main() {
                 do {
                     getline(cin, action);
                     if (action.compare("new") == 0) {
+                        cout << "ici";
                         Game *e = new GameChess();
+                        e->start(true);
                         break;
                     } else if (action.compare("char") == 0) {
 
@@ -128,7 +136,8 @@ int main() {
 
                             if (idChar <= Parser::NBR_TEST_CHESS && idChar > -1) { // creer variable Char
                                 cout << "Bonsoir" << endl;
-                                g = new GameChess("../Game_Processing/save.txt", idChar);
+                                g = new GameChess();
+                                g->continueParty(idChar);
                                 break;
                             } else cout << "Recommencez!" << endl;
 
@@ -151,9 +160,11 @@ int main() {
                     getline(cin, action);
                     if (action.compare("new") == 0) {
                         Game *e = new GameDame();
+                        e->start(true);
                         break;
                     } else if (action.compare("char") == 0) {
-                        //Rhodier char un partie
+                        Game* g = new GameDame();
+                        g->continueParty(0);
                         break;
                     } else if (action.compare("retour") == 0)
                         break;

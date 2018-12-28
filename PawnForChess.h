@@ -10,7 +10,9 @@
 class PawnForChess : public Piece{
 private:
     bool m_firstMove = true;
+
 public:
+    PawnForChess(int color, bool m_firstMove);
     PawnForChess(int color);
     PawnForChess(const Piece*);
     Piece* copy();

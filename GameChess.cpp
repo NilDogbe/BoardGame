@@ -18,17 +18,10 @@
 
 using namespace std;
 
-
-GameChess::GameChess() : Game(8, GAME_CHESS) {
-    initGameChess();
-    Game::start();
+GameChess::GameChess() : Game(SIZE, GAME_CHESS) {
 }
 
-GameChess::GameChess(string fileName, int id) : Game{fileName, id, SIZE, Game::GAME_CHESS} {
-    Game::start();
-}
-
-void GameChess::initGameChess() {
+void GameChess::init() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
             if (i == 2 && j == 4)
@@ -78,13 +71,13 @@ void GameChess::initGameChess() {
               if(j==6 && i == 6){
                   m_board[i * m_size + j] = new King(0);
               }
-
               if(j==2 && i == 6){
                   m_board[i * m_size + j] = new King(0);
               }*/
         }
     }
 }
+
 
 bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     //cout<<"Bidule";
@@ -127,17 +120,6 @@ bool GameChess::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     } else return false;
 }
 
-
-GameChess::GameChess(int id_test) : Game(SIZE, GAME_CHESS) {
-    cout << m_endGame << ": endame" << endl;
-
-    initGameChess();
-    getTest(id_test);
-}
-
-void GameChess::getTest(int id_test) {
-    Game::getTest(id_test,"<Chess>");
-}
 
 /* if( y_dep * m_size + x_dep == m_caseWhitekKing){
      cout<<"king  blanc"<< y_dep * m_size + x_dep << endl;

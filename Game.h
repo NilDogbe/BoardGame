@@ -19,13 +19,17 @@ protected:
     const int m_p2 = BLACK;
     int m_curP = WHITE;
     bool m_endGame;
+    int m_idTest;
 
     Game(int size, std::string name);
+    //Game(std::string fileName, int id, int size,  std::string name);
+    //Game(std::string fileName, int id, int size,  std::string name);
+
+    virtual void init() = 0;
 
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
 
-    Game(std::string fileName, int id, int size, std::string name);
     std::vector<Move> moves;
 
 public:
@@ -33,14 +37,19 @@ public:
     const static int WHITE = 30;
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
-    void getTest(int idTest, std::string idBalise);
+    //void startTest(int idTest, std::string idBalise);
     std::vector<int> getPossibleMove(int current_x, int current_y);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
-    void start();
+    void start(bool);
     int getColor(int x, int y);
     std::vector<std::vector<int>> getCurrentPieces();
     void chooseMove();
     void save();
+    void startTest(int id);
+    void continueParty(int id);
+
+
+    //Game* initWithFile(std::string file);
     void back();
 };
 

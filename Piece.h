@@ -13,6 +13,7 @@ protected:
     int m_color;
     std::vector<int> m_travel;
 public:
+
     Piece(int color);
     Piece(const Piece* p);
     virtual Piece* copy() = 0;
@@ -22,6 +23,8 @@ public:
     virtual void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
     virtual std::vector<int> getTravel();
     virtual std::vector<int> getPossibleMoves(int current_x, int current_y);
+    int sqr(int x);
+
 };
 
 

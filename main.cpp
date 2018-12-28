@@ -1,9 +1,19 @@
-#include "GameDame.h"
-#include "Parser.h"
-#include "GameChess.h"
+
 #include <iostream>
+#include "Piece.h"
+#include "GameChess.h"
+#include "Parser.h"
+#include "GameDame.h"
+
 
 using namespace std;
+
+int nbrTest(string x) {
+    if (x.compare("e") == 0)
+        return Parser::NBR_TEST_CHESS + 1;
+    if (x.compare("d") == 0)
+        return Parser::NBR_TEST_DAME + 1;
+}
 
 int main() {
 
@@ -13,9 +23,10 @@ int main() {
     string typeGame;
     string testOrGame;
     string action;
-    int idTest;
-    int idChar;
-
+    int idTest(-1);
+    int idChar(-1);
+    string nameGame("");
+    bool retour(false);
 
 
     do {
@@ -27,71 +38,58 @@ int main() {
 
         if (action.compare("t") == 0) {// rentre dans test
             do {
+                retour = false;
                 cout << "***********************************************" << endl
                      << "Pour test echecs : 'e'" << endl
                      << "Pour test Dames: 'd'" << endl
                      << "Pour quitter les test: 'retour'" << endl;
-                idTest = -1;
-                getline(cin, action);
-                if (action.compare("e") == 0) {
-                    do {
+                do {
+                    getline(cin, nameGame);
+                    if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0) {
                         cout << "***********************************************" << endl
-                             << "Choisir un test echec entre 1(compris) et " << Parser::NBR_TEST_CHESS + 1
+                             << "Choisir un test " << nameGame << "entre 1(compris) et " << nbrTest(nameGame)
                              << "(compris)"
                              << endl;
-                        getline(cin, action);
-                        if (std::atoi(action.c_str()) == 0) {
-                            cout << "tapper un nombre supp " << endl;
-                        } else {
+                        break;
+                    } else if (nameGame.compare("retour") == 0) {
+                        retour = true;
+                        break;
 
-                            idTest = std::atoi(action.c_str()) - 1;
-                            cout << "idTest:" << idTest << endl;
+                    } else cout << "Pas Compris5" << endl;
+                } while (1);
+                do {
+                    if (retour)
+                        break;
 
-                        }
+                    getline(cin, action);
+                    if (std::atoi(action.c_str()) == 0) {
+                        cout << "tapper un nombre supp a 0" << endl;
+                    } else break;
+                } while (1);
 
-                        if (idTest <= Parser::NBR_TEST_CHESS && idTest > -1) {
-                            cout << "Bonsoir" << endl;
-                            g = new GameDame(idTest);
-                            break;
-                        } else cout << "Recommencez!" << endl;
-
-                    } while (1);
-                    break; // fin du test
-
-                } else if (action.compare("d") == 0) { // rentre dans un jeu
-
-                    do {
-                        cout << "***********************************************" << endl
-                             << "Choisir un test echec entre 1(compris) et " << Parser::NBR_TEST_DAME + 1
-                             << "(compris)"
-                             << endl;
-                        getline(cin, action);
-                        if (std::atoi(action.c_str()) == 0) {
-                            cout << "tapper un nombre supp " << endl;
-                        } else {
-
-                            idTest = std::atoi(action.c_str()) - 1;
-                            cout << "idTest:" << idTest << endl;
-
-                        }
-
-                        if (idTest <= Parser::NBR_TEST_DAME && idTest > -1) {
-                            cout << "Bonsoir" << endl;
-                            g = new GameDame(idTest);
-                            break;
-                        } else cout << "Recommencez!" << endl;
-
-                    } while (1);
+                if (retour)
                     break;
 
+                idTest = std::atoi(action.c_str()) - 1;
+                cout << "idTest:" << idTest << endl;
 
-                    break;
-                } else cout << "PAS COMPRIS1!" << endl;
+                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0) {
+                    if (idTest <= nbrTest(nameGame) && idTest > -1) {
+                        cout << "Bonsoir" << endl;
+                        if (nameGame.compare("e") == 0)
+                            g = new GameChess(idTest);
+                        else if (nameGame.compare("d") == 0)
+                            g = new GameDame(idTest);
+                        break;
+                    }
+                } else cout << "Recommencez!" << endl;
 
             } while (1);
-
+           // break; // fin du test
+            // else cout << "PAS COMPRIS1!" << endl;
 
         } else if (action.compare("j") == 0) {
+
             cout << "**********************************************" << endl
                  << "A quel jeu voulez-vous jouer ?" << endl
                  << "Echec tappez : 'e'" << endl
@@ -130,7 +128,7 @@ int main() {
 
                             if (idChar <= Parser::NBR_TEST_CHESS && idChar > -1) { // creer variable Char
                                 cout << "Bonsoir" << endl;
-                                g = new GameChess("../Game_Processing/save.txt",idChar);
+                                g = new GameChess("../Game_Processing/save.txt", idChar);
                                 break;
                             } else cout << "Recommencez!" << endl;
 

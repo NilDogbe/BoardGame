@@ -10,6 +10,7 @@
 #include "PawnForDame.h"
 #include "DameForDame.h"
 #include "PawnForChess.h"
+#include "Bishop.h"
 #include "Tower.h"
 #include "King.h"
 #include "Knight.h"
@@ -222,6 +223,13 @@ void Game::save() {
                     fichier << "W";
                 else
                     fichier << "B";
+
+                if (p->toString().compare("P") == 0) {
+                    if (((PawnForChess*)p)->getFirstMove())
+                        fichier << "T";
+                    else
+                        fichier<< "F";
+                }
             } else
                 fichier << "N";
 
@@ -258,7 +266,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                         token = s.substr(0, pos);
                         cout << token << endl;
                         Piece *p{nullptr};
-                        if (token.size() == 2) {
+                        if (token.size() > 1) {
                             int color{0};
                             if (token.at(1) == 'B')
                                 color = BLACK;
@@ -271,6 +279,9 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                                 case 'D':
                                     p = new DameForDame(color);
                                     break;
+                                case 'B':
+                                    p = new Bishop(color);
+                                    break;
                                 case 'K':
                                     p = new King(color);
                                     break;
@@ -279,6 +290,8 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                                     break;
                                 case 'P':
                                     p = new PawnForChess(color);
+                                    if (token.at(2) == 'F')
+                                        ((PawnForChess*)p)->setFirstMove();
                                     break;
                                 case 'Q':
                                     p = new Queen(color);
@@ -288,7 +301,7 @@ Game::Game(string fileName, int id, int size, string name) : Game{size, name} {
                                     break;
                             }
                         }
-                        m_board[k] = (p);
+                        m_board[k] = p;
                         k++;
                         //cout << token << endl;
                         s.erase(0, pos + delimiter.length());
@@ -384,5 +397,10 @@ void Game::back() {
         m_board[move.getYArr() * m_size + move.getXArr()] = nullptr;
         if (move.getPieceDelete() != nullptr)
             m_board[move.getYDel() * m_size + move.getXDel()] = move.getPieceDelete()->copy();
+
+        if (m_curP == m_p1)
+            m_curP = m_p2;
+        else
+            m_curP = m_p1;
     }
 }

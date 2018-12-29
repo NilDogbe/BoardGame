@@ -48,6 +48,7 @@ int main() {
         cout << "***********************************************" << endl
              << "Pour tester : 't'" << endl
              << "Pour jouer : 'j'" << endl
+             << "Pour simuler : 's'" << endl
              << "Pour quitter : 'exit'" << endl;
         getline(cin, action);
 
@@ -121,7 +122,8 @@ int main() {
                  << "A quel jeu voulez-vous jouer ?" << endl
                  << "Echec tappez : 'e'" << endl
                  << "Dame tappez : 'd'" << endl
-                 << "Revenir en arriere : 'retour'" << endl;
+                 << "Makruk tappez : 'm'" << endl
+                    << "Revenir en arriere : 'retour'" << endl;
             getline(cin, nameGame);
             //cin.ignore();
             if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0

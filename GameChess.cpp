@@ -24,10 +24,10 @@ GameChess::GameChess() : Game(SIZE, GAME_CHESS) {
 void GameChess::init() {
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
-            if (i == 2 && j == 4)
-                m_board[i * m_size + j] = new King(BLACK);
+            /*if (i == 2 && j == 4)
+                m_board[i * m_size + j] = new King(BLACK);*/
 
-            else if (i == 1)
+             if (i == 1)
                 m_board[i * m_size + j] = new PawnForChess(WHITE);
             else if (i == 0)
                 if (j == 0 || j == m_size - 1)

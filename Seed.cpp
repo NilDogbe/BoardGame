@@ -13,6 +13,13 @@ using namespace std;
 Seed::Seed(int color) : Piece(color) {
 }
 
+Seed::Seed(const Piece *p) : Piece{p} {
+}
+
+Piece* Seed::copy() {
+    return new Seed(this);
+}
+
 std::string Seed::toString() {
     return "S";
 }
@@ -40,3 +47,4 @@ std::vector<int> Seed::getPossibleMoves(int current_x, int current_y) {
  */
     return res;
 }
+

@@ -11,6 +11,12 @@ using namespace std;
 void Khon::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
     return;
 }
+Khon::Khon(const Piece *p) : Piece{p} {
+}
+
+Piece* Khon::copy() {
+    return new Khon(this);
+}
 
 int Khon::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     int distance = sqrt(sqr(y_arr - y_dep) + sqr(x_dep - x_arr));
@@ -32,4 +38,7 @@ std::vector<int> Khon::getPossibleMoves(int current_x, int current_y) {
  */
     return res;
 
+}
+
+Khon::Khon(int color) : Piece(color) {
 }

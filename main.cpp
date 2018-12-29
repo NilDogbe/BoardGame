@@ -13,9 +13,22 @@ using namespace std;
 int nbrTest(string x) {
     if (x.compare("e") == 0)
         return Parser::NBR_TEST_CHESS + 1;
-    if (x.compare("d") == 0)
+    else if (x.compare("d") == 0)
         return Parser::NBR_TEST_DAME + 1;
+    else if (x.compare("m") == 0)
+        return Parser::NBR_TEST_MAKRUK + 1;
 }
+
+string realName(string x) {
+    if (x.compare("e") == 0)
+        return "ECHEC";
+    else if (x.compare("d") == 0)
+        return "DAME";
+    else if (x.compare("m") == 0)
+        return "MAKRUK";
+}
+
+
 
 int main() {
 
@@ -44,12 +57,14 @@ int main() {
                 cout << "***********************************************" << endl
                      << "Pour test echecs : 'e'" << endl
                      << "Pour test Dames: 'd'" << endl
+                     << "Pour test Makruk: 'm'" << endl
+                     << "Pour test Dame2: 'x'" << endl
                      << "Pour quitter les test: 'retour'" << endl;
                 do {
                     getline(cin, nameGame);
-                    if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0) {
+                    if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") == 0 || nameGame.compare("x") == 0) {
                         cout << "***********************************************" << endl
-                             << "Choisir un test " << nameGame << "entre 1(compris) et " << nbrTest(nameGame)
+                             << "Choisir un test " << realName(nameGame) << " entre 1(compris) et " << nbrTest(nameGame)
                              << "(compris)"
                              << endl;
                         break;
@@ -65,7 +80,7 @@ int main() {
 
                     getline(cin, action);
                     if (std::atoi(action.c_str()) == 0) {
-                        cout << "tapper un nombre supp a 0" << endl;
+                        cout << "IMPOSSIBLE: choisir un nombre entre 1 et "<< nbrTest(nameGame) << endl;
                     } else break;
                 } while (1);
 
@@ -75,23 +90,29 @@ int main() {
                 idTest = std::atoi(action.c_str()) - 1;
                 cout << "idTest:" << idTest << endl;
 
-                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0) {
+                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") || nameGame.compare("x") ) {
                     if (idTest <= nbrTest(nameGame) && idTest > -1) {
                         cout << "Bonsoir" << endl;
-                        if (nameGame.compare("e") == 0){
+                        if (nameGame.compare("e") == 0) {
                             g = new GameChess();
                             g->startTest(idTest);
-                        }
-                        else if (nameGame.compare("d") == 0){
+                        } else if (nameGame.compare("d") == 0) {
                             g = new GameDame();
                             g->startTest(idTest);
                         }
+                        else if(nameGame.compare("m") == 0) {
+                            g = new GameMakruk();
+                            g->startTest(idTest);
+                        }
+                        else if(nameGame.compare("x") == 0) {
+                            //TODO
+                        }
                         break;
                     }
-                } else cout << "Recommencez!" << endl;
+                } else cout << "Pas Compris Recommencez!" << endl;
 
             } while (1);
-           // break; // fin du test
+            // break; // fin du test
             // else cout << "PAS COMPRIS1!" << endl;
 
         } else if (action.compare("j") == 0) {
@@ -101,11 +122,12 @@ int main() {
                  << "Echec tappez : 'e'" << endl
                  << "Dame tappez : 'd'" << endl
                  << "Revenir en arriere : 'retour'" << endl;
-            getline(cin, action);
+            getline(cin, nameGame);
             //cin.ignore();
-            if (action.compare("e") == 0) {
-                cout << "*********************************" << endl
-                     << "Binvenue dans ECHEC " << endl
+            if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0
+            || nameGame.compare("m") == 0 || nameGame.compare("x") == 0 ) {
+                cout << "**********************************************" << endl
+                     << "Binvenue dans " << realName(nameGame) << endl
                      << "Nouvelle partie : 'new'" << endl
                      << "Charger partie : 'char'" << endl
                      << "Revenir en arriere : 'retour'" << endl;
@@ -114,8 +136,12 @@ int main() {
                     getline(cin, action);
                     if (action.compare("new") == 0) {
                         cout << "ici";
-                        Game *e = new GameChess();
-                        e->start(true);
+                        cout << nameGame;
+                        if (nameGame.compare("e") == 0){
+                            Game *e = new GameChess();
+                            e->start(true);
+                        }
+
                         break;
                     } else if (action.compare("char") == 0) {
 
@@ -149,7 +175,11 @@ int main() {
                         cout << "Pas compris Recommence!" << endl;
                 } while (1);
 
-            } else if (action.compare("d") == 0) {
+            }
+
+
+
+            else if (action.compare("d") == 0) {
                 cout << "*********************************" << endl
                      << "Binvenue dans DAME " << endl
                      << "Nouvelle partie : 'new'" << endl
@@ -160,10 +190,10 @@ int main() {
                     getline(cin, action);
                     if (action.compare("new") == 0) {
                         Game *e = new GameDame();
-                        e->start(true);
+                        e->startRobot(true);
                         break;
                     } else if (action.compare("char") == 0) {
-                        Game* g = new GameDame();
+                        Game *g = new GameDame();
                         g->continueParty(0);
                         break;
                     } else if (action.compare("retour") == 0)
@@ -173,7 +203,11 @@ int main() {
                 } while (1);
 
 
-            } else if (action.compare("retour") == 0)
+            }
+
+
+
+            else if (action.compare("retour") == 0)
                 break;
         } else if (action.compare("exit") == 0) {
             cout << "Ciao!" << endl;

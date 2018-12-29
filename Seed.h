@@ -9,8 +9,12 @@
 
 
 class Seed : public Piece {
+public:
 
     Seed(int color);
+
+    Seed(const Piece*);
+    Piece* copy();
 
     std::string toString();
 

@@ -13,8 +13,13 @@ class Khon : public Piece {
 
 public:
     Khon(int color);
+    Khon(const Piece*);
 
-    void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
+    Piece* copy();
+
+
+
+        void setTravel(int x_dep, int y_dep, int x_arr, int y_arr);
 
     int canMove(int x_dep, int y_dep, int x_arr, int y_arr);
 

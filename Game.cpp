@@ -146,7 +146,7 @@ vector<vector<int>> Game::getCurrentPieces() {
     vector<vector<int>> res;
     for (int i = 0; i < m_board.size(); i++) {
         if (m_board.at(i) != nullptr && m_board.at(i)->getColor() == m_curP) {
-            if(getPossibleMove(i % m_size, i / m_size).size() > 0) {
+            if (getPossibleMove(i % m_size, i / m_size).size() > 0) {
                 vector<int> x_y;
                 x_y.push_back(i % m_size);
                 x_y.push_back(i / m_size);
@@ -158,18 +158,19 @@ vector<vector<int>> Game::getCurrentPieces() {
 }
 
 void Game::chooseMove() {
+    srand(time(NULL));
     vector<vector<int>> pieces = getCurrentPieces();
     int rand = std::rand() % pieces.size();
     vector<int> piece_choosed = pieces.at(rand);
-    vector<int> mooves = getPossibleMove(piece_choosed.at(0),piece_choosed.at(1));
+    vector<int> mooves = getPossibleMove(piece_choosed.at(0), piece_choosed.at(1));
     int rand2 = std::rand() % mooves.size();
     int moove_choosed = mooves.at(rand2);
-    move(piece_choosed.at(0),piece_choosed.at(1), moove_choosed % m_size, moove_choosed / m_size);
-    cout<<"random "<<rand << endl;
+    move(piece_choosed.at(0), piece_choosed.at(1), moove_choosed % m_size, moove_choosed / m_size);
+    cout << "random " << rand << endl;
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<"+m_name+">\r"};
+    string idBalise{"<" + m_name + ">\r"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
@@ -226,10 +227,10 @@ void Game::save() {
                     fichier << "B";
 
                 if (p->toString().compare("P") == 0) {
-                    if (((PawnForChess*)p)->getFirstMove())
+                    if (((PawnForChess *) p)->getFirstMove())
                         fichier << "T";
                     else
-                        fichier<< "F";
+                        fichier << "F";
                 }
             } else
                 fichier << "N";
@@ -251,7 +252,7 @@ void Game::continueParty(int id) {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
+        if (((s.compare("<" + m_name + ">") == 0) || (s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -293,7 +294,7 @@ void Game::continueParty(int id) {
                                 case 'P':
                                     p = new PawnForChess(color);
                                     if (token.at(2) == 'F')
-                                        ((PawnForChess*)p)->setFirstMove();
+                                        ((PawnForChess *) p)->setFirstMove();
                                     break;
                                 case 'Q':
                                     p = new Queen(color);
@@ -372,12 +373,12 @@ void Game::start(bool initialisation) {
             } else {
                 cout << "OK" << endl;
                 Game::move(x_dep, y_dep, x_arr, y_arr);
-              //  chooseMove();
-              /*  vector<vector<int>> tmp = getCurrentPieces();
-                for(int i=0;i<tmp.size();i++){
-                    Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
-                    cout << "Piece "<<p->toString()<<endl;
-                }*/
+                //  chooseMove();
+                /*  vector<vector<int>> tmp = getCurrentPieces();
+                  for(int i=0;i<tmp.size();i++){
+                      Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
+                      cout << "Piece "<<p->toString()<<endl;
+                  }*/
                 if (m_curP == m_p1)
                     m_curP = m_p2;
                 else m_curP = m_p1;
@@ -387,6 +388,56 @@ void Game::start(bool initialisation) {
     } while (!m_endGame);
     cout << "LA PARTIE EST FINIE" << endl
          << "LE GAGNANT EST: " << m_curP;
+
+}
+
+void Game::startRobot(bool initialisation) {
+    if (initialisation)
+        init();
+
+
+    cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
+         << "Pour save une partie : 'SAVE'" << endl;
+    int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
+    string move("");
+
+
+    do {
+        cout << "*************************************************" << endl;
+
+
+        if (m_curP == WHITE)
+            cout << "Joueur: " << 1 << " a vous de jouer " << endl;
+        else
+            cout << "Joueur: " << 2 << " a vous de jouer " << endl;
+        affichage();
+        cout << endl;
+        getline(cin, move);
+        cout << move.substr(0, 4) << endl;
+
+       /* x_dep = (int) (move.at(0)) - 65;
+        y_dep = (int) (move.at(1)) - 48;
+        x_arr = (int) (move.at(2)) - 65;
+        y_arr = (int) (move.at(3)) - 48;*/
+
+
+        cout << "OK" << endl;
+        //Game::move(x_dep, y_dep, x_arr, y_arr);
+        chooseMove();
+        /*  vector<vector<int>> tmp = getCurrentPieces();
+          for(int i=0;i<tmp.size();i++){
+              Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
+              cout << "Piece "<<p->toString()<<endl;
+          }*/
+        if (m_curP == m_p1)
+            m_curP = m_p2;
+        else m_curP = m_p1;
+    } while (!m_endGame);
+
+    cout << "LA PARTIE EST FINIE" << endl
+         << "LE GAGNANT EST: " << m_curP;
+
 
 }
 

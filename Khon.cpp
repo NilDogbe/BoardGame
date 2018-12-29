@@ -3,6 +3,7 @@
 //
 
 #include "Khon.h"
+#include "GameChess.h"
 #include <cmath>
 
 using namespace std;
@@ -43,12 +44,40 @@ std::string Khon::toString() {
 
 std::vector<int> Khon::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
-/*
- * Todo leo
- */
+    if (this->getColor() == Game::WHITE) {
+        if (current_y < GameChess::SIZE - 1) {
+            res.push_back((current_y + 1) * GameChess::SIZE + current_x);
+            if (current_x < GameChess::SIZE - 1) {
+                res.push_back((current_y + 1) * GameChess::SIZE + (current_x + 1));
+                if(current_y > 0)
+                    res.push_back(current_y - 1 * GameChess::SIZE + current_x + 1);
+            }
+            if (current_x > 0) {
+                res.push_back((current_y + 1) * GameChess::SIZE + (current_x - 1));
+                if(current_y > 0)
+                    res.push_back(current_y - 1 * GameChess::SIZE + current_x - 1);
+            }
+        }
+    } else {
+        if (current_y > 0) {
+            res.push_back((current_y - 1) * GameChess::SIZE + current_x);
+            if (current_x < GameChess::SIZE - 1) {
+                res.push_back((current_y - 1) * GameChess::SIZE + (current_x + 1));
+                if(current_y > GameChess::SIZE - 1)
+                    res.push_back(current_y + 1 * GameChess::SIZE + current_x + 1);
+            }
+            if (current_x > 0) {
+                res.push_back((current_y - 1) * GameChess::SIZE + (current_x - 1));
+                if(current_y > GameChess::SIZE - 1)
+                    res.push_back(current_y + 1 * GameChess::SIZE + current_x - 1);
+            }
+        }
+    }
     return res;
 
 }
 
+
 Khon::Khon(int color) : Piece(color) {
+
 }

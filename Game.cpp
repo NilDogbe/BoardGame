@@ -71,27 +71,19 @@ bool Game::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 vector<int> Game::getPossibleMove(int current_x, int current_y) {
     vector<int> moves;
-    int nb_move = 0;
     // cout<< "ca vas dedans" <<endl;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
     if (current_piece != nullptr) {
         vector<int> res = current_piece->getPossibleMoves(current_x, current_y);
-        int s = res.size();
         for (int i = 0; i < res.size(); i++) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = tmp / m_size;
-            cout << "tmp = " << tmp;
-            cout << "x = " << x;
-            cout << "y = " << y << endl;
             if (movePiece(current_x, current_y, x, y)) {
-                cout << "La Piece " << current_piece->toString() << " peux aller " << x << " " << y << " ." << endl;
-                nb_move++;
                 moves.push_back(tmp);
             }
         }
     }
-    cout << "Il y a " << nb_move << " move possible." << endl;
     return moves;
 }
 
@@ -169,6 +161,26 @@ void Game::chooseMove() {
     cout << "random " << rand << endl;
 }
 
+void Game::getHelp(int current_x, int current_y){
+    int nb_move = 0;
+    Piece *current_piece = m_board.at(current_y * m_size + current_x);
+    vector<int> possible_move = getPossibleMove(current_x,current_y);
+
+    for (int i = 0; i < possible_move.size(); i++) {
+        int tmp = possible_move.at(i);
+        int x = tmp % m_size;
+        int y = tmp / m_size;
+        /*cout << "tmp = " << tmp;
+        cout << "x = " << x;
+        cout << "y = " << y << endl;*/
+
+        cout << "La Piece " << current_piece->toString() << " peux aller en " << x << " " << y << " ." << endl;
+        nb_move++;
+    }
+    cout << "Il y a " << nb_move << " move possible." << endl;
+
+}
+
 void Game::startTest(int idTest) {
     string idBalise{"<" + m_name + ">\r"};
     init();
@@ -185,7 +197,7 @@ void Game::startTest(int idTest) {
         // cout<<"endgame:aaaaaaaaaaaaaaaa0 "<<m_endGame;
 
         getline(cin, sens);
-        getPossibleMove(vector[acc][0], vector[acc][1]);
+        //getPossibleMove(vector[acc][0], vector[acc][1]);
         // cout<<"endgame:aaaaaaaaaaaaaaaa2 "<<m_endGame;
 
         move(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
@@ -354,7 +366,7 @@ void Game::start(bool initialisation) {
                     if (x_help < 0 || x_help >= m_size || y_help < 0 || y_help >= m_size)
                         cout << "Hors limite recommencez" << endl;
                     else
-                        getPossibleMove(x_help, y_help);
+                        getHelp(x_help, y_help);
                     /* cout << "HELP:"<<x_help<<y_help<<endl;
                      cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
                 }

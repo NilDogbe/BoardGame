@@ -3,6 +3,7 @@
 //
 
 #include "Seed.h"
+#include "GameChess.h"
 #include <iostream>
 #include <cmath>
 
@@ -16,7 +17,7 @@ Seed::Seed(int color) : Piece(color) {
 Seed::Seed(const Piece *p) : Piece{p} {
 }
 
-Piece* Seed::copy() {
+Piece *Seed::copy() {
     return new Seed(this);
 }
 
@@ -42,9 +43,22 @@ void Seed::setTravel(int x_dep, int y_dep, int x_arr, int y_arr) {
 
 std::vector<int> Seed::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
-/*
- * Todo leo
- */
+    if (current_y > 0) {
+        if (current_x > 0) {
+            res.push_back(current_y - 1 * GameChess::SIZE + current_x - 1);
+        }
+        if (current_x < GameChess::SIZE - 1) {
+            res.push_back(current_y - 1 * GameChess::SIZE + current_x + 1);
+        }
+    }
+    if (current_y < GameChess::SIZE - 1) {
+        if (current_x > 0) {
+            res.push_back(current_y + 1 * GameChess::SIZE + current_x - 1);
+        }
+        if (current_x < GameChess::SIZE - 1) {
+            res.push_back(current_y + 1 * GameChess::SIZE + current_x + 1);
+        }
+    }
     return res;
 }
 

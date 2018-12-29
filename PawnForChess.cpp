@@ -24,7 +24,7 @@ Piece* PawnForChess::copy() {
 int PawnForChess::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
     //cout << "Mouvemment Piont " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
-    if (m_color == Game::WHITE) {
+    if (m_color == Game::BLACK) {
         //  cout << "15 P" << endl;
 
         if ((abs(x_dep - x_arr) == 1) && (y_dep - y_arr == 1)) {

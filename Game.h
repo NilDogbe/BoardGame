@@ -48,7 +48,7 @@ public:
     void startTest(int id);
     void continueParty(int id);
     void startRobot(bool initialisation);
-
+    void getHelp(int current_x, int current_y);
 
     //Game* initWithFile(std::string file);
     void back();

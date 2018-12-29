@@ -8,17 +8,16 @@
 #include "Game.h"
 
 class GameDame : public Game {
-
+private:
+    bool forceToEat;
 protected:
     virtual void init();
 public:
-    void checkPawnTransform(int x, int y);
     const static int SIZE = 10;
     GameDame();
-    //GameDame(std::string fileName, int id);
-    //GameDame(int id_test);
-    //void startTest(int id_test);
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
+    void checkPawnTransform(int x, int y);
+    void setForceToEat(bool forceToEat);
 };
 
 

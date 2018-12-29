@@ -102,6 +102,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
         move.setPieceMove(piece_dep->copy());
         move.setDep(x_dep, y_dep);
         move.setArr(x_arr, y_arr);
+        move.setCurP(m_curP);
         cout << m_name << " ," << GAME_MAKRUK << endl;
         if (m_name.compare(Game::GAME_CHESS) == 0 || m_name.compare(Game::GAME_MAKRUK) == 0) {
             if (piece_dep->toString() == "P")
@@ -141,19 +142,21 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 for (int i{0}; i < moves.size(); i++) {
                     piece_dep->setTravel(x_arr, y_arr, moves[i] % m_size, moves[i] / m_size);
                     travel = piece_dep->getTravel();
-                    bool sortir{false};
                     for (int j{0}; j < travel.size(); j++) {
                         if (m_board.at(travel.at(j)) != nullptr &&
                             m_board.at(travel.at(j))->getColor() != piece_dep->getColor()) {
                             changeCurP = false;
+                            ((GameDame *) this)->setForceToEat(true);
                             cout << "TU PEUX RE MANGER" << endl;
-                            sortir = true;
                             break;
                         }
                     }
-                    if (sortir)
+                    if (!changeCurP)
                         break;
                 }
+
+                if (changeCurP)
+                    ((GameDame *) this)->setForceToEat(false);
             }
         }
 
@@ -218,7 +221,7 @@ void Game::getHelp(int current_x, int current_y) {
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<" + m_name + ">\r"};
+    string idBalise{"<"+m_name+">\r"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
@@ -258,6 +261,8 @@ void Game::save() {
     if (fichier) {
         fichier << "<" << m_name << ">" << "\n";
 
+        fichier << m_nbrPlayers << "\n";
+
         if (m_curP == WHITE)
             fichier << "WHITE\n";
         else
@@ -275,10 +280,10 @@ void Game::save() {
                     fichier << "B";
 
                 if (p->toString().compare("P") == 0) {
-                    if (((PawnForChess *) p)->getFirstMove())
+                    if (((PawnForChess*)p)->getFirstMove())
                         fichier << "T";
                     else
-                        fichier << "F";
+                        fichier<< "F";
                 }
             } else
                 fichier << "N";
@@ -298,12 +303,15 @@ void Game::continueParty(int id) {
     string fileName{"../Game_Processing/save.txt"};
     vector<string> vector{Parser::getLines(fileName)};
 
+    int nbrPlayers{0};
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + m_name + ">") == 0) || (s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
-            for (int j{0}; j < 2; j++) {
+        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
+            for (int j{0}; j < 3; j++) {
                 s = vector.at(i + j + 1);
-                if (j == 0) {
+                if (j == 0)
+                    nbrPlayers = std::atoi(s.c_str());
+                else if(j == 1) {
                     if (s.compare("WHITE") == 0)
                         m_curP = WHITE;
                     else
@@ -364,15 +372,16 @@ void Game::continueParty(int id) {
             id--;
     }
 
-    if (id == -1)
-        start(false, true); //TODO Rhodier
+    cout << "AAA " << nbrPlayers << endl;
+    start(false, nbrPlayers);
 }
 
 void Game::start(bool initialisation, int nbrP) {
+    m_nbrPlayers = nbrP;
     if (initialisation)
         init();
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece taper (A1) : 'HELP A1' " << endl
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
          << "Pour save une partie : 'SAVE'" << endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
@@ -387,7 +396,6 @@ void Game::start(bool initialisation, int nbrP) {
         else
             cout << "Joueur: " << 2 << " a vous de jouer " << endl;
         affichage();
-
         cout << endl;
         if (nbrP == 1 && m_curP == BLACK) {
             chooseMove();
@@ -506,10 +514,7 @@ void Game::back() {
         if (move.getPieceDelete() != nullptr)
             m_board[move.getYDel() * m_size + move.getXDel()] = move.getPieceDelete()->copy();
 
-        if (m_curP == m_p1)
-            m_curP = m_p2;
-        else
-            m_curP = m_p1;
+        m_curP = move.getCurP();
     }
 }
 
@@ -519,9 +524,9 @@ int Game::getNumberSave(string game) {
     int nbr{0};
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (s.compare("<" + game + ">") == 0 || s.compare("<" + game + ">\r") == 0)
-            nbr++;
+        if (s.compare("<" + game + ">") == 0||s.compare("<" + game + ">\r") == 0)
+        nbr++;
     }
-
+    
     return nbr;
 }

@@ -39,6 +39,10 @@ int Move::getYDel() const {
     return y_del;
 }
 
+int Move::getCurP() const {
+    return curP;
+}
+
 void Move::setPieceMove(Piece* p) {
     piece_move = p;
 }
@@ -60,4 +64,8 @@ void Move::setArr(int x, int y) {
 void Move::setDel(int x, int y) {
     x_del = x;
     y_del = y;
+}
+
+void Move::setCurP(int p) {
+    curP = p;
 }

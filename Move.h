@@ -14,6 +14,7 @@ private:
     int x_dep, y_dep;
     int x_arr, y_arr;
     int x_del, y_del;
+    int curP;
 public:
     Move();
     Piece* getPieceMove() const;
@@ -24,11 +25,13 @@ public:
     int getYArr() const;
     int getXDel() const;
     int getYDel() const;
+    int getCurP() const;
     void setPieceMove(Piece*);
     void setPieceDelete(Piece*);
     void setDep(int x, int y);
     void setArr(int x, int y);
     void setDel(int x, int y);
+    void setCurP(int);
 };
 
 

@@ -10,8 +10,7 @@
 
 using namespace std;
 
-GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
-
+GameDame::GameDame() : Game{SIZE, Game::GAME_DAME}, forceToEat{false} {
 }
 
 void GameDame::init() {
@@ -58,7 +57,7 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                 if (m_board[*it] != nullptr)
                     nbr_pieces += 1;
             bool move{false};
-            if (canMove == 1 && nbr_pieces == 0) {
+            if (canMove == 1 && nbr_pieces == 0 && !forceToEat) {
                 std::cout << "3" << std::endl;
                 if (arr == nullptr) {
                     move = true;
@@ -84,3 +83,6 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     return false;
 }
 
+void GameDame::setForceToEat(bool forceToEat) {
+    this->forceToEat = forceToEat;
+}

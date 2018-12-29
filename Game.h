@@ -11,6 +11,7 @@
 
 class Game {
 private:
+    int m_nbrPlayers;
 protected:
     std::string m_name;
     const int m_size;

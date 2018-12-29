@@ -79,6 +79,9 @@ vector<int> Game::getPossibleMove(int current_x, int current_y) {
             int tmp = res.at(i);
             int x = tmp % m_size;
             int y = tmp / m_size;
+            /*cout << "tmp = " << tmp;
+            cout << "x = " << x;
+            cout << "y = " << y << endl;*/
             if (movePiece(current_x, current_y, x, y)) {
                 moves.push_back(tmp);
             }
@@ -122,7 +125,6 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                     break;
                 }
             }
-
             cout << "Les dames c'est trop bien" << endl;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
@@ -161,10 +163,10 @@ void Game::chooseMove() {
     cout << "random " << rand << endl;
 }
 
-void Game::getHelp(int current_x, int current_y){
+void Game::getHelp(int current_x, int current_y) {
     int nb_move = 0;
     Piece *current_piece = m_board.at(current_y * m_size + current_x);
-    vector<int> possible_move = getPossibleMove(current_x,current_y);
+    vector<int> possible_move = getPossibleMove(current_x, current_y);
 
     for (int i = 0; i < possible_move.size(); i++) {
         int tmp = possible_move.at(i);
@@ -334,8 +336,8 @@ void Game::start(bool initialisation) {
     if (initialisation)
         init();
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " <<endl
-         << "Pour save une partie : 'SAVE'" <<endl;
+         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
+         << "Pour save une partie : 'SAVE'" << endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
 
@@ -370,13 +372,11 @@ void Game::start(bool initialisation) {
                     /* cout << "HELP:"<<x_help<<y_help<<endl;
                      cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
                 }
-            }
-            else if (move.substr(0, 4).compare("SAVE") == 0){
+            } else if (move.substr(0, 4).compare("SAVE") == 0) {
                 save();
             } else if (move.substr(0, 4).compare("BACK") == 0) {
                 back();
-            }
-            else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
+            } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
                 cout << "MOUVEMENT IMPOSSIBLE" << endl;
                 cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
                 cout << "Recommencez :" << endl;
@@ -428,10 +428,10 @@ void Game::startRobot(bool initialisation) {
         getline(cin, move);
         cout << move.substr(0, 4) << endl;
 
-       /* x_dep = (int) (move.at(0)) - 65;
-        y_dep = (int) (move.at(1)) - 48;
-        x_arr = (int) (move.at(2)) - 65;
-        y_arr = (int) (move.at(3)) - 48;*/
+        /* x_dep = (int) (move.at(0)) - 65;
+         y_dep = (int) (move.at(1)) - 48;
+         x_arr = (int) (move.at(2)) - 65;
+         y_arr = (int) (move.at(3)) - 48;*/
 
 
         cout << "OK" << endl;

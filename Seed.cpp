@@ -45,18 +45,18 @@ std::vector<int> Seed::getPossibleMoves(int current_x, int current_y) {
     vector<int> res;
     if (current_y > 0) {
         if (current_x > 0) {
-            res.push_back(current_y - 1 * GameChess::SIZE + current_x - 1);
+            res.push_back((current_y - 1 )* GameChess::SIZE + current_x - 1);
         }
         if (current_x < GameChess::SIZE - 1) {
-            res.push_back(current_y - 1 * GameChess::SIZE + current_x + 1);
+            res.push_back((current_y - 1) * GameChess::SIZE + current_x + 1);
         }
     }
     if (current_y < GameChess::SIZE - 1) {
         if (current_x > 0) {
-            res.push_back(current_y + 1 * GameChess::SIZE + current_x - 1);
+            res.push_back((current_y + 1) * GameChess::SIZE + current_x - 1);
         }
         if (current_x < GameChess::SIZE - 1) {
-            res.push_back(current_y + 1 * GameChess::SIZE + current_x + 1);
+            res.push_back((current_y + 1) * GameChess::SIZE + current_x + 1);
         }
     }
     return res;

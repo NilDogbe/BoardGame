@@ -22,17 +22,13 @@ protected:
     int m_idTest;
 
     Game(int size, std::string name);
-    //Game(std::string fileName, int id, int size,  std::string name);
-    //Game(std::string fileName, int id, int size,  std::string name);
-
     virtual void init() = 0;
-
-    const static std::string GAME_DAME;
-    const static std::string GAME_CHESS;
 
     std::vector<Move> moves;
 
 public:
+    const static std::string GAME_DAME;
+    const static std::string GAME_CHESS;
     const static int BLACK = 31;
     const static int WHITE = 30;
     virtual void affichage();
@@ -52,6 +48,7 @@ public:
 
     //Game* initWithFile(std::string file);
     void back();
+    static int getNumberSave(std::string);
 };
 
 

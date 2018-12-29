@@ -94,6 +94,7 @@ vector<int> Game::getPossibleMove(int current_x, int current_y) {
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Dans move " << m_name << endl;
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
+        bool changeCurP{true};
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
         Piece *piece_arr = m_board.at(y_arr * m_size + x_arr);
         Move move;
@@ -115,13 +116,15 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 move.setDel(x_arr, y_arr);
             }
         } else if (m_name.compare(Game::GAME_DAME) == 0) {
+            bool manger{false};
             vector<int> travel = piece_dep->getTravel();
-            for (int i = 0; i < travel.size(); i++) {
+            for (int i{0}; i < travel.size(); i++) {
                 if (m_board.at(travel.at(i)) != nullptr) {
                     cout << "Les dames ca fait peur" << endl;
                     move.setPieceDelete(m_board.at(travel.at(i))->copy());
                     move.setDel(travel.at(i) % m_size, travel.at(i) / m_size);
                     m_board.at(travel.at(i)) = nullptr;
+                    manger = true;
                     break;
                 }
             }
@@ -129,12 +132,36 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
+
+            if (manger) {
+                vector<int> moves = getPossibleMove(x_arr, y_arr);
+                for (int i{0}; i < moves.size(); i++) {
+                    piece_dep->setTravel(x_arr, y_arr, moves[i] % m_size, moves[i] / m_size);
+                    travel = piece_dep->getTravel();
+                    bool sortir{false};
+                    for (int j{0}; j < travel.size(); j++) {
+                        if (m_board.at(travel.at(j)) != nullptr &&
+                            m_board.at(travel.at(j))->getColor() != piece_dep->getColor()) {
+                            changeCurP = false;
+                            cout << "TU PEUX RE MANGER" << endl;
+                            sortir = true;
+                            break;
+                        }
+                    }
+                    if (sortir)
+                        break;
+                }
+            }
         }
 
         moves.push_back(move);
+        if (changeCurP) {
+            if (m_curP == m_p1)
+                m_curP = m_p2;
+            else m_curP = m_p1;
+        }
     }
 }
-
 
 vector<vector<int>> Game::getCurrentPieces() {
     vector<vector<int>> res;
@@ -184,7 +211,7 @@ void Game::getHelp(int current_x, int current_y) {
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<" + m_name + ">\r"};
+    string idBalise{"<"+m_name+">\r"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
@@ -241,10 +268,10 @@ void Game::save() {
                     fichier << "B";
 
                 if (p->toString().compare("P") == 0) {
-                    if (((PawnForChess *) p)->getFirstMove())
+                    if (((PawnForChess*)p)->getFirstMove())
                         fichier << "T";
                     else
-                        fichier << "F";
+                        fichier<< "F";
                 }
             } else
                 fichier << "N";
@@ -266,7 +293,7 @@ void Game::continueParty(int id) {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + m_name + ">") == 0) || (s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
+        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -306,9 +333,10 @@ void Game::continueParty(int id) {
                                     p = new Knight(color);
                                     break;
                                 case 'P':
-                                    p = new PawnForChess(color);
-                                    if (token.at(2) == 'F')
-                                        ((PawnForChess *) p)->setFirstMove();
+                                    if (token.at(2) == 'T')
+                                        p = new PawnForChess(color, true);
+                                    else
+                                        p = new PawnForChess(color, false);
                                     break;
                                 case 'Q':
                                     p = new Queen(color);
@@ -329,7 +357,8 @@ void Game::continueParty(int id) {
             id--;
     }
 
-    start(false);
+    if (id == -1)
+        start(false);
 }
 
 void Game::start(bool initialisation) {
@@ -391,9 +420,6 @@ void Game::start(bool initialisation) {
                       Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
                       cout << "Piece "<<p->toString()<<endl;
                   }*/
-                if (m_curP == m_p1)
-                    m_curP = m_p2;
-                else m_curP = m_p1;
             }
         } else cout << "Pas Compris 2!" << endl;
 
@@ -465,10 +491,18 @@ void Game::back() {
         m_board[move.getYArr() * m_size + move.getXArr()] = nullptr;
         if (move.getPieceDelete() != nullptr)
             m_board[move.getYDel() * m_size + move.getXDel()] = move.getPieceDelete()->copy();
-
-        if (m_curP == m_p1)
-            m_curP = m_p2;
-        else
-            m_curP = m_p1;
     }
+}
+
+int Game::getNumberSave(string game) {
+    string fileName{"../Game_Processing/save.txt"};
+    vector<string> vector{Parser::getLines(fileName)};
+    int nbr{0};
+    for (int i{0}; i < vector.size(); i++) {
+        string s = vector.at(i);
+        if (s.compare("<" + game + ">") == 0||s.compare("<" + game + ">\r") == 0)
+        nbr++;
+    }
+    
+    return nbr;
 }

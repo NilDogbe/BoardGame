@@ -34,43 +34,9 @@ void GameDame::init() {
     m_board[9 * SIZE + 7] = nullptr;
 }
 
-/*bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
-    if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
-        Piece *dep = m_board[y_dep * SIZE + x_dep];
-        Piece *arr = m_board[y_arr * SIZE + x_arr];
-        std::cout << "1" << std::endl;
-        if (arr == nullptr) {
-            std::cout << "2" << std::endl;
-            if (dep->canMove(x_dep, y_dep, x_arr, y_arr) == 1) {
-                dep->setTravel(x_dep, y_dep, x_arr, y_arr);
-                int nbr_pieces{0};
-                vector<int> v = dep->getTravel();
-                for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-                    if (m_board[*it] != nullptr)
-                        nbr_pieces += 1;
-                std::cout << "3" << std::endl;
-                if (nbr_pieces <= 1) {
-                    if (nbr_pieces == 0) {
-                        std::cout << "bouger" << std::endl;
-                    } else if (nbr_pieces == 1) {
-                        int i = dep->getTravel().back();
-                        m_board[i] = nullptr;
-                        std::cout << "manger" << std::endl;
-                    }
-                    m_board[y_dep * SIZE + x_dep] = nullptr;
-                    m_board[y_arr * SIZE + x_arr] = dep;
-                    checkPawnTransform(x_arr, y_arr);
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-}*/
-
 void GameDame::checkPawnTransform(int x, int y) {
-    if ((m_curP == Game::WHITE && y == SIZE - 1) || (m_curP == Game::BLACK && y == 0)) {
+    if ((m_board[y * SIZE + x]->getColor() == Game::WHITE && y == SIZE - 1)
+        || (m_board[y * SIZE + x]->getColor() == Game::BLACK && y == 0)) {
         Piece *p = m_board[y * SIZE + x];
         m_board[y * SIZE + x] = new DameForDame(p);
         delete p;
@@ -100,8 +66,9 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                 }
             } else if (canMove == 2 || nbr_pieces == 1) {
                 vector<int> travel = dep->getTravel();
-                for(int i = 0;i<travel.size();i++) {
-                    if (m_board.at(travel.at(i)) != nullptr && m_board.at(travel.at(i))->getColor() != dep->getColor()) {
+                for (int i = 0; i < travel.size(); i++) {
+                    if (m_board.at(travel.at(i)) != nullptr &&
+                        m_board.at(travel.at(i))->getColor() != dep->getColor()) {
                         move = true;
                         break;
                     }

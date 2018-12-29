@@ -95,13 +95,9 @@ cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
 vector<string> Parser::getLines(string fileName) {
     ifstream fichier(fileName, ios::in);
     vector<string> vector;
-    cout << "eeee"<<endl ;
 
     if (fichier) {
         string s;
-        cout << "eeee" ;
-
-
         while (getline(fichier, s)) {
             vector.push_back(s);
         }

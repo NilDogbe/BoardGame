@@ -14,7 +14,7 @@ using namespace std;
 PawnForChess::PawnForChess(int color) : Piece(color) {
 }
 
-PawnForChess::PawnForChess(const Piece *p) : Piece{p} {
+PawnForChess::PawnForChess(const Piece *p) : Piece{p}, m_firstMove{((PawnForChess*)p)->m_firstMove} {
 }
 
 Piece* PawnForChess::copy() {

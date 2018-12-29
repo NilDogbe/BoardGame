@@ -131,6 +131,9 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
         }
 
+        cout << endl << "endgame: " << m_endGame << endl;
+        cout << x_dep << "," << y_dep << " -> "
+             << x_arr << "," << y_arr << endl;
         moves.push_back(move);
     }
 }
@@ -205,10 +208,10 @@ void Game::startTest(int idTest) {
         move(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
         // cout<<"endgame:aaaaaaaaaaaaaaaa3 "<<m_endGame;
         affichage();
-        cout << endl << "endgame: " << m_endGame << endl;
+        /*cout << endl << "endgame: " << m_endGame << endl;
         cout << vector[acc][0] << "," << vector[acc][1] << " -> "
-             << vector[acc][2] << "," << vector[acc][3] << endl
-             << " numCoup" << acc << endl;
+             << vector[acc][2] << "," << vector[acc][3] << endl*/
+        cout << " numCoup" << acc << endl;
         acc++;
 
 

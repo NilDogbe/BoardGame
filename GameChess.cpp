@@ -18,7 +18,7 @@
 
 using namespace std;
 
-GameChess::GameChess() : Game(SIZE, GAME_CHESS) {
+GameChess::GameChess() : Game(SIZE, GAME_CHESS){
 }
 
 void GameChess::init() {

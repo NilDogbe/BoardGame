@@ -11,7 +11,8 @@
 using namespace std;
 
 
-GameMakruk::GameMakruk():GameChess(){
+GameMakruk::GameMakruk():GameChess() {
+    m_name = "Makruk";
 }
 
 void GameMakruk::init(){

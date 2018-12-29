@@ -21,6 +21,7 @@ using namespace std;
 
 string const Game::GAME_DAME = "Dame";
 string const Game::GAME_CHESS = "Chess";
+string const Game::GAME_MAKRUK = "Makruk";
 
 Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
@@ -101,7 +102,8 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
         move.setPieceMove(piece_dep->copy());
         move.setDep(x_dep, y_dep);
         move.setArr(x_arr, y_arr);
-        if (m_name.compare(Game::GAME_CHESS) == 0) {
+        cout << m_name << " ," << GAME_MAKRUK << endl;
+        if (m_name.compare(Game::GAME_CHESS) == 0 || m_name.compare(Game::GAME_MAKRUK) == 0) {
             if (piece_dep->toString() == "P")
                 ((PawnForChess *) piece_dep)->setFirstMove();
             if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
@@ -128,6 +130,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                     break;
                 }
             }
+
             cout << "Les dames c'est trop bien" << endl;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
@@ -165,6 +168,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
         }
     }
 }
+
 
 vector<vector<int>> Game::getCurrentPieces() {
     vector<vector<int>> res;
@@ -214,7 +218,7 @@ void Game::getHelp(int current_x, int current_y) {
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<"+m_name+">\r"};
+    string idBalise{"<" + m_name + ">\r"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
@@ -271,10 +275,10 @@ void Game::save() {
                     fichier << "B";
 
                 if (p->toString().compare("P") == 0) {
-                    if (((PawnForChess*)p)->getFirstMove())
+                    if (((PawnForChess *) p)->getFirstMove())
                         fichier << "T";
                     else
-                        fichier<< "F";
+                        fichier << "F";
                 }
             } else
                 fichier << "N";
@@ -296,7 +300,7 @@ void Game::continueParty(int id) {
 
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
+        if (((s.compare("<" + m_name + ">") == 0) || (s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 2; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0) {
@@ -361,14 +365,14 @@ void Game::continueParty(int id) {
     }
 
     if (id == -1)
-        start(false);
+        start(false, true); //TODO Rhodier
 }
 
-void Game::start(bool initialisation) {
+void Game::start(bool initialisation, int nbrP) {
     if (initialisation)
         init();
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
-         << "Pour avoir la liste des coups d'une piece tapper (A1) : 'HELP A1' " << endl
+         << "Pour avoir la liste des coups d'une piece taper (A1) : 'HELP A1' " << endl
          << "Pour save une partie : 'SAVE'" << endl;
     int x_dep(-1), y_dep(-1), x_arr(-1), y_arr(-1), x_help(-1), y_help(-1);
     string move("");
@@ -383,48 +387,56 @@ void Game::start(bool initialisation) {
         else
             cout << "Joueur: " << 2 << " a vous de jouer " << endl;
         affichage();
+
         cout << endl;
-        getline(cin, move);
-        cout << move.substr(0, 4) << endl;
-        if (move.size() == 4 || move.size() == 7) {
+        if (nbrP == 1 && m_curP == BLACK) {
+            chooseMove();
+        } else {
+            getline(cin, move);
+            cout << move.substr(0, 4) << endl;
+            if (move.size() == 4 || move.size() == 7) {
 
-            x_dep = (int) (move.at(0)) - 65;
-            y_dep = (int) (move.at(1)) - 48;
-            x_arr = (int) (move.at(2)) - 65;
-            y_arr = (int) (move.at(3)) - 48;
+                x_dep = (int) (move.at(0)) - 65;
+                y_dep = (int) (move.at(1)) - 48;
+                x_arr = (int) (move.at(2)) - 65;
+                y_arr = (int) (move.at(3)) - 48;
 
-            if (move.substr(0, 4).compare("HELP") == 0) {
-                if (move.size() == 7) {
-                    x_help = (int) (move.at(5)) - 65;
-                    y_help = (int) (move.at(6)) - 48;
-                    if (x_help < 0 || x_help >= m_size || y_help < 0 || y_help >= m_size)
-                        cout << "Hors limite recommencez" << endl;
-                    else
-                        getHelp(x_help, y_help);
-                    /* cout << "HELP:"<<x_help<<y_help<<endl;
-                     cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
+                if (move.substr(0, 4).compare("HELP") == 0) {
+                    if (move.size() == 7) {
+                        x_help = (int) (move.at(5)) - 65;
+                        y_help = (int) (move.at(6)) - 48;
+                        if (x_help < 0 || x_help >= m_size || y_help < 0 || y_help >= m_size)
+                            cout << "Hors limite recommencez" << endl;
+                        else
+                            getHelp(x_help, y_help);
+                        /* cout << "HELP:"<<x_help<<y_help<<endl;
+                         cout << "HELP:"<<x_help<<y_help<< move.size()<<endl;*/
+                    }
+                } else if (move.substr(0, 4).compare("SAVE") == 0) {
+                    save();
+                } else if (move.substr(0, 4).compare("BACK") == 0) {
+                    back();
+                } else if (move.substr(0, 4).compare("QUIT") == 0) {
+                    break;
+
+                } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
+                    cout << "MOUVEMENT IMPOSSIBLE" << endl;
+                    cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
+                    cout << "Recommencez :" << endl;
+                } else if (getColor(x_dep, y_dep) != m_curP) {
+                    cout << "Recommencez ce n'est pas votre couleur:" << endl;
+                } else {
+                    cout << "OK" << endl;
+                    Game::move(x_dep, y_dep, x_arr, y_arr);
+                    //  chooseMove();
+                    /*  vector<vector<int>> tmp = getCurrentPieces();
+                      for(int i=0;i<tmp.size();i++){
+                          Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
+                          cout << "Piece "<<p->toString()<<endl;
+                      }*/
                 }
-            } else if (move.substr(0, 4).compare("SAVE") == 0) {
-                save();
-            } else if (move.substr(0, 4).compare("BACK") == 0) {
-                back();
-            } else if (!movePiece(x_dep, y_dep, x_arr, y_arr)) {
-                cout << "MOUVEMENT IMPOSSIBLE" << endl;
-                cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl;
-                cout << "Recommencez :" << endl;
-            } else if (getColor(x_dep, y_dep) != m_curP) {
-                cout << "Recommencez ce n'est pas votre couleur:" << endl;
-            } else {
-                cout << "OK" << endl;
-                Game::move(x_dep, y_dep, x_arr, y_arr);
-                //  chooseMove();
-                /*  vector<vector<int>> tmp = getCurrentPieces();
-                  for(int i=0;i<tmp.size();i++){
-                      Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
-                      cout << "Piece "<<p->toString()<<endl;
-                  }*/
-            }
-        } else cout << "Pas Compris 2!" << endl;
+            } else cout << "Pas Compris 2!" << endl;
+        }
 
     } while (!m_endGame);
     cout << "LA PARTIE EST FINIE" << endl
@@ -432,9 +444,8 @@ void Game::start(bool initialisation) {
 
 }
 
-void Game::startRobot(bool initialisation) {
-    if (initialisation)
-        init();
+void Game::startRobot() {
+    init();
 
 
     cout << "Exemple de coup: 'A1A2' -> Piont A1 se deplace en A2 " << endl
@@ -494,6 +505,11 @@ void Game::back() {
         m_board[move.getYArr() * m_size + move.getXArr()] = nullptr;
         if (move.getPieceDelete() != nullptr)
             m_board[move.getYDel() * m_size + move.getXDel()] = move.getPieceDelete()->copy();
+
+        if (m_curP == m_p1)
+            m_curP = m_p2;
+        else
+            m_curP = m_p1;
     }
 }
 
@@ -503,9 +519,9 @@ int Game::getNumberSave(string game) {
     int nbr{0};
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (s.compare("<" + game + ">") == 0||s.compare("<" + game + ">\r") == 0)
-        nbr++;
+        if (s.compare("<" + game + ">") == 0 || s.compare("<" + game + ">\r") == 0)
+            nbr++;
     }
-    
+
     return nbr;
 }

@@ -11,8 +11,8 @@
 
 class Game {
 private:
-    const std::string m_name;
 protected:
+    std::string m_name;
     const int m_size;
     std::vector<Piece *> m_board;
     const int m_p1 = WHITE;
@@ -29,6 +29,7 @@ protected:
 public:
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
+    const static std::string GAME_MAKRUK;
     const static int BLACK = 31;
     const static int WHITE = 30;
     virtual void affichage();
@@ -36,14 +37,14 @@ public:
     //void startTest(int idTest, std::string idBalise);
     std::vector<int> getPossibleMove(int current_x, int current_y);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
-    void start(bool);
+    void start(bool init, int nbrP);
     int getColor(int x, int y);
     std::vector<std::vector<int>> getCurrentPieces();
     void chooseMove();
     void save();
     void startTest(int id);
     void continueParty(int id);
-    void startRobot(bool initialisation);
+    void startRobot();
     void getHelp(int current_x, int current_y);
 
     //Game* initWithFile(std::string file);

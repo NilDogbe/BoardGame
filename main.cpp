@@ -21,13 +21,12 @@ int nbrTest(string x) {
 
 string realName(string x) {
     if (x.compare("e") == 0)
-        return "ECHEC";
+        return Game::GAME_CHESS;
     else if (x.compare("d") == 0)
-        return "DAME";
+        return Game::GAME_DAME;
     else if (x.compare("m") == 0)
-        return "MAKRUK";
+        return Game::GAME_MAKRUK;
 }
-
 
 
 int main() {
@@ -63,7 +62,8 @@ int main() {
                      << "Pour quitter les test: 'retour'" << endl;
                 do {
                     getline(cin, nameGame);
-                    if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") == 0 || nameGame.compare("x") == 0) {
+                    if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") == 0 ||
+                        nameGame.compare("x") == 0) {
                         cout << "***********************************************" << endl
                              << "Choisir un test " << realName(nameGame) << " entre 1(compris) et " << nbrTest(nameGame)
                              << "(compris)"
@@ -81,7 +81,7 @@ int main() {
 
                     getline(cin, action);
                     if (std::atoi(action.c_str()) == 0) {
-                        cout << "IMPOSSIBLE: choisir un nombre entre 1 et "<< nbrTest(nameGame) << endl;
+                        cout << "IMPOSSIBLE: choisir un nombre entre 1 et " << nbrTest(nameGame) << endl;
                     } else break;
                 } while (1);
 
@@ -91,7 +91,8 @@ int main() {
                 idTest = std::atoi(action.c_str()) - 1;
                 cout << "idTest:" << idTest << endl;
 
-                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") || nameGame.compare("x") ) {
+                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") ||
+                    nameGame.compare("x")) {
                     if (idTest <= nbrTest(nameGame) && idTest > -1) {
                         cout << "Bonsoir" << endl;
                         if (nameGame.compare("e") == 0) {
@@ -100,12 +101,10 @@ int main() {
                         } else if (nameGame.compare("d") == 0) {
                             g = new GameDame();
                             g->startTest(idTest);
-                        }
-                        else if(nameGame.compare("m") == 0) {
+                        } else if (nameGame.compare("m") == 0) {
                             g = new GameMakruk();
                             g->startTest(idTest);
-                        }
-                        else if(nameGame.compare("x") == 0) {
+                        } else if (nameGame.compare("x") == 0) {
                             //TODO
                         }
                         break;
@@ -123,11 +122,11 @@ int main() {
                  << "Echec tappez : 'e'" << endl
                  << "Dame tappez : 'd'" << endl
                  << "Makruk tappez : 'm'" << endl
-                    << "Revenir en arriere : 'retour'" << endl;
+                 << "Revenir en arriere : 'retour'" << endl;
             getline(cin, nameGame);
             //cin.ignore();
             if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0
-            || nameGame.compare("m") == 0 || nameGame.compare("x") == 0 ) {
+                || nameGame.compare("m") == 0 || nameGame.compare("x") == 0) {
                 cout << "**********************************************" << endl
                      << "Binvenue dans " << realName(nameGame) << endl
                      << "Nouvelle partie : 'new'" << endl
@@ -136,25 +135,54 @@ int main() {
 
                 do {
                     getline(cin, action);
-                    if (action.compare("new") == 0) {
-                        cout << "ici";
-                        cout << nameGame;
-                        if (nameGame.compare("e") == 0){
-                            Game *e = new GameChess();
-                            e->start(true);
-                        }
-
-                        break;
-                    } else if (action.compare("char") == 0) {
-
+                    if (action.compare("new") == 0) {   // && (nameGame.compare("e") == 0)) {
+                        cout << "Coisir le nombre de joueur 1 ou 2" << endl;
                         do {
-                            cout << "***********************************************" << endl
-                                 << "Choisir un Char echec entre 1(compris) et " << Parser::NBR_TEST_CHESS + 1
-                                 << "(compris)"
-                                 << endl;
+                            int nbrP = -1;
                             getline(cin, action);
                             if (std::atoi(action.c_str()) == 0) {
-                                cout << "tapper un nombre supp " << endl;
+                                cout << "tapper un nombre supp a 0" << endl;
+                            } else {
+
+                                nbrP = std::atoi(action.c_str());
+                                cout << "nbrP:" << nbrP << endl;
+
+                            }
+
+
+                            if (nameGame.compare("e") == 0 && (nbrP == 1 || nbrP == 2)) {
+                                Game *e = new GameChess();
+                                e->start(true, nbrP);
+                                return 1;
+                            } else if (nameGame.compare("d") == 0 && (nbrP == 1 || nbrP == 2)) {
+                                Game *e = new GameDame();
+                                e->start(true, nbrP);
+                                return 1;
+                            } else if (nameGame.compare("m") == 0 && (nbrP == 1 || nbrP == 2)) {
+                                Game *e = new GameMakruk();
+                                e->start(true, nbrP);
+                                return 1;
+                            } else if (nameGame.compare("x") == 0 && (nbrP == 1 || nbrP == 2)) {
+                                Game *e = new GameDame();
+                                e->start(true, nbrP);
+                                return 1;
+                            } else {
+                                cout << "Recommencer!";
+                            }
+
+                        } while (1);
+
+                    } else if (action.compare("char") == 0) {
+                        cout << "***********************************************" << endl
+                             << "Choisir un Char" << realName(nameGame) << "entre 1(compris) et "
+                             << Game::getNumberSave(nameGame)
+                             << "(compris)"
+                             << endl;
+
+                        do {
+                            getline(cin, action);
+                            if (std::atoi(action.c_str()) == 0) {
+                                cout << "tapper un nombre supp a 0" << endl;
                             } else {
 
                                 idChar = std::atoi(action.c_str()) - 1;
@@ -162,70 +190,99 @@ int main() {
 
                             }
 
-                            if (idChar <= Parser::NBR_TEST_CHESS && idChar > -1) { // creer variable Char
-                                cout << "Bonsoir" << endl;
+                            if (idChar <= Game::getNumberSave(realName(nameGame)) && idChar > -1 &&
+                                nameGame.compare("e") == 0) { // creer variable Char
+                                cout << "Partie " << realName(nameGame) << " chargée" << endl;
                                 g = new GameChess();
                                 g->continueParty(idChar);
+                                return 1;
+                            } else if (idChar <= Game::getNumberSave(realName(nameGame)) && idChar > -1 &&
+                                       nameGame.compare("d") == 0) { // creer variable Char
+                                cout << "Partie " << realName(nameGame) << " chargée" << endl;
+                                g = new GameDame();
+                                g->continueParty(idChar);
+                                return 1;
+                            } else if (idChar <= Game::getNumberSave(realName(nameGame)) && idChar > -1 &&
+                                       nameGame.compare("m") == 0) { // creer variable Char
+                                cout << "Partie " << realName(nameGame) << " chargée" << endl;
+                                g = new GameMakruk();
+                                g->continueParty(idChar);
+                                return 1;
+                            } else if (idChar <= Game::getNumberSave(realName(nameGame)) && idChar > -1 &&
+                                       nameGame.compare("x") == 0) {
+                                //TODO Rhodier
+                                cout << "Partie " << realName(nameGame) << " chargée" << endl;
+                                g = new GameMakruk();
+                                g->continueParty(idChar);
                                 break;
-                            } else cout << "Recommencez!" << endl;
+                            } else cout << "Recommencez 7!" << endl;
+
 
                         } while (1);
-                        break;
+
+
+                       // break;
                     } else if (action.compare("retour") == 0)
                         break;
                     else
                         cout << "Pas compris Recommence!" << endl;
+
+
                 } while (1);
 
             }
+        } else if (action.compare("s") == 0) {
+            cout << "Simuler une partie d'ECHEC : 'e' " << endl
+                 << "Simuler une partie de DAME : 'd' " << endl
+                 << "Simuler une partie de MAKRUK : 'm' " << endl
+                 << "Simuler une partie de XXXX : 'x' " << endl
+                 << "Retour : 'retour' " << endl;
 
 
+            do {
+                getline(cin, nameGame);
+                if (nameGame.compare("retour") == 0)
+                    break;
 
-            else if (action.compare("d") == 0) {
-                cout << "*********************************" << endl
-                     << "Binvenue dans DAME " << endl
-                     << "Nouvelle partie : 'new'" << endl
-                     << "Charger partie : 'char'" << endl
-                     << "Revenir en arriere : 'retour'" << endl;
-
-                do {
-                    getline(cin, action);
-                    if (action.compare("new") == 0) {
-                        Game *e = new GameDame();
-                        e->startRobot(true);
+                if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0 || nameGame.compare("m") ||
+                    nameGame.compare("x")) {
+                    if (nameGame.compare("e") == 0) {
+                        Game *g = new GameChess();
+                        g->startRobot();
                         break;
-                    } else if (action.compare("char") == 0) {
+                    } else if (nameGame.compare("d") == 0) {
                         Game *g = new GameDame();
-                        g->continueParty(0);
+                        g->startRobot();
                         break;
-                    } else if (action.compare("retour") == 0)
+                    } else if (nameGame.compare("m") == 0) {
+                        Game *g = new GameMakruk();
+                        g->startRobot();
                         break;
-                    else
-                        cout << "Pas compris Recommence!" << endl;
-                } while (1);
-
-
-            }
-
-
-
-            else if (action.compare("retour") == 0)
-                break;
+                    } else if (nameGame.compare("x") == 0) { //TODO
+                        g = new GameMakruk();
+                        g->startRobot();
+                        break;
+                    }
+                }
+                else
+                    cout << "Pas compris repeter";
+            } while (1);
         } else if (action.compare("exit") == 0) {
             cout << "Ciao!" << endl;
-            return 0;
+            break;
         } else
             cout << "PAS COMPRIS0!" << endl;
 
 
     } while (1);
 
-    cout << "fin!" << endl;
+    cout << "Merci d'avoir jouer a notre appliation!" <<
+         endl;
 
-    //Game* gd = new GameChess(0);
+//Game* gd = new GameChess(0);
 
-    //Game_Processing\\Script_Test.txt" pour leo
-    //p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
+//Game_Processing\\Script_Test.txt" pour leo
+//p.ReadScipt("D:\\Work\\Git\\BoardGame\\Game_Processing\\Script_Test.txt",0);
 // cout << "\033[31mUn texte en rouge et\033[0m retour a la normale" << endl;
 // int age(0);
 // string nom;

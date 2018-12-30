@@ -27,6 +27,13 @@ string const Game::GAME_DAME_ENGLISH = "DameEnglish";
 Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
 
+Game::~Game() {
+    for (int i = 0; i < m_board.size(); i++) {
+        if (m_board[i] != nullptr)
+            delete m_board[i];
+    }
+}
+
 void Game::affichage() {
     for (int i = m_size - 1; i >= 0; i--) {
         cout << i << " ";
@@ -223,7 +230,7 @@ void Game::getHelp(int current_x, int current_y) {
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<"+m_name+">\r"};
+    string idBalise{"<"+m_name+">"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo

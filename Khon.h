@@ -14,7 +14,6 @@ class Khon : public Piece {
 public:
     Khon(int color);
     Khon(const Piece*);
-
     Piece* copy();
 
 

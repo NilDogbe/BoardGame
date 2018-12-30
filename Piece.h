@@ -13,7 +13,6 @@ protected:
     int m_color;
     std::vector<int> m_travel;
 public:
-
     Piece(int color);
     Piece(const Piece* p);
     virtual Piece* copy() = 0;

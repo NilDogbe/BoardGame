@@ -15,18 +15,16 @@ private:
 protected:
     std::string m_name;
     int m_size;
-    std::vector<Piece *> m_board;
+    std::vector<Piece*> m_board;
     const int m_p1 = WHITE;
     const int m_p2 = BLACK;
     int m_curP = WHITE;
     bool m_endGame;
-    int m_idTest;
 
     Game(int size, std::string name);
     virtual void init() = 0;
 
     std::vector<Move> moves;
-
 public:
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
@@ -36,7 +34,6 @@ public:
     const static int WHITE = 30;
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
-    //void startTest(int idTest, std::string idBalise);
     std::vector<int> getPossibleMove(int current_x, int current_y);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
     void start(bool init, int nbrP);
@@ -49,9 +46,9 @@ public:
     void startRobot();
     void getHelp(int current_x, int current_y);
 
-    //Game* initWithFile(std::string file);
     void back();
     static int getNumberSave(std::string);
+    virtual ~Game();
 };
 
 

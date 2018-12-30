@@ -9,9 +9,6 @@
 #include "string.h"
 
 class Parser {
-private:
-
-    std::vector<std::string> m_vectorOfMove;
 public:
     static const int NBR_TEST_CHESS = 1;
     static const int NBR_TEST_DAME = 1;

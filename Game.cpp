@@ -22,6 +22,7 @@ using namespace std;
 string const Game::GAME_DAME = "Dame";
 string const Game::GAME_CHESS = "Chess";
 string const Game::GAME_MAKRUK = "Makruk";
+string const Game::GAME_DAME_ENGLISH = "DameEnglish";
 
 Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size), m_endGame{0}, m_name{name} {
 }
@@ -118,7 +119,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 move.setPieceDelete(piece_arr->copy());
                 move.setDel(x_arr, y_arr);
             }
-        } else if (m_name.compare(Game::GAME_DAME) == 0) {
+        } else if (m_name.compare(Game::GAME_DAME) == 0 || m_name.compare(Game::GAME_DAME_ENGLISH) == 0) {
             bool manger{false};
             vector<int> travel = piece_dep->getTravel();
             for (int i{0}; i < travel.size(); i++) {
@@ -139,6 +140,7 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
 
             if (manger) {
                 vector<int> moves = getPossibleMove(x_arr, y_arr);
+                piece_dep = m_board.at(y_arr * m_size + x_arr);
                 for (int i{0}; i < moves.size(); i++) {
                     piece_dep->setTravel(x_arr, y_arr, moves[i] % m_size, moves[i] / m_size);
                     travel = piece_dep->getTravel();

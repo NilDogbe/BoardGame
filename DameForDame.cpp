@@ -13,6 +13,10 @@ DameForDame::DameForDame(int color) : Piece{color} {
 DameForDame::DameForDame(const Piece *p) : Piece{p} {
 }
 
+Piece* DameForDame::copy() {
+    return new DameForDame(this);
+}
+
 string DameForDame::toString() {
     return "D";
 }
@@ -66,8 +70,4 @@ std::vector<int> DameForDame::getPossibleMoves(int current_x, int current_y) {
             res.push_back((current_y - i) * GameDame::SIZE + (current_x - i));
     }
     return res;
-}
-
-Piece* DameForDame::copy() {
-    return new DameForDame(this);
 }

@@ -15,16 +15,9 @@ vector<vector<int>> Parser::ReadScipt(string flux, int idTest, string idBalise) 
 cout<< "eeee" << idBalise << endl;
     ifstream monFlux(flux);//Ouverture d'un fichier en lecture
     //faire un switch case
-    string endBalise;
-    if (idBalise.compare("<Chess>\r") == 0 || idBalise.compare("<Chess>") == 0){
-        endBalise = "</Chess>";
-cout << " eaaaaaaaaaaaaaaaaaaa"<<endl;
-    }
-    else if (idBalise.compare("<Dame>\r") == 0 || idBalise.compare("<Dame>") == 0){
-        endBalise = "</Dame>";
-        cout<< "eeee" << idBalise << " dddddddd " << endBalise <<  endl;
+    string endBalise = idBalise;
+    endBalise.insert(1, "/");
 
-    }
     cout<< "eeee" << idBalise << " " << endBalise <<  endl;
 
     int nbr_chessTest = 0;

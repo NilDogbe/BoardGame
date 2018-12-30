@@ -34,18 +34,18 @@ void GameDame::init() {
 }
 
 void GameDame::checkPawnTransform(int x, int y) {
-    if ((m_board[y * SIZE + x]->getColor() == Game::WHITE && y == SIZE - 1)
-        || (m_board[y * SIZE + x]->getColor() == Game::BLACK && y == 0)) {
-        Piece *p = m_board[y * SIZE + x];
-        m_board[y * SIZE + x] = new DameForDame(p);
+    if ((m_board[y * m_size + x]->getColor() == Game::WHITE && y == m_size - 1)
+        || (m_board[y * m_size + x]->getColor() == Game::BLACK && y == 0)) {
+        Piece *p = m_board[y * m_size + x];
+        m_board[y * m_size + x] = new DameForDame(p);
         delete p;
     }
 }
 
 bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
-        Piece *dep = m_board[y_dep * SIZE + x_dep];
-        Piece *arr = m_board[y_arr * SIZE + x_arr];
+        Piece *dep = m_board[y_dep * m_size + x_dep];
+        Piece *arr = m_board[y_arr * m_size + x_arr];
         std::cout << "1" << std::endl;
         if (arr == nullptr) {
             std::cout << "2" << std::endl;

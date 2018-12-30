@@ -3,6 +3,7 @@
 #include "Piece.h"
 #include "GameChess.h"
 #include "GameMakruk.h"
+#include "GameDameEnglish.h"
 
 #include "Parser.h"
 #include "GameDame.h"
@@ -17,6 +18,8 @@ int nbrTest(string x) {
         return Parser::NBR_TEST_DAME + 1;
     else if (x.compare("m") == 0)
         return Parser::NBR_TEST_MAKRUK + 1;
+    else if (x.compare("x") == 0)
+        return Parser::NBR_TEST_DAME_ENGLISH + 1;
 }
 
 string realName(string x) {
@@ -26,6 +29,8 @@ string realName(string x) {
         return Game::GAME_DAME;
     else if (x.compare("m") == 0)
         return Game::GAME_MAKRUK;
+    else if (x.compare("x") == 0)
+        return Game::GAME_DAME_ENGLISH;
 }
 
 
@@ -58,7 +63,7 @@ int main() {
                      << "Pour test echecs : 'e'" << endl
                      << "Pour test Dames: 'd'" << endl
                      << "Pour test Makruk: 'm'" << endl
-                     << "Pour test Dame2: 'x'" << endl
+                     << "Pour test DameEnglish: 'x'" << endl
                      << "Pour quitter les test: 'retour'" << endl;
                 do {
                     getline(cin, nameGame);
@@ -105,7 +110,8 @@ int main() {
                             g = new GameMakruk();
                             g->startTest(idTest);
                         } else if (nameGame.compare("x") == 0) {
-                            //TODO
+                            g = new GameDameEnglish();
+                            g->startTest(idTest);
                         }
                         break;
                     }
@@ -116,12 +122,12 @@ int main() {
             // else cout << "PAS COMPRIS1!" << endl;
 
         } else if (action.compare("j") == 0) {
-
             cout << "**********************************************" << endl
                  << "A quel jeu voulez-vous jouer ?" << endl
-                 << "Echec tappez : 'e'" << endl
-                 << "Dame tappez : 'd'" << endl
-                 << "Makruk tappez : 'm'" << endl
+                 << "Echec tapez : 'e'" << endl
+                 << "Dame tapez : 'd'" << endl
+                 << "Makruk tapez : 'm'" << endl
+                 << "DameEnglish tapez : 'x'" << endl
                  << "Revenir en arriere : 'retour'" << endl;
             getline(cin, nameGame);
             //cin.ignore();
@@ -163,7 +169,7 @@ int main() {
                                 e->start(true, nbrP);
                                 return 1;
                             } else if (nameGame.compare("x") == 0 && (nbrP == 1 || nbrP == 2)) {
-                                Game *e = new GameDame();
+                                Game *e = new GameDameEnglish();
                                 e->start(true, nbrP);
                                 return 1;
                             } else {
@@ -210,7 +216,6 @@ int main() {
                                 return 1;
                             } else if (idChar <= Game::getNumberSave(realName(nameGame)) && idChar > -1 &&
                                        nameGame.compare("x") == 0) {
-                                //TODO Rhodier
                                 cout << "Partie " << realName(nameGame) << " chargée" << endl;
                                 g = new GameMakruk();
                                 g->continueParty(idChar);
@@ -258,8 +263,8 @@ int main() {
                         Game *g = new GameMakruk();
                         g->startRobot();
                         break;
-                    } else if (nameGame.compare("x") == 0) { //TODO
-                        g = new GameMakruk();
+                    } else if (nameGame.compare("x") == 0) {
+                        g = new GameDameEnglish();
                         g->startRobot();
                         break;
                     }

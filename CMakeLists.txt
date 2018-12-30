@@ -19,4 +19,4 @@ add_executable(BoardGame
         Parser.cpp Parser.h
         DameForDame.cpp DameForDame.h
         Move.cpp Move.h
-        DameForDame.cpp DameForDame.h GameMakruk.cpp GameMakruk.h Seed.cpp Seed.h Khon.cpp Khon.h)
+        DameForDame.cpp DameForDame.h GameMakruk.cpp GameMakruk.h Seed.cpp Seed.h Khon.cpp Khon.h GameDameEnglish.cpp GameDameEnglish.h PawnForDameEnglish.cpp PawnForDameEnglish.h DameForDameEnglish.cpp DameForDameEnglish.h)

@@ -16,7 +16,7 @@ public:
     const static int SIZE = 10;
     GameDame();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
-    void checkPawnTransform(int x, int y);
+    virtual void checkPawnTransform(int x, int y);
     void setForceToEat(bool forceToEat);
 };
 

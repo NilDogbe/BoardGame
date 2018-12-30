@@ -14,7 +14,7 @@ private:
     int m_nbrPlayers;
 protected:
     std::string m_name;
-    const int m_size;
+    int m_size;
     std::vector<Piece *> m_board;
     const int m_p1 = WHITE;
     const int m_p2 = BLACK;
@@ -31,6 +31,7 @@ public:
     const static std::string GAME_DAME;
     const static std::string GAME_CHESS;
     const static std::string GAME_MAKRUK;
+    const static std::string GAME_DAME_ENGLISH;
     const static int BLACK = 31;
     const static int WHITE = 30;
     virtual void affichage();

@@ -28,10 +28,10 @@ Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size),
 }
 
 Game::~Game() {
-    for (int i = 0; i < m_board.size(); i++) {
+    /*for (int i = 0; i < m_board.size(); i++) {
         if (m_board[i] != nullptr)
             delete m_board[i];
-    }
+    }*/
 }
 
 void Game::affichage() {
@@ -499,9 +499,6 @@ void Game::startRobot() {
               Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
               cout << "Piece "<<p->toString()<<endl;
           }*/
-        if (m_curP == m_p1)
-            m_curP = m_p2;
-        else m_curP = m_p1;
     } while (!m_endGame);
 
     cout << "LA PARTIE EST FINIE" << endl

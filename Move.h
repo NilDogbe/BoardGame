@@ -17,7 +17,7 @@ private:
     int curP;
 public:
     Move();
-    ~Move();
+    void free();
     Piece* getPieceMove() const;
     Piece* getPieceDelete() const;
     int getXDep() const;

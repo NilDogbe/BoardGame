@@ -7,11 +7,11 @@
 Move::Move() : piece_move{nullptr}, piece_delete{nullptr} {
 }
 
-Move::~Move() {
-    /*if (piece_move != nullptr)
+void Move::free() {
+    if (piece_move != nullptr)
         delete piece_move;
     if (piece_delete != nullptr)
-        delete piece_delete;*/
+        delete piece_delete;
 }
 
 Piece *Move::getPieceMove() const {

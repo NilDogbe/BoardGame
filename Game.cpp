@@ -28,10 +28,12 @@ Game::Game(int size, string name) : m_board(size * size, nullptr), m_size(size),
 }
 
 Game::~Game() {
-    /*for (int i = 0; i < m_board.size(); i++) {
+    for (int i = 0; i < m_board.size(); i++) {
         if (m_board[i] != nullptr)
             delete m_board[i];
-    }*/
+    }
+    for (int i = 0; i < moves.size(); i++)
+        moves[i].free();
 }
 
 void Game::affichage() {
@@ -99,7 +101,6 @@ vector<int> Game::getPossibleMove(int current_x, int current_y) {
     return moves;
 }
 
-
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
     cout << "Dans move " << m_name << endl;
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
@@ -140,33 +141,18 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 }
             }
 
+            if (!manger) {
+                if (((GameDame *) this)->canEat(x_dep, y_dep))
+                    return;
+            }
+
             cout << "Les dames c'est trop bien" << endl;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
 
-            if (manger) {
-                vector<int> moves = getPossibleMove(x_arr, y_arr);
-                piece_dep = m_board.at(y_arr * m_size + x_arr);
-                for (int i{0}; i < moves.size(); i++) {
-                    piece_dep->setTravel(x_arr, y_arr, moves[i] % m_size, moves[i] / m_size);
-                    travel = piece_dep->getTravel();
-                    for (int j{0}; j < travel.size(); j++) {
-                        if (m_board.at(travel.at(j)) != nullptr &&
-                            m_board.at(travel.at(j))->getColor() != piece_dep->getColor()) {
-                            changeCurP = false;
-                            ((GameDame *) this)->setForceToEat(true);
-                            cout << "TU PEUX RE MANGER" << endl;
-                            break;
-                        }
-                    }
-                    if (!changeCurP)
-                        break;
-                }
-
-                if (changeCurP)
-                    ((GameDame *) this)->setForceToEat(false);
-            }
+            if (manger && ((GameDame *) this)->canEat(x_arr, y_arr))
+                changeCurP = false;
         }
 
         cout << endl << "endgame: " << m_endGame << endl;
@@ -180,7 +166,6 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
         }
     }
 }
-
 
 vector<vector<int>> Game::getCurrentPieces() {
     vector<vector<int>> res;

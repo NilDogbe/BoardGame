@@ -10,7 +10,7 @@
 
 using namespace std;
 
-GameDame::GameDame() : Game{SIZE, Game::GAME_DAME}, forceToEat{false} {
+GameDame::GameDame() : Game{SIZE, Game::GAME_DAME} {
 }
 
 void GameDame::init() {
@@ -57,7 +57,7 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
                 if (m_board[*it] != nullptr)
                     nbr_pieces += 1;
             bool move{false};
-            if (canMove == 1 && nbr_pieces == 0 && !forceToEat) {
+            if (canMove == 1 && nbr_pieces == 0) {
                 std::cout << "3" << std::endl;
                 if (arr == nullptr) {
                     move = true;
@@ -83,6 +83,20 @@ bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     return false;
 }
 
-void GameDame::setForceToEat(bool forceToEat) {
-    this->forceToEat = forceToEat;
+bool GameDame::canEat(int x, int y) {
+    Piece* p = m_board.at(y * m_size + x);
+    vector<int> moves = getPossibleMove(x, y);
+    vector<int> travel;
+    for (int i{0}; i < moves.size(); i++) {
+        p->setTravel(x, y, moves[i] % m_size, moves[i] / m_size);
+        travel = p->getTravel();
+        for (int j{0}; j < travel.size(); j++) {
+            if (m_board.at(travel.at(j)) != nullptr &&
+                m_board.at(travel.at(j))->getColor() != p->getColor()) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

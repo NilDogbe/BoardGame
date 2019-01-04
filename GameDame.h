@@ -8,8 +8,6 @@
 #include "Game.h"
 
 class GameDame : public Game {
-private:
-    bool forceToEat;
 protected:
     virtual void init();
 public:
@@ -17,7 +15,7 @@ public:
     GameDame();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
     virtual void checkPawnTransform(int x, int y);
-    void setForceToEat(bool forceToEat);
+    bool canEat(int x, int y);
 };
 
 

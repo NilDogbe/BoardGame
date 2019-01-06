@@ -34,7 +34,7 @@ public:
     const static int WHITE = 30;
     virtual void affichage();
     virtual bool movePiece(int x_dep, int y_dep, int x_arr, int y_arr);
-    std::vector<int> getPossibleMove(int current_x, int current_y);
+    virtual std::vector<int> getPossibleMove(int current_x, int current_y);
     void move(int x_dep, int y_dep, int x_arr, int y_arr);
     void start(bool init, int nbrP);
     int getColor(int x, int y);

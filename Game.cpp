@@ -141,9 +141,9 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 }
             }
 
-            if (!manger) {
-                if (((GameDame *) this)->canEat(x_dep, y_dep))
-                    return;
+            if (((GameDame *) this)->endGame()) {
+                m_endGame = true;
+                return;
             }
 
             cout << "Les dames c'est trop bien" << endl;
@@ -468,22 +468,26 @@ void Game::startRobot() {
         affichage();
         cout << endl;
         getline(cin, move);
-        cout << move.substr(0, 4) << endl;
+        if(move.compare("QUIT") == 0)
+            break;
+        else {
+            cout << move.substr(0, 4) << endl;
 
-        /* x_dep = (int) (move.at(0)) - 65;
-         y_dep = (int) (move.at(1)) - 48;
-         x_arr = (int) (move.at(2)) - 65;
-         y_arr = (int) (move.at(3)) - 48;*/
+            /* x_dep = (int) (move.at(0)) - 65;
+             y_dep = (int) (move.at(1)) - 48;
+             x_arr = (int) (move.at(2)) - 65;
+             y_arr = (int) (move.at(3)) - 48;*/
 
 
-        cout << "OK" << endl;
-        //Game::move(x_dep, y_dep, x_arr, y_arr);
-        chooseMove();
-        /*  vector<vector<int>> tmp = getCurrentPieces();
-          for(int i=0;i<tmp.size();i++){
-              Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
-              cout << "Piece "<<p->toString()<<endl;
-          }*/
+            cout << "OK" << endl;
+            //Game::move(x_dep, y_dep, x_arr, y_arr);
+            chooseMove();
+            /*  vector<vector<int>> tmp = getCurrentPieces();
+              for(int i=0;i<tmp.size();i++){
+                  Piece* p = m_board.at((tmp.at(i)).at(1) * m_size + (tmp.at(i)).at(0));
+                  cout << "Piece "<<p->toString()<<endl;
+              }*/
+        }
     } while (!m_endGame);
 
     cout << "LA PARTIE EST FINIE" << endl

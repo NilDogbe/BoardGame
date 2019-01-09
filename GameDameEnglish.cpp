@@ -15,7 +15,7 @@ void GameDameEnglish::init() {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
-                m_board[i * SIZE + j] = new PawnForDameEnglish(WHITE);
+                m_board[i * SIZE + j] = new DameForDameEnglish(WHITE);
         }
     }
     for (int i = SIZE - 1; i >= SIZE - 3; i--) {
@@ -24,6 +24,9 @@ void GameDameEnglish::init() {
                 m_board[i * SIZE + j] = new PawnForDameEnglish(BLACK);
         }
     }
+
+    /*m_board[6 * SIZE + 4] = nullptr;
+    m_board[7 * SIZE + 5] = nullptr;*/
 
 }
 

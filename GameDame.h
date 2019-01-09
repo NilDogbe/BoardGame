@@ -17,6 +17,7 @@ public:
     bool movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testCanEat);
     virtual void checkPawnTransform(int x, int y);
     bool canEat(int x, int y);
+    bool canEat();
     virtual std::vector<int> getPossibleMove(int current_x, int current_y);
     std::vector<int> getPossibleMove2(int current_x, int current_y, bool testCanEat);
     bool endGame();

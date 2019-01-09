@@ -61,7 +61,7 @@ bool GameDame::movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testC
             bool move{false};
             if (canMove == 1 && nbr_pieces == 0) {
                 std::cout << "3" << std::endl;
-                if (!testCanEat || (testCanEat && !canEat(x_dep, y_dep))) {
+                if (!testCanEat || (testCanEat && !canEat())) {
                     if (arr == nullptr) {
                         move = true;
                         std::cout << "bouger" << std::endl;
@@ -89,6 +89,21 @@ bool GameDame::movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testC
 
 bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
     return movePiece2(x_dep, y_dep,x_arr, y_arr, true);
+}
+
+bool GameDame::canEat() {
+    Piece* p;
+    for (int i = 0; i < m_size * m_size; i++) {
+        p = m_board[i];
+        if (p != nullptr) {
+            if (p->getColor() == m_curP) {
+                if (canEat(i % m_size, i / m_size))
+                    return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 bool GameDame::canEat(int x, int y) {

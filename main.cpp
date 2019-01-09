@@ -4,7 +4,6 @@
 #include "GameChess.h"
 #include "GameMakruk.h"
 #include "GameDameEnglish.h"
-
 #include "Parser.h"
 #include "GameDame.h"
 
@@ -134,7 +133,7 @@ int main() {
             if (nameGame.compare("e") == 0 || nameGame.compare("d") == 0
                 || nameGame.compare("m") == 0 || nameGame.compare("x") == 0) {
                 cout << "**********************************************" << endl
-                     << "Binvenue dans " << realName(nameGame) << endl
+                     << "Bienvenue dans " << realName(nameGame) << endl
                      << "Nouvelle partie : 'new'" << endl
                      << "Charger partie : 'char'" << endl
                      << "Revenir en arriere : 'retour'" << endl;
@@ -180,8 +179,8 @@ int main() {
 
                     } else if (action.compare("char") == 0) {
                         cout << "***********************************************" << endl
-                             << "Choisir un Char" << realName(nameGame) << "entre 1(compris) et "
-                             << Game::getNumberSave(nameGame)
+                             << "Choisir un Char " << realName(nameGame) << "entre 1(compris) et "
+                             << Game::getNumberSave(realName(nameGame))
                              << "(compris)"
                              << endl;
 
@@ -220,7 +219,7 @@ int main() {
                                 g = new GameMakruk();
                                 g->continueParty(idChar);
                                 break;
-                            } else cout << "Recommencez 7!" << endl;
+                            } else cout << "Recommencez !" << endl;
 
 
                         } while (1);

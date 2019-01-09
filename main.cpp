@@ -236,10 +236,10 @@ int main() {
 
             }
         } else if (action.compare("s") == 0) {
-            cout << "Simuler une partie d'ECHEC : 'e' " << endl
-                 << "Simuler une partie de DAME : 'd' " << endl
-                 << "Simuler une partie de MAKRUK : 'm' " << endl
-                 << "Simuler une partie de XXXX : 'x' " << endl
+            cout << "Simuler une partie d'Echec : 'e' " << endl
+                 << "Simuler une partie de Dame : 'd' " << endl
+                 << "Simuler une partie de Makruk : 'm' " << endl
+                 << "Simuler une partie de DameEnglish : 'x' " << endl
                  << "Retour : 'retour' " << endl;
 
 

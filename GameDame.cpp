@@ -31,7 +31,7 @@ void GameDame::init() {
     m_board[7 * SIZE + 5] = nullptr;
     m_board[8 * SIZE + 6] = nullptr;
     m_board[9 * SIZE + 7] = nullptr;*/
-   // m_board[4 * SIZE + 2] = new PawnForDame(BLACK);
+    // m_board[4 * SIZE + 2] = new PawnForDame(BLACK);
 
 }
 
@@ -48,9 +48,9 @@ bool GameDame::movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testC
     if (Game::movePiece(x_dep, y_dep, x_arr, y_arr)) {
         Piece *dep = m_board[y_dep * m_size + x_dep];
         Piece *arr = m_board[y_arr * m_size + x_arr];
-        std::cout << "1" << std::endl;
+        //std::cout << "1" << std::endl;
         if (arr == nullptr) {
-            std::cout << "2" << std::endl;
+            //std::cout << "2" << std::endl;
             int canMove{dep->canMove(x_dep, y_dep, x_arr, y_arr)};
             int nbr_pieces{0};
             dep->setTravel(x_dep, y_dep, x_arr, y_arr);
@@ -60,14 +60,15 @@ bool GameDame::movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testC
                     nbr_pieces += 1;
             bool move{false};
             if (canMove == 1 && nbr_pieces == 0) {
-                std::cout << "3" << std::endl;
+                //std::cout << "3" << std::endl;
                 if (!testCanEat || (testCanEat && !canEat())) {
                     if (arr == nullptr) {
                         move = true;
-                        std::cout << "bouger" << std::endl;
+                        //std::cout << "bouger" << std::endl;
                     }
                 }
-            } else if (canMove == 2 || nbr_pieces == 1) {
+            } else if ((m_name.compare(Game::GAME_DAME) == 0 && (canMove == 2 || nbr_pieces == 1))
+                       || (m_name.compare(Game::GAME_DAME_ENGLISH) == 0 && (canMove == 2 && nbr_pieces == 1))) {
                 vector<int> travel = dep->getTravel();
                 for (int i = 0; i < travel.size(); i++) {
                     if (m_board.at(travel.at(i)) != nullptr &&
@@ -88,11 +89,11 @@ bool GameDame::movePiece2(int x_dep, int y_dep, int x_arr, int y_arr, bool testC
 }
 
 bool GameDame::movePiece(int x_dep, int y_dep, int x_arr, int y_arr) {
-    return movePiece2(x_dep, y_dep,x_arr, y_arr, true);
+    return movePiece2(x_dep, y_dep, x_arr, y_arr, true);
 }
 
 bool GameDame::canEat() {
-    Piece* p;
+    Piece *p;
     for (int i = 0; i < m_size * m_size; i++) {
         p = m_board[i];
         if (p != nullptr) {
@@ -107,7 +108,7 @@ bool GameDame::canEat() {
 }
 
 bool GameDame::canEat(int x, int y) {
-    Piece* p = m_board.at(y * m_size + x);
+    Piece *p = m_board.at(y * m_size + x);
     vector<int> moves = getPossibleMove2(x, y, false);
     vector<int> travel;
     for (int i{0}; i < moves.size(); i++) {
@@ -146,17 +147,27 @@ vector<int> GameDame::getPossibleMove2(int current_x, int current_y, bool testCa
 }
 
 bool GameDame::endGame() {
-    Piece* p;
+    Piece *p;
+
+    int nbrPions{0};
     int color{WHITE};
     if (m_curP == WHITE)
         color = BLACK;
+
+    // on regarde s'il existe encore des moves possible et le nombre de pions
     for (int i = 0; i < m_board.size(); i++) {
         p = m_board.at(i);
         if (p != nullptr) {
-            if (p->getColor() == color)
-                return false;
+            if (p->getColor() == color) {
+                nbrPions++;
+                if (getPossibleMove2(i % m_size, i / m_size, false).size() != 0)
+                    return false;
+            }
         }
     }
+
+    if (nbrPions != 0)
+        return false;
 
     return true;
 }

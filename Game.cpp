@@ -147,16 +147,19 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 }
             }
 
-            if (((GameDame *) this)->endGame()) {
-                m_endGame = true;
-                return;
-            }
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
 
             if (manger && ((GameDame *) this)->canEat(x_arr, y_arr))
                 changeCurP = false;
+
+            if (changeCurP) {
+                if (((GameDame *) this)->endGame()) {
+                    m_endGame = true;
+                    return;
+                }
+            }
         }
 
         cout << endl << "endgame: " << m_endGame << endl;

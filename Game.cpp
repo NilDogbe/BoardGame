@@ -102,7 +102,7 @@ vector<int> Game::getPossibleMove(int current_x, int current_y) {
 }
 
 void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
-    cout << "Dans move " << m_name << endl;
+   // cout << "Dans move " << m_name << endl;
     if (movePiece(x_dep, y_dep, x_arr, y_arr)) {
         bool changeCurP{true};
         Piece *piece_dep = m_board.at(y_dep * m_size + x_dep);
@@ -117,12 +117,18 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
             if (piece_dep->toString() == "P")
                 ((PawnForChess *) piece_dep)->setFirstMove();
             if (piece_arr != nullptr && piece_arr->toString().compare("K") == 0) {
-                cout << "aaaaaaaaaaaaaaa";
                 m_endGame = true;
                 return;
             }
             m_board.at(y_dep * m_size + x_dep) = nullptr;
-            m_board.at(y_arr * m_size + x_arr) = piece_dep;
+
+            if (piece_dep->toString() == "P" && piece_dep->getColor() == WHITE && y_arr == (GameChess::SIZE - 1))
+                m_board.at(y_arr * m_size + x_arr) = new Queen(WHITE);
+            else if (piece_dep->toString() == "P" && piece_dep->getColor() == BLACK && y_arr == 0)
+                m_board.at(y_arr * m_size + x_arr) = new Queen(BLACK);
+            else
+                m_board.at(y_arr * m_size + x_arr) = piece_dep;
+
             if (piece_arr != nullptr) {
                 move.setPieceDelete(piece_arr->copy());
                 move.setDel(x_arr, y_arr);
@@ -145,8 +151,6 @@ void Game::move(int x_dep, int y_dep, int x_arr, int y_arr) {
                 m_endGame = true;
                 return;
             }
-
-            cout << "Les dames c'est trop bien" << endl;
             m_board.at(y_dep * m_size + x_dep) = nullptr;
             m_board.at(y_arr * m_size + x_arr) = piece_dep;
             ((GameDame *) this)->checkPawnTransform(x_arr, y_arr);
@@ -215,7 +219,7 @@ void Game::getHelp(int current_x, int current_y) {
 }
 
 void Game::startTest(int idTest) {
-    string idBalise{"<"+m_name+">"};
+    string idBalise{"<" + m_name + ">"};
     init();
     Parser p;
     //C:\Users\Leo\CLionProjects\BoardGame\Game_Processing\Script_Test.txt : leo
@@ -230,7 +234,7 @@ void Game::startTest(int idTest) {
         // cout<<"endgame:aaaaaaaaaaaaaaaa0 "<<m_endGame;
 
         getline(cin, sens);
-        //getPossibleMove(vector[acc][0], vector[acc][1]);
+        getHelp(vector[acc][0], vector[acc][1]);
         // cout<<"endgame:aaaaaaaaaaaaaaaa2 "<<m_endGame;
 
         move(vector[acc][0], vector[acc][1], vector[acc][2], vector[acc][3]);
@@ -274,10 +278,10 @@ void Game::save() {
                     fichier << "B";
 
                 if (p->toString().compare("P") == 0) {
-                    if (((PawnForChess*)p)->getFirstMove())
+                    if (((PawnForChess *) p)->getFirstMove())
                         fichier << "T";
                     else
-                        fichier<< "F";
+                        fichier << "F";
                 }
             } else
                 fichier << "N";
@@ -300,12 +304,12 @@ void Game::continueParty(int id) {
     int nbrPlayers{0};
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (((s.compare("<" + m_name + ">") == 0)||(s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
+        if (((s.compare("<" + m_name + ">") == 0) || (s.compare("<" + m_name + ">\r") == 0)) && id == 0) {
             for (int j{0}; j < 3; j++) {
                 s = vector.at(i + j + 1);
                 if (j == 0)
                     nbrPlayers = std::atoi(s.c_str());
-                else if(j == 1) {
+                else if (j == 1) {
                     if (s.compare("WHITE") == 0)
                         m_curP = WHITE;
                     else
@@ -468,7 +472,7 @@ void Game::startRobot() {
         affichage();
         cout << endl;
         getline(cin, move);
-        if(move.compare("QUIT") == 0)
+        if (move.compare("QUIT") == 0)
             break;
         else {
             cout << move.substr(0, 4) << endl;
@@ -519,9 +523,9 @@ int Game::getNumberSave(string game) {
     int nbr{0};
     for (int i{0}; i < vector.size(); i++) {
         string s = vector.at(i);
-        if (s.compare("<" + game + ">") == 0||s.compare("<" + game + ">\r") == 0)
-        nbr++;
+        if (s.compare("<" + game + ">") == 0 || s.compare("<" + game + ">\r") == 0)
+            nbr++;
     }
-    
+
     return nbr;
 }

@@ -27,7 +27,7 @@ std::string Seed::toString() {
 
 int Seed::canMove(int x_dep, int y_dep, int x_arr, int y_arr) {
     m_travel.clear();
-    cout << "Mouvemment Seed " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
+   // cout << "Mouvemment Seed " << x_dep << "," << y_dep << " to " << x_arr << "," << y_arr << endl;
     int distance = sqrt(sqr(y_arr - y_dep) + sqr(x_dep - x_arr));
 
     if (abs(x_arr - x_dep) == abs(y_arr - y_dep) && distance == 1) {

@@ -19,10 +19,8 @@ void GameMakruk::init(){
     cout << "eeeeee";
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
-            if (i == 2 && j == 4)
-                m_board[i * m_size + j] = new King(BLACK);
 
-            else if (i == 2)
+            if (i == 2)
                 m_board[i * m_size + j] = new PawnForChess(WHITE,false);
             else if (i == 0)
                 if (j == 0 || j == m_size - 1)

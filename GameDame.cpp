@@ -20,18 +20,18 @@ void GameDame::init() {
                 m_board[i * SIZE + j] = new PawnForDame(WHITE);
         }
     }
-    /*for (int i = SIZE - 1; i >= SIZE - 4; i--) {
+    for (int i = SIZE - 1; i >= SIZE - 4; i--) {
         for (int j = 0; j < SIZE; j++) {
             if ((i + j) % 2 == 0)
                 m_board[i * SIZE + j] = new PawnForDame(BLACK);
         }
-    }
+    }/*
 
     m_board[6 * SIZE + 4] = nullptr;
     m_board[7 * SIZE + 5] = nullptr;
     m_board[8 * SIZE + 6] = nullptr;
     m_board[9 * SIZE + 7] = nullptr;*/
-    m_board[4 * SIZE + 2] = new PawnForDame(BLACK);
+   // m_board[4 * SIZE + 2] = new PawnForDame(BLACK);
 
 }
 

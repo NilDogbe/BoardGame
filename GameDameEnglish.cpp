@@ -25,10 +25,6 @@ void GameDameEnglish::init() {
         }
     }
 
-    m_board[6 * SIZE + 4] = nullptr;
-    m_board[7 * SIZE + 5] = nullptr;
-    m_board[8 * SIZE + 6] = nullptr;
-    m_board[9 * SIZE + 7] = nullptr;
 }
 
 void GameDameEnglish::checkPawnTransform(int x, int y) {
